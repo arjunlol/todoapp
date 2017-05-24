@@ -1,7 +1,110 @@
 body {
-  background-color: #EEE;
+  background-color: purple;
+
+  section.search-form-area {
+    margin-top:180px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    color: #fff;
 
   h1 {
     color: #244751;
   }
+  form {
+    font-size:20px;
+    margin-top:2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    label{
+      margin-right:10px;
+      font-size:25px;
+
+    }
+  a {
+    text-decoration: none;
+    color:#fff;
+    padding: 10px;
+    border: 2px solid;
+    margin-left:10px;
+  }
+  }
+ }
 }
+
+
+
+
+nav {
+  top:0;
+  height:80px;
+  width:100%;
+  position:fixed;
+  background-color:#fff;
+  opacity: 0.9;
+  display:flex;
+  align-items: center;
+  justify-content:space-around;
+ a {
+  text-decoration: none;
+ }
+
+}
+
+main {
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.alerts {
+  height:100px;
+}
+
+#view-lists {
+  color:#fff;
+  width:365px;
+  font-size:20px;
+  text-decoration:none;
+  border: 2px solid;
+  text-align:center;
+  padding:10px;
+}
+
+.category-list {
+  display:none;
+  width: 73%;
+  text-align:center;
+  a {
+    color:#fff;
+    text-decoration:none;
+
+  div {
+    padding: 25px;
+  }
+ }
+}
+
+
+div#to-watch-list {
+    background-color: #A040A0;
+
+  }
+div#to-eat-list {
+    background-color: #B060B0;
+  }
+div#to-read-list {
+    background-color: #C080C0;
+  }
+div#to-buy-list {
+    background-color: #CF9FCF;
+  }
+
+
+

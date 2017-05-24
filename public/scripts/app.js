@@ -4,7 +4,15 @@ $(() => {
     url: "/api/users"
   }).done((users) => {
     for(user of users) {
-      $("<div>").text(user.name).appendTo($("body"));
+      // $("<div>").text(user.name).appendTo($("body"));
     }
   });;
 });
+
+
+
+$(document).ready(function(){
+  $('#view-lists').click(function(){
+    $('.category-list').slideToggle();
+  })
+})
