@@ -92,19 +92,32 @@ main {
 }
 
 
-div#to-watch-list {
+div#to-watch-list-btn {
     background-color: #A040A0;
 
   }
-div#to-eat-list {
+div#to-eat-list-btn {
     background-color: #B060B0;
   }
-div#to-read-list {
+div#to-read-list-btn {
     background-color: #C080C0;
   }
-div#to-buy-list {
+div#to-buy-list-btn {
     background-color: #CF9FCF;
   }
 
+.list {
+  height:auto;
 
+    padding: 0;
+    margin: 0 0 30px 0;
+  li {
+    list-style: none;
+    padding:10px;
+   }
 
+}
+
+#watch-list {
+  display:none;
+}
