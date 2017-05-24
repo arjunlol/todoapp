@@ -2,7 +2,8 @@
 
 const express = require('express');
 const router  = express.Router();
-var request = require('request');
+var request = require('request-promise');
+var parser = require('xml2json');
 
 module.exports = (knex) => {
 
@@ -19,16 +20,17 @@ module.exports = (knex) => {
 
   //test route for testing API
   router.get("/wolfsearch/:search", (req, res) => {
-    console.log('test');
     request({
-
-
       uri: 'http://api.wolframalpha.com/v2/query',
       qs: {
         input: req.params.search,
         appid: '8A2RH8-QPYYEQGL7K',
+        format: 'json'
       }
-    }).pipe(res);
+    }).then((data) => {
+      res.json(parser.toJson(data));
+    })
+    // .pipe(parser.toJson(res));
   });
 
   //route handler for register user
@@ -61,7 +63,7 @@ module.exports = (knex) => {
 
   });
 
-    router.post("/profile", (req, res) => {
+  router.post("/profile", (req, res) => {
 
   });
 
