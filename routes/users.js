@@ -6,6 +6,7 @@ var request = require('request');
 
 module.exports = (knex) => {
 
+  //user home page see their lists - logged in
   router.get("/", (req, res) => {
 
     knex
@@ -16,6 +17,7 @@ module.exports = (knex) => {
     });
   });
 
+  //test route for testing API
   router.get("/wolfsearch/:search", (req, res) => {
     console.log('test');
     request({
@@ -28,6 +30,41 @@ module.exports = (knex) => {
       }
     }).pipe(res);
   });
+
+  //route handler for register user
+  router.post("/create", (req, res) => {
+
+  });
+
+  //route handler for returning list of specific catergory
+  router.get("/:category", (req, res) => {
+
+  });
+
+  //updating the profile
+  router.put("/profile", (req, res) => {
+
+  });
+
+  //update item from list
+  router.put("/:category/:item", (req, res) => {
+
+  });
+
+  //delete item from list
+  router.delete("/:category/:item", (req, res) => {
+
+  });
+
+  //log out user cookie session
+  router.get("/logout", (req, res) => {
+
+  });
+
+    router.post("/profile", (req, res) => {
+
+  });
+
   return router;
 }
 
