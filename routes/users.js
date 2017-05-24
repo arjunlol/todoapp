@@ -39,7 +39,7 @@ module.exports = (knex) => {
     //put item into the database
     //respond with both the category and the item
     let item = req.body.item;
-    let catergory = 'movie';
+    let category = 'movie';
     res.send({category:item})
   });
 
