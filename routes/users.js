@@ -3,7 +3,6 @@
 const express = require('express');
 const router  = express.Router();
 var request = require('request-promise');
-var parser = require('xml2json');
 
 module.exports = (knex) => {
 
@@ -25,18 +24,30 @@ module.exports = (knex) => {
       qs: {
         input: req.params.search,
         appid: '8A2RH8-QPYYEQGL7K',
-        format: 'json'
+        output: 'json'
       }
     }).then((data) => {
-      res.json(parser.toJson(data));
+      let wolframResult = JSON.parse(data);
+      // res.json((parser.toJson(data)));
+      res.send(wolframResult.queryresult.assumptions.values);
     })
     // .pipe(parser.toJson(res));
   });
 
-  //route handler for register user
+    //route handler for user creating an item
   router.post("/create", (req, res) => {
+    //put item into the database
+    //respond with both the category and the item
+    let item = req.body.item;
+    let catergory = 'movie';
+    res.send({category:item})
+  });
+
+  //route handler for register user
+  router.post("/register", (req, res) => {
 
   });
+
 
   //route handler for returning list of specific catergory
   router.get("/:category", (req, res) => {
