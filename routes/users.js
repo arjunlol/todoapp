@@ -19,17 +19,18 @@ module.exports = (knex) => {
 
     //route handler for user creating an item
   router.post("/create", (req, res) => {
+    let item = req.body.item
+    let category = req.body.category
+    let created_at = new Date()
+    let item_id;
 
-    // const listItem = {
-    //   content: {
-    //     text: req.body.text
-    //   },
-    //   created_at: Date.now()
+    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+      .then((id) => {
 
-    //   req.body.item
-    //   req.body.category
-
-    // };
+      item_id = id[0].id // Selects just the number from the array
+      knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
+        .then((result) => {})
+      })
   });
 
   //route handler for register user
