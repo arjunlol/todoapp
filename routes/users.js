@@ -20,16 +20,16 @@ module.exports = (knex) => {
     //route handler for user creating an item
   router.post("/create", (req, res) => {
 
-    const listItem = {
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now()
+    // const listItem = {
+    //   content: {
+    //     text: req.body.text
+    //   },
+    //   created_at: Date.now()
 
-      req.body.item
-      req.body.category
+    //   req.body.item
+    //   req.body.category
 
-    };
+    // };
   });
 
   //route handler for register user
