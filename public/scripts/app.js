@@ -31,12 +31,14 @@ $(document).ready(function(){
     event.preventDefault(e);
     var item = $('#form-textarea').val()
     console.log(item)
-
+    $('.alerts').text("Categoring now..").fadeOut("slow", function() {
+    $('.alerts').html('changed')
+    })
 
 
     isMovieOrBook(item, (result)=> {
     test = result;
-    console.log(test);
+    console.log(test);//
 });
     //needs to pass this value to wolf
     //when done clear form data
