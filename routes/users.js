@@ -36,13 +36,14 @@ module.exports = (knex) => {
     let user = {
       user_name: req.body.username,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10),
+      password: bcrypt.hashSync(req.body.password, 10), //encrypt password
       createdAt: new Date()
     }
+    //insert user into the users table
     knex('users').insert(user)
       .then((resp) => {
-        req.session.user = [user['user_name'], user['handler']];
-        res.redirect('/')
+        req.session.user = [user['user_name'], user['email']]; //set cookie upon succesful registering
+        res.redirect('/');
       })
   });
 
@@ -77,7 +78,45 @@ module.exports = (knex) => {
   });
 
   router.post("/login", (req, res) => {
-
+    if(req.body.email === "" ||  req.body.password === "" ){ //if user or pass left empty return error
+      res.status(400).send("Please fill in both email and password");
+      return;
+    }
+    let user = {
+      "email": req.body.email,
+      "password": req.body.password
+    };
+    //select all from the users table that match email address
+    knex('users')
+      .select()
+      .where('email', user.email)
+      .then((result) => {
+          if(!result[0]){ //If email address does not exist in database
+            console.log('1')
+            res.status(403).send("Please input valid email/password");
+            return;
+          } else if(!(bcrypt.compareSync(user.password, result[0].password))) { //if incorrect password
+            console.log('2')
+            res.status(403).send("Please input valid email/password");
+            return;
+          } else { //correct email & password
+            req.session.user = [user.email, result[0].user_name]; //set cookie if the correct email/pass
+            res.redirect('/');
+          }
+        })
+      .catch((err) =>{
+        console.log(err);
+      })
+  //   DataHelpers.checkUserMatch(user, (err, match) => {
+  //     if((match[0] === undefined) || !(bcrypt.compareSync(user.password, match[0].password))){
+  //       res.status(403).send("Invalid Username/Password");
+  //       return;
+  //     } else if((bcrypt.compareSync(user.password, match[0].password))) {
+  //       req.session.user = [match[0]['name'], match[0]['handler']];//array of name and handle
+  //       res.redirect('/');
+  //     }
+  //   });
+  // });
 
 
   });
