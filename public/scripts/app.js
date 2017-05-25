@@ -107,15 +107,16 @@ function isMovieOrBook (item, cb) {
     url: `http://api.wolframalpha.com/v2/query?input=${item}&appid=${appid}&output=json`,
     dataType: 'jsonp',
     success: function (data){ //data is result from wolfram api
-      console.log(data);
-      let categories = data.queryresult.assumptions.values;
-
+      //if wolfram deems no ambiguity in the search, then it doesnt return any assumptions but only 'datatype'
+      let categories = data.queryresult.assumptions || data.queryresult.datatypes;
+      categories = categories.values || categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
       categories.forEach(category => {
         //if returned assumptions are either a book or movie set accordingly
-        if(category.name === 'Book'){
+        //if using assumptions then the name of the assumptions exists otherwise only use the datatype
+        if((category.name || category) === 'Book'){
           isBook = true;
         }
-        if(category.name === 'Movie'){
+        if((category.name || category) === 'Movie'){
           isMovie = true;
         }
       });
@@ -129,12 +130,7 @@ function isMovieOrBook (item, cb) {
      } else {
       result = 'Neither';
      }
-
      cb(result);
     }
   })
 };
-
-
-//   });
-// });
