@@ -9,21 +9,23 @@ $(() => {
   });;
 });
 
-
-
 $(document).ready(function(){
-  $('#view-lists').click(function(){
-    $('.category-list').slideToggle();
+  $('.listHeader').click(function(){
+    if ($($(this)[0].nextElementSibling).is('.collapsed')) {
+      expandList($(this)[0].nextElementSibling);
+    } else {
+      collapseList($(this)[0].nextElementSibling);
+    }
   })
-
-  $('#to-watch-list-btn').click(function(){
-    $('#watch-list').slideToggle();
-  })
-
-
 })
 
+function collapseList(parent) {
+  $(parent).slideUp().addClass('collapsed').find('ul').slideUp().addClass('collapsed');
+}
 
+function expandList(parent) {
+  $(parent).slideDown().removeClass('collapsed');
+}
 
 //router post /create
 // ajax
