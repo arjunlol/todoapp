@@ -4,7 +4,7 @@ $(() => {
     url: "/api/users"
   }).done((users) => {
     for(user of users) {
-      $("<li>").text(user.name).appendTo($("#watch-list"));
+      $("<li>").text(user.user_name).appendTo($("#watch-list"));
     }
   });;
 });
