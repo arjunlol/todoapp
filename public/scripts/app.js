@@ -2,8 +2,6 @@
 //this ajax call takes each user in the db and adds that value to a new li inside the ul watch list
 //this needs to be adapted to sort which actegory value given into whichever list
 $(() => {
-
-
   $.ajax({
     method: "GET",
     url: "/todo"
@@ -21,7 +19,7 @@ $(() => {
 $(document).ready(function(){
   $('.listHeader').click(function(){
     if ($($(this)[0].nextElementSibling).is('.collapsed')) {
-      // expandList($(this)[0].nextElementSibling);
+      expandList($(this)[0].nextElementSibling);
     } else {
       collapseList($(this)[0].nextElementSibling);
     }
@@ -55,6 +53,8 @@ function collapseList(parent) {
 function expandList(parent) {
   $(parent).slideDown().removeClass('collapsed');
 }
+
+
 
 
 
@@ -126,7 +126,7 @@ function isMovieOrBook (item, cb) {
   })
 };
 
-//testing ismovieorbook function
+testing ismovieorbook function
 $(document).ready(function(){
   let test;
   isMovieOrBook('galaxy', (result)=> {
