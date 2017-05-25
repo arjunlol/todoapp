@@ -29,8 +29,15 @@ $(document).ready(function(){
 //and trying to pass
   $('#submit-btn').click(function(e) {
     event.preventDefault(e);
-    var formData = $('#search-form').serialize();
-    console.log(formData)
+    var item = $('#form-textarea').val()
+    console.log(item)
+
+
+
+    isMovieOrBook(item, (result)=> {
+    test = result;
+    console.log(test);
+});
     //needs to pass this value to wolf
     //when done clear form data
 
@@ -120,18 +127,15 @@ function isMovieOrBook (item, cb) {
      } else {
       result = 'Neither';
      }
-     console.log(result);
+
      cb(result);
     }
   })
 };
 
-testing ismovieorbook function
-$(document).ready(function(){
-  let test;
-  isMovieOrBook('galaxy', (result)=> {
-    test = result;
-    console.log(test);
+//testing ismovieorbook function
+// $(document).ready(function(){
 
-  });
-});
+
+//   });
+// });
