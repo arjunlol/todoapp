@@ -81,6 +81,7 @@ function isMovieOrBook (item, cb) {
     url: `http://api.wolframalpha.com/v2/query?input=${item}&appid=${appid}&output=json`,
     dataType: 'jsonp',
     success: function (data){ //data is result from wolfram api
+      console.log(data);
       let categories = data.queryresult.assumptions.values;
 
       categories.forEach(category => {
@@ -111,7 +112,7 @@ function isMovieOrBook (item, cb) {
 //testing ismovieorbook function
 $(document).ready(function(){
   let test;
-  isMovieOrBook('galaxy', (result)=> {
+  isMovieOrBook('Guardians of the Galaxy', (result)=> {
     test = result;
     console.log(test);
 
