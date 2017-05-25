@@ -127,10 +127,10 @@ function isMovieOrBook (item, cb) {
   })
 };
 
-testing ismovieorbook function
+//testing ismovieorbook function
 $(document).ready(function(){
   let test;
-  isMovieOrBook('Guardians of the Galaxy', (result)=> {
+  isMovieOrBook('galaxy', (result)=> {
     test = result;
     console.log(test);
 
