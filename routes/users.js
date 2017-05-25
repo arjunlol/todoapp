@@ -17,30 +17,28 @@ module.exports = (knex) => {
     });
   });
 
-  //test route for testing API
-  router.get("/wolfsearch/:search", (req, res) => {
-    request({
-      uri: 'http://api.wolframalpha.com/v2/query',
-      qs: {
-        input: req.params.search,
-        appid: '8A2RH8-QPYYEQGL7K',
-        output: 'json'
-      }
-    }).then((data) => {
-      let wolframResult = JSON.parse(data);
-      // res.json((parser.toJson(data)));
-      res.send(wolframResult.queryresult.assumptions.values);
-    })
-    // .pipe(parser.toJson(res));
-  });
+  // //test route for testing API
+  // router.get("/wolfsearch/:search", (req, res) => {
+
+  // });
 
     //route handler for user creating an item
   router.post("/create", (req, res) => {
     //put item into the database
     //respond with both the category and the item
     let item = req.body.item;
-    let category = 'movie';
-    res.send({category:item})
+    request({
+      uri: 'http://api.wolframalpha.com/v2/query',
+      qs: {
+        input: item,
+        appid: '8A2RH8-QPYYEQGL7K',
+        output: 'json'
+      }
+    }).then((data) => {
+      let wolframResult = JSON.parse(data);
+      let category = wolframResult.queryresult.assumptions.values[0]["name"]
+      res.send({category:item})
+    })
   });
 
   //route handler for register user
