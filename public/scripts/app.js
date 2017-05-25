@@ -58,12 +58,23 @@ function expandList(parent) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+//function takes an item and returns the category of the item to the supplied callback function
 function isMovieOrBook (item, cb) {
-  let appid = '8A2RH8-QPYYEQGL7K';
-  let isMovie = false; //1
-  let isBook = false; //2
+  let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
+  let isMovie = false;
+  let isBook = false;
   let result;
-  let x = false;
  $.ajax({
     method: "GET",
     //wolfram API URL
@@ -73,7 +84,7 @@ function isMovieOrBook (item, cb) {
       let categories = data.queryresult.assumptions.values;
 
       categories.forEach(category => {
-        //if returned assumptions are either book or movie
+        //if returned assumptions are either a book or movie set accordingly
         if(category.name === 'Book'){
           isBook = true;
         }
@@ -81,6 +92,7 @@ function isMovieOrBook (item, cb) {
           isMovie = true;
         }
       });
+    //after all assumption values are iterated over, set result to be both, movie, book. or neither
      if (isMovie && isBook) {
       result = 'Both';
      } else if (isMovie) {
@@ -93,14 +105,10 @@ function isMovieOrBook (item, cb) {
      console.log(result);
      cb(result);
     }
-
   })
- // .then(() => {
- //      cb(result);
- //     })
 };
 
-
+//testing ismovieorbook function
 $(document).ready(function(){
   let test;
   isMovieOrBook('galaxy', (result)=> {
