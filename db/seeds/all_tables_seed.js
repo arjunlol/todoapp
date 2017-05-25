@@ -1,8 +1,8 @@
 let categories = [
-  {id: 3, name: 'movie_tv'},
-  {id: 4, name: 'book'},
-  {id: 5, name: 'restaurant'},
-  {id: 6, name: 'product'}
+  {id: 1, name: 'movie'},
+  {id: 2, name: 'book'},
+  {id: 3, name: 'restaurant'},
+  {id: 4, name: 'product'}
 ]
 
 let users = [
@@ -11,10 +11,10 @@ let users = [
 ]
 
 let items = [
-  {id: 7, createdAt: '2017-05-25 1:40', name: 'Pulp Fiction', categories_id: 3, users_id: 2},
-  {id: 8, createdAt: '2017-05-25 1:40', name: 'The Catcher in the Rye', categories_id: 4, users_id: 1},
-  {id: 9, createdAt: '2017-05-25 1:40', name: 'The Real Jerk', categories_id: 5, users_id: 1},
-  {id: 10, createdAt: '2017-05-25 1:40', name: 'Trampoline', categories_id: 6, users_id: 2}
+  {id: 1, createdAt: '2017-05-25 1:40', name: 'Pulp Fiction', categories_id: 1, users_id: 2},
+  {id: 2, createdAt: '2017-05-25 1:40', name: 'The Catcher in the Rye', categories_id: 2, users_id: 1},
+  {id: 3, createdAt: '2017-05-25 1:40', name: 'The Real Jerk', categories_id: 3, users_id: 1},
+  {id: 4, createdAt: '2017-05-25 1:40', name: 'Trampoline', categories_id: 4, users_id: 2}
 ]
 
 exports.seed = function(knex, Promise) {
