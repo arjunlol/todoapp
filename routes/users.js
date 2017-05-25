@@ -70,7 +70,8 @@ module.exports = (knex) => {
 
   //log out user cookie session
   router.get("/logout", (req, res) => {
-
+    req.session = null; //destroy cookie
+    res.redirect('/');
   });
 
   router.post("/profile", (req, res) => {
@@ -107,18 +108,6 @@ module.exports = (knex) => {
       .catch((err) =>{
         console.log(err);
       })
-  //   DataHelpers.checkUserMatch(user, (err, match) => {
-  //     if((match[0] === undefined) || !(bcrypt.compareSync(user.password, match[0].password))){
-  //       res.status(403).send("Invalid Username/Password");
-  //       return;
-  //     } else if((bcrypt.compareSync(user.password, match[0].password))) {
-  //       req.session.user = [match[0]['name'], match[0]['handler']];//array of name and handle
-  //       res.redirect('/');
-  //     }
-  //   });
-  // });
-
-
   });
 
   return router;
