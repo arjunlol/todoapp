@@ -59,7 +59,7 @@ module.exports = (knex) => {
     let user_id;
     knex('users') //first find the id of the email
     .select('id')
-    .where('email', 'John.Doe@fake.com')
+    .where('email', email)
       .then((user_id) => {
         user_id = user_id[0].id
         knex('items') //then find the items with that category id and user id
@@ -73,12 +73,33 @@ module.exports = (knex) => {
   });
 
   //updating the profile
-  router.put("/profile", (req, res) => {
+  //will update to put method override when refactoring, post for mvp
+  router.post("/profile", (req, res) => {
+    //currently assuming that user wants to update all fields..
+    //will refactor to only update what user wants later.
+    let email = req.session.user[0];
+    let nameNew = req.body.name;
+    let emailNew = req.body.email;
+    let passwordNew = bcrypt.hashSync(req.body.password, 10);
 
+    knex('users')
+    .where('email', email)
+    .update({
+      "user_name": nameNew,
+      "email": emailNew,
+      "password": passwordNew
+    })
+    .then((result) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    })
   });
 
   //update item from list
-  router.put("/:category/:item", (req, res) => {
+  //will method override to put when refactoring, currently post for mvp
+  router.post("/:category/:item", (req, res) => {
 
 
 
@@ -122,10 +143,6 @@ module.exports = (knex) => {
   router.get("/logout", (req, res) => {
     req.session = null; //destroy cookie
     res.redirect('/');
-  });
-
-  router.post("/profile", (req, res) => {
-
   });
 
   router.post("/login", (req, res) => {
