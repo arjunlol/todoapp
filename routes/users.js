@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router  = express.Router();
-const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
 
@@ -65,6 +64,10 @@ module.exports = (knex) => {
 
   //delete item from list
   router.delete("/:category/:item", (req, res) => {
+    let item = req.params.item;
+    let category = req.params.category;
+    let email = req.session.user[0];
+
 
   });
 
