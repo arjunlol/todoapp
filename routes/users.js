@@ -98,16 +98,41 @@ module.exports = (knex) => {
   });
 
   //update item from list
-  //will method override to put when refactoring, currently post for mvp
-  router.post("/:category/:item", (req, res) => {
+  router.put("/:category/:item", (req, res) => {
+    let item = req.params.item;
+    let category = req.params.category;
+    let itemNew = req.body.item;
+    let email = req.session.user[0];
 
-
-
+    knex('categories').select('id').where('name', category) //first find the id of the category
+      .then((id) => {
+        let categories_id = id[0].id // Selects just the number from the array
+        knex('users')
+        .select('id')
+        .where('email', email)
+          .then((user_id) => { //then find the id of the user
+            let user = user_id[0].id
+            console.log(user)
+            knex('items') //then find the item with that category id and user id
+            .where('name', item)
+            .andWhere('users_id', user)
+            .andWhere('categories_id', categories_id)
+            .update({
+              "name": itemNew
+            })
+            .then((result) => {
+              res.redirect('/');
+            })
+      })
+      .catch(() => {
+        res.status(403).send('Could not update');
+      })
+    });
   });
 
   //delete item from list
   //should method override to delete when refactoring
-  router.post("/:category/:item", (req, res) => {
+  router.delete("/:category/:item", (req, res) => {
     //currently does not check if user has permissions to delete that item
     let item = req.params.item;
     let category = req.params.category;
