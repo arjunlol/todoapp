@@ -28,9 +28,9 @@ module.exports = (knex) => {
     knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
       .then((id) => {
 
-      item_id = id[0].id // Selects just the number from the array
-      knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
-        .then((result) => {})
+        item_id = id[0].id // Selects just the number from the array
+        knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
+          .then((result) => {})
       })
   });
   //route handler for register user
@@ -46,7 +46,7 @@ module.exports = (knex) => {
     //insert user into the users table
     knex('users').insert(user)
       .then((resp) => {
-        req.session.user = [user['user_name'], user['email']]; //set cookie upon succesful registering
+        req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
         res.redirect('/');
       })
   });
@@ -65,13 +65,39 @@ module.exports = (knex) => {
   //update item from list
   router.put("/:category/:item", (req, res) => {
 
+
+
   });
 
   //delete item from list
-  router.delete("/:category/:item", (req, res) => {
+  //should method override to delete when refactoring
+  router.post("/:category/:item", (req, res) => {
     let item = req.params.item;
     let category = req.params.category;
-    let email = req.session.user[0];
+ //   let email = req.session.user[0];
+
+    knex
+    .select('*')
+    .from('categories')
+    .rightOuterJoin('items', 'categories.id', 'items.categories_id')
+    // .innerJoin('users', 'items.users_id', 'users.id')
+    .then((result) => {
+      console.log(result);
+    });
+
+    // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+    //   .then((id) => {
+    //     item_id = id[0].id // Selects just the number from the array
+    //     knex('users')
+    //     .select('id')
+    //     .where('email', email)
+    //       .then((user_id) => {
+
+    //       })
+
+        // delete({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
+        //   .then((result) => {})
+
 
   });
 
