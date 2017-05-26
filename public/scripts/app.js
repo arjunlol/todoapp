@@ -8,7 +8,6 @@ $(() => {
   }).done((users) => {
     for(id of users) {
       $("<li>").text(id.user_name).appendTo($("#watch-list"));
-
     }
   });
 });
@@ -31,26 +30,47 @@ $(document).ready(function(){
     event.preventDefault(e);
     var item = $('#form-textarea').val()
     console.log(item)
+    waitingMsg()
 
 
-
+    //searches wolfram and appends result to a list
     isMovieOrBook(item, (result)=> {
     test = result;
     console.log(test);
-});
-    //needs to pass this value to wolf
-    //when done clear form data
+    if (result === 'both'){
+      result = "other"
+      //$("<li>").text(item).appendTo($("." + result));
+      $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
+      selectCategoryBtns();
 
-    //this ajax is to be moved into your ismovieorbook function
-    // $.ajax({
-    //   url: '/create',
-    //   method: 'POST',
-    //   data: formData //this will take an object of a category and an item
-    //   }).done(() => {
-    // })
+
+
+
+
+
+
+    } else if (result === 'movie' || result === 'book'){
+      $("<li>").text(item).appendTo($("." + result));
+      $('.alerts').text(item + ": Has been added to your " + result + " List")
+       $('.flash-update-btn').show();
+       $('.flash-delete-btn').show();
+    } else {
+      $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+    }
+  })
   })
 })
 
+function selectCategoryBtns(){
+  $('.flash-category-btn').show();
+
+}
+
+
+//msg user recives while waiting for the apis response
+function waitingMsg(){
+  $('.alerts').text("Categorizing now..")
+}
 
 //this function as per name collapses the uls and lis
 function collapseList(parent) {
@@ -109,7 +129,9 @@ function isMovieOrBook (item, cb) {
     success: function (data){ //data is result from wolfram api
       //if wolfram deems no ambiguity in the search, then it doesnt return any assumptions but only 'datatype'
       let categories = data.queryresult.assumptions || data.queryresult.datatypes;
-      categories = categories.values || categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
+      console.log(categories)
+      console.log(data)
+      categories = categories.values || categories[0].values|| categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
       categories.forEach(category => {
         //if returned assumptions are either a book or movie set accordingly
         //if using assumptions then the name of the assumptions exists otherwise only use the datatype
@@ -122,13 +144,13 @@ function isMovieOrBook (item, cb) {
       });
     //after all assumption values are iterated over, set result to be both, movie, book. or neither
      if (isMovie && isBook) {
-      result = 'Both';
+      result = 'both';
      } else if (isMovie) {
-      result = 'Movie';
+      result = 'movie';
      } else if (isBook) {
-      result = 'Book';
+      result = 'book';
      } else {
-      result = 'Neither';
+      result = 'neither';
      }
      cb(result);
     }
