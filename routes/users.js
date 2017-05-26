@@ -18,15 +18,20 @@ module.exports = (knex) => {
     });
   });
 
-  // //test route for testing API
-  // router.get("/wolfsearch/:search", (req, res) => {
-
-  // });
-
     //route handler for user creating an item
   router.post("/create", (req, res) => {
-    //put item into the database
-    //respond with both the category and the item
+    let item = req.body.item
+    let category = req.body.category
+    let created_at = new Date()
+    let item_id;
+
+    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+      .then((id) => {
+
+      item_id = id[0].id // Selects just the number from the array
+      knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
+        .then((result) => {})
+      })
   });
   //route handler for register user
   router.post("/register", (req, res) => {
@@ -67,7 +72,6 @@ module.exports = (knex) => {
     let item = req.params.item;
     let category = req.params.category;
     let email = req.session.user[0];
-
 
   });
 

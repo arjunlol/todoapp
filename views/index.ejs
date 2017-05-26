@@ -17,6 +17,8 @@
         <h1>ToDo App!</h1>
         <a href="#"><div>LISTS</div></a>
         <a href="#"><div>ARCHIVE</div></a>
+        <a href="#"><div>REGISTER</div></a>
+        <a href="#"><div>LOGIN</div></a>
         <a href="#"><div>LOGOUT</div></a>
         <img src= "#">
       </nav>
@@ -29,7 +31,12 @@
       </form>
 
       <div class="alerts"></div>
-      <!-- <a class="flash-category-btn" href="#"></a> -->
+      <div class="flash-buttons-section">
+      <a class="flash-category-btn" href="#">Book</a>
+      <a class="flash-category-btn" href="#">Movie</a>
+      <a class="flash-update-btn" href="#">Update</a>
+      <a class="flash-delete-btn" href="#">Delete</a>
+      </div>
 
 
 
@@ -38,24 +45,29 @@
       </a>
       <ul class="category-list collapsed">
         <li>
-          <a href="#" id="to-watch-list-btn" class="listHeader">Film / Series (To watch)</a>
+          <a href="#" id="to-watch-list-btn" class="listHeader ">Film / Series (To watch)</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="watch-list" class= "list collapsed"></ul>
+          <ul id="watch-list" class= "list collapsed movie"></ul>
         </li>
         <li>
           <a href="#" id="to-eat-list-btn" class="listHeader">Restaurants, cafes, etc. (To eat)</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="eat-list" class= "list collapsed"></ul>
+          <ul id="eat-list" class= "list collapsed eat"></ul>
         </li>
         <li>
           <a href="#" id="to-read-list-btn" class="listHeader">Books (To read)</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="read-list" class= "list collapsed"></ul>
+          <ul id="read-list" class= "list collapsed book"></ul>
         </li>
         <li>
           <a href="#" id="to-buy-list-btn" class="listHeader">Products (To buy)</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="buy-list" class= "list collapsed"></ul>
+          <ul id="buy-list" class= "list collapsed product"></ul>
+        </li>
+        <li>
+          <a href="#" id="other-list-btn" class="listHeader">Other Stuff</a>
+           <!-- this ul is where app.js adds an <li> for each item in db -->
+          <ul id="other-list" class= "list collapsed other both neither"></ul>
         </li>
       </ul>
     </section>
