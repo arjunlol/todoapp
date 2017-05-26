@@ -72,33 +72,36 @@ module.exports = (knex) => {
   //delete item from list
   //should method override to delete when refactoring
   router.post("/:category/:item", (req, res) => {
+    //currently does not check if user has permissions to delete that item
     let item = req.params.item;
     let category = req.params.category;
- //   let email = req.session.user[0];
-
-    knex
-    .select('*')
-    .from('categories')
-    .rightOuterJoin('items', 'categories.id', 'items.categories_id')
-    // .innerJoin('users', 'items.users_id', 'users.id')
-    .then((result) => {
-      console.log(result);
-    });
-
-    // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
-    //   .then((id) => {
-    //     item_id = id[0].id // Selects just the number from the array
-    //     knex('users')
-    //     .select('id')
-    //     .where('email', email)
-    //       .then((user_id) => {
-
-    //       })
-
-        // delete({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
-        //   .then((result) => {})
+   //let email = req.session.user[0];
+    let item_id;
+    let user_id;
 
 
+    knex('categories').select('id').where('name', category) //first find the id of the category
+      .then((id) => {
+        console.log(id)
+        let categories_id = id[0].id // Selects just the number from the array
+        knex('users')
+        .select('id')
+        .where('email', 'John.Doe@fake.com')
+          .then((user_id) => { //then find the id of the user
+            user_id = user_id[0].id
+            knex('items') //then find the item with that category id and user id
+            .where('name', item)
+            .andWhere('users_id', user_id)
+            .andWhere('categories_id', categories_id)
+            .del() //delete the item
+            .then(() => {
+              res.redirect('/');
+            })
+          })
+      })
+      .catch(() => {
+        res.status(403).send('Could not delete item');
+      })
   });
 
   //log out user cookie session
