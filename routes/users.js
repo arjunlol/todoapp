@@ -24,7 +24,6 @@ module.exports = (knex) => {
     let category = req.body.category
     let created_at = new Date()
     let item_id;
-
     knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
       .then((id) => {
 
@@ -53,8 +52,24 @@ module.exports = (knex) => {
 
 
   //route handler for returning list of specific catergory
+  //assumes parameter is number corresponding to category... so that easy request to loop through
   router.get("/:category", (req, res) => {
-
+    let email = req.session.user[0];
+    let categories_id= req.params.category;
+    let user_id;
+    knex('users') //first find the id of the email
+    .select('id')
+    .where('email', 'John.Doe@fake.com')
+      .then((user_id) => {
+        user_id = user_id[0].id
+        knex('items') //then find the items with that category id and user id
+        .select('name')
+        .where('users_id', user_id)
+        .andWhere('categories_id', categories_id)
+        .then((items) => {
+          res.json(items);
+        })
+      })
   });
 
   //updating the profile
@@ -75,10 +90,9 @@ module.exports = (knex) => {
     //currently does not check if user has permissions to delete that item
     let item = req.params.item;
     let category = req.params.category;
-   //let email = req.session.user[0];
+   let email = req.session.user[0];
     let item_id;
     let user_id;
-
 
     knex('categories').select('id').where('name', category) //first find the id of the category
       .then((id) => {
@@ -86,7 +100,7 @@ module.exports = (knex) => {
         let categories_id = id[0].id // Selects just the number from the array
         knex('users')
         .select('id')
-        .where('email', 'John.Doe@fake.com')
+        .where('email', email)
           .then((user_id) => { //then find the id of the user
             user_id = user_id[0].id
             knex('items') //then find the item with that category id and user id
