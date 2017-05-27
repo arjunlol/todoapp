@@ -7,21 +7,25 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+
+
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
   </head>
 
   <body>
     <main>
-      <nav>
-        <h1>ToDo App!</h1>
-        <a href="#"><div>LISTS</div></a>
-        <a href="#"><div>ARCHIVE</div></a>
-        <a href="#"><div>REGISTER</div></a>
-        <a href="#"><div>LOGIN</div></a>
-        <a href="#"><div>LOGOUT</div></a>
-        <img src= "#">
-      </nav>
+<nav>
+  <h1>ToDo App!</h1>
+  <a href="#"><div>LISTS</div></a>
+  <a href="#"><div>ARCHIVE</div></a>
+  <a href="#"><div>REGISTER</div></a>
+  <a href="#"><div>LOGIN</div></a>
+  <a href="#"><div>LOGOUT</div></a>
+  <img src= "#">
+</nav>
+
 
     <section class="search-form-area">
       <form id="search-form">
@@ -34,11 +38,9 @@
       <div class="flash-buttons-section">
       <a class="flash-category-btn" href="#">Book</a>
       <a class="flash-category-btn" href="#">Movie</a>
-      <a class="flash-update-btn" href="#">Update</a>
-      <a class="flash-delete-btn" href="#">Delete</a>
+      <!-- <a class="flash-update-btn" href="#">Update</a>
+      <a class="flash-delete-btn" href="#">Delete</a> -->
       </div>
-
-
 
       <a id = "view-lists" class="listHeader" href="#">
         <div>VIEW LISTS</div>
@@ -47,7 +49,9 @@
         <li>
           <a href="#" id="to-watch-list-btn" class="listHeader ">Film / Series (To watch)</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="watch-list" class= "list collapsed movie"></ul>
+          <ul id="watch-list" class= "list collapsed movie">
+
+          </ul>
         </li>
         <li>
           <a href="#" id="to-eat-list-btn" class="listHeader">Restaurants, cafes, etc. (To eat)</a>

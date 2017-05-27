@@ -13,6 +13,7 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const yelpSearch  = require('./routes/yelp.js');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -43,6 +44,7 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/todo", usersRoutes(knex));
+//app.use("/yelp", yelpSearch(knex));
 
 // Home page
 app.get("/", (req, res) => {
