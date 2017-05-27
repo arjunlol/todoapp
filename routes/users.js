@@ -4,7 +4,8 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
-const productCheck = require('./product_check.js')
+const productCheck = require('./product_check.js');
+const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
 
@@ -23,6 +24,7 @@ module.exports = (knex) => {
   router.post("/create", (req, res) => {
     //let item = req.body.item
     let item = req.body.data;
+    console.log('received req', req.body.item)
     //const item = 'pizza';
 
     yelpSearch(item, function(results){
