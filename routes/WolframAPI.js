@@ -16,7 +16,7 @@ function isMovieOrBook (item, cb) {
     // res.send(wolframResult.queryresult.assumptions.values);
   });
 
-
+}
 
 // return any assumptions but only 'datatype'
 //       cb(data);

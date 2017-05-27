@@ -345,6 +345,19 @@ $(() => {
    $(this).closest('li').remove();//remove item on front end
     deleteItem(item, category) //remove item on back end
   });
+
+  //on register click, register user
+  $("#register-submit-btn").on("click", function(event) {
+    let formData = $('#register-form').serializeArray();
+    let name = formData[0].value;
+    let email = formData[1].value;
+    let password = formData[2].value;
+    registerUser(name, email, password);
+  });
+
+
+
+
 })
 
 
