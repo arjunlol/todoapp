@@ -160,6 +160,288 @@ function expandList(parent) {
 
 
 //function takes an item and returns the category of the item to the supplied callback function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $(() => {
+//   $.ajax({
+//     url: "https://api.yelp.com/v3/businesses/search?term=mcdonalds&location=toronto",
+//     method: "GET",
+//     headers: {'Access-Control-Allow-Origin': 'http://localhost',
+//       'authorization': '-fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx',
+//       'User-Agent': 'curl/7.51.0'}
+//   //   // dataType: 'jsonp',
+//   //   beforeSend: function(xhr){xhr.setRequestHeader('authorization', 'Bearer -fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx');}
+//   // Access-Control-Allow-Origin
+//   }).done((data) => {
+//     console.log(data);
+//   });
+// });
+
+//when click on register than do
+
+$(() => {
+
+  loadLists();
+
+
+// on the click of the delete remove that specific list item
+  $("li").on("click", ".flash-delete-btn", function(event) {
+    event.preventDefault();
+    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
+    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    category = category[category.length-1]; //the last item of the array is the category
+   $(this).closest('li').remove();//remove item on front end
+    deleteItem(item, category) //remove item on back end
+  });
+})
+
+
+function deleteItem(item, category) {
+  $.ajax({
+    url: "/todo/${category}/${item}",
+    method: "DELETE"
+  })
+};
+
+function loadLists() {
+  let categories = ['movie', 'restaurant', 'book', 'product'];
+  categories.forEach(function (category) {
+    loadItems(category);
+  })
+}
+
+
+
+function loadItems(category) { //4 categories
+  $.ajax({
+    url: `todo/${category}`,
+    method: "GET",
+    success: function(result) {
+      result.forEach(function (item) { //loops through all items and renders
+        console.log(item)
+        renderElement(item.name, category)//renders items for specified category
+      })
+    }
+  })
+};
+
+function renderElement(item, category) {
+  const buttons =
+  `<div class="update-and-delete-btns" style= "">
+      <a class="flash-update-btn" href="#">Update</a>
+      <a class="flash-delete-btn" href="#">Delete</a>
+   </div>`
+
+  $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+};
+
+function logoutUser() {
+  $.ajax({
+    url: "/todo/logout",
+    method: "POST",
+    success: function() {
+      //render the ejs where someone has to log in or register
+    }
+  })
+};
+
+function loginUser(email, password) {
+  $.ajax({
+    url: "/todo/login",
+    method: "POST",
+    data: {'email': email, 'password': password},
+    success: function() {
+      //render the ejs where someone has signed in
+    }
+  })
+};
+
+function registerUser(name, email, password) {
+  $.ajax({
+    url: "/todo/register",
+    method: "POST",
+    data: {'username': name, 'email': email, 'password': password},
+    success: function() {
+      //render the ejs where someone has signed in
+    }
+  })
+};
+
+function updateItem(item, category, newItem) {
+  $.ajax({
+    url: `/todo/${category}/${item}`,
+    method: "PUT",
+    data: {'item': newItem},
+    success: function() {
+      //update .val of item element
+    }
+  })
+};
+
+function updateUser(newName, newEmail, newPassword) {
+  $.ajax({
+    url: `/todo/profile`,
+    method: "PUT",
+    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword},
+    success: function() {
+      //update .val of item element
+    }
+  })
+}
+
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
 //   let isMovie = false;
@@ -200,3 +482,4 @@ function expandList(parent) {
 //     }
 //   })
 // };
+
