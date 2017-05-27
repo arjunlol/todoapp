@@ -32,7 +32,40 @@ $(document).ready(function(){
     waitingMsg()
 
 
-    //searches wolfram and appends result to a list
+   function checkApis(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
+   //end of checkapis function
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   //searches wolfram and appends result to a list
     isMovieOrBook(item, (result) => {
     const buttons =
     `<div class="update-and-delete-btns" style= "">
@@ -44,39 +77,44 @@ $(document).ready(function(){
     console.log(test);
     if (result === 'both'){
       result = "other"
-      //$("<li>").text(item).appendTo($("." + result));//need to append based on click result
       $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
       selectCategoryBtns();
     } else if (result === 'movie' || result === 'book'){
-      //$("<li>").text(item).appendTo($("." + result));
+        //$("<li>").text(item).appendTo($("." + result));//need an else if for book
         $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
         $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
-
-      $('.alerts').text(item + ": Has been added to your " + result + " List")
-      // $('.flash-update-btn').show();
-      // $('.flash-delete-btn').show();
-
+        $('.alerts').text(item + ": Has been added to your " + result + " List")
     } else {
-      $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // productCheck(item, cb)
+      yelpSearch(item, cb)
+
     }
-  })
-  })
-//ajax for yelp
-$.ajax({
-    method: "POST",
-    url: "/todo/create",
-    data: "item"
-  }).done((object) => {
-    console.log("this is the route", object)
-    $("<li>").text(`${object.category}, ${object.item}`).appendTo($("#eat-list"));
-    // }
-  });
+    })
 
-
-
-
-
+  $.ajax({
+      method: "POST",
+      url: "/todo/create",
+      data: {'item': item}
+    }).done((object) => {
+      console.log("this is the route", object)
+      $("<li>").text(`${object.category}, ${object.item}`).appendTo($("." + result));
+      })
+    });
 })
+
+
+
+
+//ajax for yelp
+
+
+
+
+
+
+
+
 //doc ready close
 
 
@@ -153,46 +191,6 @@ function expandList(parent) {
 
 
 //function takes an item and returns the category of the item to the supplied callback function
-function isMovieOrBook (item, cb) {
-  let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
-  let isMovie = false;
-  let isBook = false;
-  let result;
- $.ajax({
-    method: "GET",
-    //wolfram API URL
-    url: `http://api.wolframalpha.com/v2/query?input=${item}&appid=${appid}&output=json`,
-    dataType: 'jsonp',
-    success: function (data){ //data is result from wolfram api
-      //if wolfram deems no ambiguity in the search, then it doesnt return any assumptions but only 'datatype'
-      let categories = data.queryresult.assumptions || data.queryresult.datatypes;
-      console.log(categories)
-      console.log(data)
-      categories = categories.values || categories[0].values|| categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
-      categories.forEach(category => {
-        //if returned assumptions are either a book or movie set accordingly
-        //if using assumptions then the name of the assumptions exists otherwise only use the datatype
-        if((category.name || category) === 'Book'){
-          isBook = true;
-        }
-        if((category.name || category) === 'Movie'){
-          isMovie = true;
-        }
-      });
-    //after all assumption values are iterated over, set result to be both, movie, book. or neither
-     if (isMovie && isBook) {
-      result = 'both';
-     } else if (isMovie) {
-      result = 'movie';
-     } else if (isBook) {
-      result = 'book';
-     } else {
-      result = 'neither';
-     }
-     cb(result);
-    }
-  })
-};
 
 
 
@@ -461,3 +459,45 @@ function logout (){
     }
   })
 };
+
+// function isMovieOrBook (item, cb) {
+//   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
+//   let isMovie = false;
+//   let isBook = false;
+//   let result;
+//  $.ajax({
+//     method: "GET",
+//     //wolfram API URL
+//     url: `http://api.wolframalpha.com/v2/query?input=${item}&appid=${appid}&output=json`,
+//     dataType: 'jsonp',
+//     success: function (data){ //data is result from wolfram api
+//       //if wolfram deems no ambiguity in the search, then it doesnt return any assumptions but only 'datatype'
+//       let categories = data.queryresult.assumptions || data.queryresult.datatypes;
+//       console.log(categories)
+//       console.log(data)
+//       categories = categories.values || categories[0].values|| categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
+//       categories.forEach(category => {
+//         //if returned assumptions are either a book or movie set accordingly
+//         //if using assumptions then the name of the assumptions exists otherwise only use the datatype
+//         if((category.name || category) === 'Book'){
+//           isBook = true;
+//         }
+//         if((category.name || category) === 'Movie'){
+//           isMovie = true;
+//         }
+//       });
+//     //after all assumption values are iterated over, set result to be both, movie, book. or neither
+//      if (isMovie && isBook) {
+//       result = 'both';
+//      } else if (isMovie) {
+//       result = 'movie';
+//      } else if (isBook) {
+//       result = 'book';
+//      } else {
+//       result = 'neither';
+//      }
+//      cb(result);
+//     }
+//   })
+// };
+

@@ -4,7 +4,8 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
-//const productCheck = require('./product_check.js')
+const productCheck = require('./product_check.js');
+const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
 
@@ -22,8 +23,9 @@ module.exports = (knex) => {
     //route handler for user creating an item
   router.post("/create", (req, res) => {
     //let item = req.body.item
-    // let category = req.body.category
-    const item = 'pizza';
+    let item = req.body.data;
+    console.log('received req', req.body.item)
+    //const item = 'pizza';
 
     yelpSearch(item, function(results){
       if(results){
@@ -31,6 +33,11 @@ module.exports = (knex) => {
         res.send({category, item})
       }
       console.log(results.businesses[0].categories);
+
+      // product_check(item) {
+      //   console.log("ProductCheck is running", item)
+      // }
+
 
     })
 
