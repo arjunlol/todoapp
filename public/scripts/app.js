@@ -64,15 +64,15 @@ $(document).ready(function(){
     // }
     // })
 
-  $.ajax({
-      method: "POST",
-      url: "/todo/create",
-      data: {'item': item}
-    }).done((object) => {
-      console.log("this is the route", object)
-      $("<li>").text(`${object.category}, ${object.item}`).appendTo($("." + result));
-      })
-    });
+//   $.ajax({
+//       method: "POST",
+//       url: "/todo/create",
+//       data: {'item': item}
+//     }).done((object) => {
+//       console.log("this is the route", object)
+//       $("<li>").text(`${object.category}, ${object.item}`).appendTo($("." + result));
+//       })
+//     });
 })
 
 
