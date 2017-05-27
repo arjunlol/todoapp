@@ -30,7 +30,7 @@ $(document).ready(function(){
     var item = $('#form-textarea').val()
     console.log(item)
     waitingMsg()
-
+  })
 
    function checkApis(){
    }
@@ -348,11 +348,20 @@ $(() => {
 
   //on register click, register user
   $("#register-submit-btn").on("click", function(event) {
+    event.preventDefault();
     let formData = $('#register-form').serializeArray();
     let name = formData[0].value;
     let email = formData[1].value;
     let password = formData[2].value;
     registerUser(name, email, password);
+  });
+
+  $("#login-submit-btn").on("click", function(event) {
+    event.preventDefault()
+    let formData = $('#login-form').serializeArray();
+    let email = formData[0].value;
+    let password = formData[1].value;
+    loginUser(email, password);
   });
 
 
@@ -448,12 +457,12 @@ function updateUser(newName, newEmail, newPassword) {
   $.ajax({
     url: `/todo/profile`,
     method: "PUT",
-    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword},
-    success: function() {
-      //update .val of item element
-    }
+    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword}
+    // success: function() {
+    //   //update .val of item element
+    // }
   })
-}
+};
 
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
