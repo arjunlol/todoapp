@@ -365,21 +365,22 @@ function isMovieOrBook (item, cb) {
 //when click on register than do
 
 $(() => {
-  console.log('test');
-// on the click of the delete remove that specific list item
-  $('a .flash-delete-btn').on('click', function(event) {
-    preventDefault();
-    let item = $(this).closest('li').text()
-    console.log(item);
-    // $(this).remove();
-    // let item = "item"
-    // let category = "blah"
-    // $.ajax({
-    //   url: "/todo/${category}/${item}",
-    //   method: "DELETE",
-    // })
 
-  })
+
+
+
+// on the click of the delete remove that specific list item
+  $("li").on("click", ".flash-delete-btn", function(event) {
+    event.preventDefault();
+    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
+    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    category = category[category.length-1]; //the last item of the array is the category
+   $(this).closest('li').remove();//remove item on front end
+    deleteItem(item, category) //remove item on back end
+  });
+
+
+
 
 //on the update click where is the input going to come from?
     //update the item inline
@@ -412,3 +413,13 @@ $(() => {
 })
 
 
+function deleteItem (item, category) {
+  $.ajax({
+    url: "/todo/${category}/${item}",
+    method: "DELETE",
+  })
+};
+
+function loadItems() {
+
+};
