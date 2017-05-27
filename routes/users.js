@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
-//const productCheck = require('./product_check.js')
+const productCheck = require('./product_check.js')
 
 module.exports = (knex) => {
 
