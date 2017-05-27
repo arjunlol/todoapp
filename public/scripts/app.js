@@ -12,7 +12,6 @@ $(() => {
   });
 });
 
-
 //after doc is ready
 //line 20-26 ish are collapsing the 4 category lists when the parent list button is collapsed
 $(document).ready(function(){
@@ -34,32 +33,52 @@ $(document).ready(function(){
 
 
     //searches wolfram and appends result to a list
-    isMovieOrBook(item, (result)=> {
+    isMovieOrBook(item, (result) => {
+    const buttons =
+    `<div class="update-and-delete-btns" style= "">
+        <a class="flash-update-btn" href="#">Update</a>
+        <a class="flash-delete-btn" href="#">Delete</a>
+     </div>`
+
     test = result;
     console.log(test);
     if (result === 'both'){
       result = "other"
-      //$("<li>").text(item).appendTo($("." + result));
+      //$("<li>").text(item).appendTo($("." + result));//need to append based on click result
       $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
       selectCategoryBtns();
-
-
-
-
-
-
-
     } else if (result === 'movie' || result === 'book'){
-      $("<li>").text(item).appendTo($("." + result));
+      //$("<li>").text(item).appendTo($("." + result));
+        $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
+        $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+
       $('.alerts').text(item + ": Has been added to your " + result + " List")
-       $('.flash-update-btn').show();
-       $('.flash-delete-btn').show();
+      // $('.flash-update-btn').show();
+      // $('.flash-delete-btn').show();
+
     } else {
       $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
     }
   })
   })
+//ajax for yelp
+$.ajax({
+    method: "POST",
+    url: "/todo/create",
+    data: "item"
+  }).done((object) => {
+    console.log("this is the route", object)
+    $("<li>").text(`${object.category}, ${object.item}`).appendTo($("#eat-list"));
+    // }
+  });
+
+
+
+
+
 })
+//doc ready close
+
 
 function selectCategoryBtns(){
   $('.flash-category-btn').show();
@@ -80,6 +99,26 @@ function collapseList(parent) {
 function expandList(parent) {
   $(parent).slideDown().removeClass('collapsed');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
