@@ -483,7 +483,6 @@ function updateUser(newName, newEmail, newPassword) {
   })
 };
 
->>>>>>> master
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
 //   let isMovie = false;
@@ -524,7 +523,4 @@ function updateUser(newName, newEmail, newPassword) {
 //     }
 //   })
 // };
-<<<<<<< HEAD
-=======
 
->>>>>>> master

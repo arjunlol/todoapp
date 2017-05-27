@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -16,7 +18,7 @@
   <% include partials/_header %>
   <body>
     <main>
-  <% if (true){ %>
+  <% if (false){ %>
   <section id="register-popup-section" class="reg-log-section">
     <form id="register-form" class="reg-log-form">
         <label for="name">Name:</label>
@@ -44,9 +46,9 @@
     <% } else { %>
     <section class="search-form-area">
       <form id="search-form">
-        <label for="list-item">To Do:</label>
-        <input id ="form-textarea" type="text" name="item">
-        <a id ="submit-btn" href="#"><div>ADD</div></a>
+        <!-- <label for="list-item">To Do:</label> -->
+        <input id="form-textarea" type="text" name="item" placeholder="add something to a list">
+        <a id="submit-btn" href="#"><div><i class="fa fa-plus" aria-hidden="true"></i></div></a>
       </form>
 
       <div class="alerts"></div>
@@ -58,33 +60,33 @@
       </div>
 
       <a id = "view-lists" class="listHeader" href="#">
-        <div>VIEW LISTS</div>
+        <div>view lists</div>
       </a>
       <ul class="category-list collapsed">
         <li>
-          <a href="#" id="to-watch-list-btn" class="listHeader ">Film / Series (To watch)</a>
+          <a href="#" id="to-watch-list-btn" class="listHeader ">things to watch</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
           <ul id="watch-list" class= "list collapsed movie">
 
           </ul>
         </li>
         <li>
-          <a href="#" id="to-eat-list-btn" class="listHeader">Restaurants, cafes, etc. (To eat)</a>
+          <a href="#" id="to-eat-list-btn" class="listHeader">places to eat</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
           <ul id="eat-list" class= "list collapsed eat"></ul>
         </li>
         <li>
-          <a href="#" id="to-read-list-btn" class="listHeader">Books (To read)</a>
+          <a href="#" id="to-read-list-btn" class="listHeader">books to read</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
           <ul id="read-list" class= "list collapsed book"></ul>
         </li>
         <li>
-          <a href="#" id="to-buy-list-btn" class="listHeader">Products (To buy)</a>
+          <a href="#" id="to-buy-list-btn" class="listHeader">products to buy</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
           <ul id="buy-list" class= "list collapsed product"></ul>
         </li>
         <li>
-          <a href="#" id="other-list-btn" class="listHeader">Other Stuff</a>
+          <a href="#" id="other-list-btn" class="listHeader">other stuff</a>
            <!-- this ul is where app.js adds an <li> for each item in db -->
           <ul id="other-list" class= "list collapsed other both neither"></ul>
         </li>

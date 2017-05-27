@@ -1,19 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Dosis);
+
+$body-font-family: 'Dosis', sans-serif;
+$darkPurple: #2E294E;
+$creamyOrange: #F46036;
+
+
+
+
+
+
 body {
-  background-color: purple;
+  background-color: #fff;
 
   section.search-form-area {
     margin-top:180px;
-    width: 500px;
+    width:65%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: purple;
-    color: #fff;
+    background-color: #fff;
+    color: $darkPurple;
 
-  h1 {
-    color: #244751;
-  }
   form {
     font-size:20px;
     margin-top:2vw;
@@ -22,42 +31,61 @@ body {
     align-items: center;
     justify-content: space-around;
 
-    label{
-      margin-right:10px;
-      font-size:49px;
+      label {
+        margin-right:10px;
+        font-size:49px;
+      }
 
+      a {
+        text-decoration: none;
+        color:#fff;
+        padding: 10px;
+        border: 2px solid;
+        margin-left:10px;
+      }
+
+      input {
+        padding:10px;
+      }
     }
-  a {
-    text-decoration: none;
-    color:#fff;
-    padding: 10px;
-    border: 2px solid;
-    margin-left:10px;
   }
-  input {
-    padding:10px;
-  }
-  }
- }
 }
 
 
+#submit-btn {
+  color: $darkPurple;
+  border: none;
+  font-size: 36px;
+  padding: 0;
+}
 
 
 nav {
   top:0;
-  height:80px;
+  height:100px;
+  padding: 10px;
   width:100%;
   position:fixed;
-  background-color:#fff;
+  background-color: $darkPurple;
   opacity: 0.9;
   display:flex;
   align-items: center;
   justify-content:space-around;
+
  a {
   text-decoration: none;
+  color: $creamyOrange;
  }
 
+ h1 {
+      color: $creamyOrange;
+      font-family: "Pacifico", sans-serif;
+      font-size: 3em;
+      font-weight: normal;
+      float: left;
+      padding: none;
+      margin: none;
+    }
 }
 
 main {
@@ -117,14 +145,15 @@ main {
 }
 
 #view-lists {
-  color:#fff;
+  color: $darkPurple;
   width:99%;
   font-size:20px;
   text-decoration:none;
-  border: 2px solid;
+  // border: 2px solid;
   text-align:center;
   padding:30px;
 }
+
 #view-lists:hover {
 
 
@@ -182,7 +211,6 @@ main {
 .reg-log-section {
   margin-top: 25vw;
   display:none;
-
 }
 
 #register-form {
@@ -190,6 +218,10 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#form-textarea {
+  width: 100%
 }
 
 #login-form {
