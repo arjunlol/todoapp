@@ -120,11 +120,34 @@ function expandList(parent) {
 
 
 
+    // test = result;
+    // console.log(test);
+    // if (result === 'both'){
+    //   result = "other"
+    //   $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
+    //   selectCategoryBtns();
+    // } else if (result === 'movie' || result === 'book'){
+    //     //$("<li>").text(item).appendTo($("." + result));//need an else if for book
+    //     $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
+    //     $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+    //     $('.alerts').text(item + ": Has been added to your " + result + " List")
+    // } else {
+      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // productCheck(item, cb)
+      // yelpSearch(item, cb)
 
 
 
-
-
+//ajax for yelp
+// $.ajax({
+//     method: "POST",
+//     url: "/todo/create",
+//     data: "item"
+//   }).done((object) => {
+//     console.log("this is the route", object)
+//     $("<li>").text(`${object.category}, ${object.item}`).appendTo($("#buy-list"));
+//     // }
+//   });
 
 
 
@@ -160,10 +183,6 @@ function expandList(parent) {
 
 
 //function takes an item and returns the category of the item to the supplied callback function
-
-
-
-
 
 
 
@@ -464,6 +483,7 @@ function updateUser(newName, newEmail, newPassword) {
   })
 };
 
+>>>>>>> master
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
 //   let isMovie = false;
@@ -504,4 +524,7 @@ function updateUser(newName, newEmail, newPassword) {
 //     }
 //   })
 // };
+<<<<<<< HEAD
+=======
 
+>>>>>>> master

@@ -4,7 +4,9 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
-const productCheck = require('./product_check.js');
+const productCheck = require('./product_check.js')
+const isMovieOrBook = require('./is_movie_or_book.js')
+// const $ = require('jQuery')
 const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
@@ -20,33 +22,64 @@ module.exports = (knex) => {
     });
   });
 
-    //route handler for user creating an item
-  router.post("/create", (req, res) => {
-    //let item = req.body.item
-    let item = req.body.data;
-    console.log('received req', req.body.item)
-    //const item = 'pizza';
-
-    yelpSearch(item, function(results){
-      if(results){
-        let category = "restaurant";
-        res.send({category, item})
+  //route handler for user creating an item
+  router.post("/create", (req, res) => { //user id hardcoded currently
+  let isProduct = undefined
+  let isRestaurant = undefined
+  let isBook = undefined
+  let isMovie = undefined
+  let item = req.body.item
+  let created_at = new Date();
+  let email = req.session.user[0]
+  //promise call all API's to determine the category
+  new Promise ((resolve) => {
+    yelpSearch(item, function(result){
+      console.log('yelpcity');
+      if(result){
+        isRestaurant = 'restaurant';
       }
-      console.log(results.businesses[0].categories);
-
-      // product_check(item) {
-      //   console.log("ProductCheck is running", item)
-      // }
-
-
+    });
+    wolframApi(item, (result) => {
+      console.log('wolfcity');
+      if(result.movie){
+        isMovie = 'movie';
+      }
+      if(result.book){
+        isBook = 'book';
+      }
+      resolve()
+    });
+  }).then(() => { //after all api calls finsih the resond with category and store item in database
+    let category = isMovie || isBook || isRestaurant || 'product'; //prioritizes wolfram results
+    res.send(category);
+    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+    .then((id) => {
+      let item_id = id[0].id // Selects just the number from the array
+      knex('users') //first find the id of the email
+      .select('id')
+      .where('email', email)
+        .then((user_id) => {
+          let user = user_id[0].id
+          knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: user}) //Inserts a new row in the items table
+          .then(() => {})
+       })
+    }).catch(() =>{
+      res.status(404).send('ERROR');
     })
-
-    // let created_at = new Date()
-    // let item_id;
-    // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
   })
 
-
+  // Promise.all(promises)
+  //   ,then(() => {
+  //   })
+    // productCheck(item, function(results) {
+    //   console.log("Results of productCheck function:", results)
+    //   if (results === true) {
+    //     // let category = "product";
+    //     isProduct = true
+    //   }
+    //   console.log("Product check sez isProduct =", isProduct)
+    // });
+})
 
   //route handler for register user
   router.post("/register", (req, res) => {
