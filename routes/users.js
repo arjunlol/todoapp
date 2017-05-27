@@ -94,7 +94,7 @@ module.exports = (knex) => {
 
   //updating the profile
   //will update to put method override when refactoring, post for mvp
-  router.post("/profile", (req, res) => {
+  router.put("/profile", (req, res) => {
     //currently assuming that user wants to update all fields..
     //will refactor to only update what user wants later.
     let email = req.session.user[0];

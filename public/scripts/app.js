@@ -462,6 +462,16 @@ function updateItem(item, category, newItem) {
   })
 };
 
+function updateUser(newName, newEmail, newPassword) {
+  $.ajax({
+    url: `/todo/profile`,
+    method: "PUT",
+    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword},
+    success: function() {
+      //update .val of item element
+    }
+  })
+}
 
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
