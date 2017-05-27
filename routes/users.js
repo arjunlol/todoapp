@@ -7,6 +7,7 @@ const yelpSearch  = require('./yelp.js');
 const productCheck = require('./product_check.js')
 const isMovieOrBook = require('./is_movie_or_book.js')
 const $ = require('jQuery')
+const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
 
@@ -33,9 +34,14 @@ module.exports = (knex) => {
   function bigFunction(item, cb) {
 
     yelpSearch(item, function(result){
-      // console.log("Results of yelpSearch function:", results)
-      if(result){
-        // let category = "restaurant";
+        // console.log("Results of yelpSearch function:", result)
+        //let category = "restaurant";
+        //res.send({category, item})
+        //let item = req.body.item
+        //let item = req.body.data;
+        //console.log('received req', req.body.item)
+        //const item = 'pizza';
+        if(result){
         isRestaurant = true
         // resultCheck(isRestaurant, false);
       }
@@ -115,27 +121,31 @@ module.exports = (knex) => {
   //route handler for returning list of specific catergory
   //assumes parameter is number corresponding to category... so that easy request to loop through
   router.get("/:category", (req, res) => {
-    let email = req.session.user[0];
-    let categories_id= req.params.category;
+    let email = 'arjun@arjun.com';
+    let category= req.params.category;
     let user_id;
-    knex('users') //first find the id of the email
-    .select('id')
-    .where('email', email)
-      .then((user_id) => {
-        user_id = user_id[0].id
-        knex('items') //then find the items with that category id and user id
-        .select('name')
-        .where('users_id', user_id)
-        .andWhere('categories_id', categories_id)
-        .then((items) => {
-          res.json(items);
+    knex('categories').select('id').where('name', category) //first find the id of the category
+      .then((id) => {
+      let categories_id = id[0].id // Selects just the number from the array
+      knex('users') //first find the id of the email
+      .select('id')
+      .where('email', email)
+        .then((user_id) => {
+          user_id = user_id[0].id
+          knex('items') //then find the items with that category id and user id
+          .select('name')
+          .where('users_id', user_id)
+          .andWhere('categories_id', categories_id)
+          .then((items) => {
+            res.json(items);
+          })
         })
       })
   });
 
   //updating the profile
   //will update to put method override when refactoring, post for mvp
-  router.post("/profile", (req, res) => {
+  router.put("/profile", (req, res) => {
     //currently assuming that user wants to update all fields..
     //will refactor to only update what user wants later.
     let email = req.session.user[0];
@@ -226,7 +236,7 @@ module.exports = (knex) => {
   });
 
   //log out user cookie session
-  router.get("/logout", (req, res) => {
+  router.post("/logout", (req, res) => {
     req.session = null; //destroy cookie
     res.redirect('/');
   });
