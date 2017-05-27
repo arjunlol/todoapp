@@ -154,3 +154,215 @@ function isMovieOrBook (item, cb) {
     }
   })
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $(() => {
+//   $.ajax({
+//     url: "https://api.yelp.com/v3/businesses/search?term=mcdonalds&location=toronto",
+//     method: "GET",
+//     headers: {'Access-Control-Allow-Origin': 'http://localhost',
+//       'authorization': '-fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx',
+//       'User-Agent': 'curl/7.51.0'}
+//   //   // dataType: 'jsonp',
+//   //   beforeSend: function(xhr){xhr.setRequestHeader('authorization', 'Bearer -fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx');}
+//   // Access-Control-Allow-Origin
+//   }).done((data) => {
+//     console.log(data);
+//   });
+// });
+
+//when click on register than do
+
+$() => {
+// on the click of the delete remove that specific list item
+    $(this).remove();
+    let item = "item"
+    let category = "blah"
+    $.ajax({
+      url: "/todo/${category}/${item}",
+      method: "DELETE",
+    })
+
+//on the update click where is the input going to come from?
+    //update the item inline
+    let item = "item";
+    let itemNew = "newitem";
+    let category = "blah";
+    $.ajax({
+      url: "/todo/${category}/${item}",
+      method: "PUT",
+      data: {item: itemNew}
+    })
+
+//on the register form after they click submit then do
+//username email password from
+    $.ajax({
+      url: "/todo/register",
+      method: "POST",
+      data: {}
+    })
+
+    let item = "item";
+    let itemNew = "newitem";
+    let category = "blah";
+    $.ajax({
+      url: "/todo/login",
+      method: "POST",
+      data: {item: itemNew}
+    })
+
+}
+
+
