@@ -178,7 +178,7 @@ module.exports = (knex) => {
   });
 
   //log out user cookie session
-  router.get("/logout", (req, res) => {
+  router.post("/logout", (req, res) => {
     req.session = null; //destroy cookie
     res.redirect('/');
   });

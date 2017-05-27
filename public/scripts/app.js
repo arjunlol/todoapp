@@ -381,7 +381,6 @@ $(() => {
 
 
 
-
 //on the update click where is the input going to come from?
     //update the item inline
     // let item = "item";
@@ -451,4 +450,14 @@ function renderElement(item, category) {
 
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+};
+
+function logout (){
+  $.ajax({
+    url: "/todo/logout",
+    method: "POST"
+    success: function() {
+      //render the ejs where someone has to log in or register
+    }
+  })
 };
