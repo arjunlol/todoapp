@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
 const productCheck = require('./product_check.js')
 const isMovieOrBook = require('./is_movie_or_book.js')
-const $ = require('jQuery')
+// const $ = require('jQuery')
 const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
@@ -30,23 +30,28 @@ module.exports = (knex) => {
   let isMovie = false
   // let item = req.body.item
   let item = req.body.data
+  let category = categorize(item, (result) => {
+    console.log(result)
+  });
 
-  function bigFunction(item, cb) {
+  function categorize(item, cb) {
 
     yelpSearch(item, function(result){
-        // console.log("Results of yelpSearch function:", result)
-        //let category = "restaurant";
-        //res.send({category, item})
-        //let item = req.body.item
-        //let item = req.body.data;
-        //console.log('received req', req.body.item)
-        //const item = 'pizza';
-        if(result){
+      if(result){
         isRestaurant = true
-        // resultCheck(isRestaurant, false);
       }
-      console.log("YelpSearch sez isRestaruant =", isRestaurant)
     });
+
+    wolframApi(item, (result) => {
+      if(result.movie){
+        isMovie = true;
+      }
+      if(result.book){
+        isBook = true;
+      }
+    });
+
+
 
     // productCheck(item, function(results) {
     //   console.log("Results of productCheck function:", results)
@@ -57,23 +62,24 @@ module.exports = (knex) => {
     //   console.log("Product check sez isProduct =", isProduct)
     // });
 
-    isMovieOrBook(item, function(results) {
-      if (result === "both") {
-        isBook = true
-        isMovie = true
-      } else if (result === "book") {
-        isBook = true
-      } else if (result === "movie") {
-        isMovie = true
-      }
-      console.log("isMovieOrBook sez isBook =", isBook)
-      console.log("isMovieOrBook sez isMovie =", isMovie)
-    });
+
+
+    // isMovieOrBook(item, function(results) {
+    //   if (result === "both") {
+    //     isBook = true
+    //     isMovie = true
+    //   } else if (result === "book") {
+    //     isBook = true
+    //   } else if (result === "movie") {
+    //     isMovie = true
+    //   }
+    //   console.log("isMovieOrBook sez isBook =", isBook)
+    //   console.log("isMovieOrBook sez isMovie =", isMovie)
+    // });
     // when finished
       // callback to handle result => isBook or isMovie or isProduct or isRestaurant
-    }
+  }
 
-  bigFunction(item)
 
   })
 
