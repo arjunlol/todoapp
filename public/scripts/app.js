@@ -366,7 +366,7 @@ function isMovieOrBook (item, cb) {
 
 $(() => {
 
-
+  loadLists();
 
 
 // on the click of the delete remove that specific list item
@@ -416,10 +416,39 @@ $(() => {
 function deleteItem (item, category) {
   $.ajax({
     url: "/todo/${category}/${item}",
-    method: "DELETE",
+    method: "DELETE"
   })
 };
 
-function loadItems() {
+function loadLists() {
+  let categories = ['movie', 'restaurant', 'book', 'product'];
+  categories.forEach(function (category) {
+    loadItems(category);
+  })
+}
 
+
+
+function loadItems(category) { //4 categories
+  $.ajax({
+    url: `todo/${category}`,
+    method: "GET",
+    success: function(result) {
+      result.forEach(function (item) { //loops through all items and renders
+        console.log(item)
+        renderElement(item.name, category)//renders items for specified category
+      })
+    }
+  })
+};
+
+function renderElement(item, category) {
+  const buttons =
+  `<div class="update-and-delete-btns" style= "">
+      <a class="flash-update-btn" href="#">Update</a>
+      <a class="flash-delete-btn" href="#">Delete</a>
+   </div>`
+
+  $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
 };
