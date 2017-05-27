@@ -3,7 +3,8 @@
 const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
-
+const yelpSearch  = require('./yelp.js');
+const productCheck = require('./product_check.js')
 
 module.exports = (knex) => {
 
@@ -20,19 +21,26 @@ module.exports = (knex) => {
 
     //route handler for user creating an item
   router.post("/create", (req, res) => {
-    let item = req.body.item
-    let category = req.body.category
-    let created_at = new Date()
-    let item_id;
+    //let item = req.body.item
+    // let category = req.body.category
+    const item = 'pizza';
 
-    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
-      .then((id) => {
+    yelpSearch(item, function(results){
+      if(results){
+        let category = "restaurant";
+        res.send({category, item})
+      }
+      console.log(results.businesses[0].categories);
 
-      item_id = id[0].id // Selects just the number from the array
-      knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: 2}) //Inserts a new row in the items table
-        .then((result) => {})
-      })
-  });
+    })
+
+    // let created_at = new Date()
+    // let item_id;
+    // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+  })
+
+
+
   //route handler for register user
   router.post("/register", (req, res) => {
     //have to still check if user exists,
@@ -46,43 +54,129 @@ module.exports = (knex) => {
     //insert user into the users table
     knex('users').insert(user)
       .then((resp) => {
-        req.session.user = [user['user_name'], user['email']]; //set cookie upon succesful registering
+        req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
         res.redirect('/');
       })
   });
 
 
   //route handler for returning list of specific catergory
+  //assumes parameter is number corresponding to category... so that easy request to loop through
   router.get("/:category", (req, res) => {
-
+    let email = req.session.user[0];
+    let categories_id= req.params.category;
+    let user_id;
+    knex('users') //first find the id of the email
+    .select('id')
+    .where('email', email)
+      .then((user_id) => {
+        user_id = user_id[0].id
+        knex('items') //then find the items with that category id and user id
+        .select('name')
+        .where('users_id', user_id)
+        .andWhere('categories_id', categories_id)
+        .then((items) => {
+          res.json(items);
+        })
+      })
   });
 
   //updating the profile
-  router.put("/profile", (req, res) => {
+  //will update to put method override when refactoring, post for mvp
+  router.post("/profile", (req, res) => {
+    //currently assuming that user wants to update all fields..
+    //will refactor to only update what user wants later.
+    let email = req.session.user[0];
+    let nameNew = req.body.name;
+    let emailNew = req.body.email;
+    let passwordNew = bcrypt.hashSync(req.body.password, 10);
 
+    knex('users')
+    .where('email', email)
+    .update({
+      "user_name": nameNew,
+      "email": emailNew,
+      "password": passwordNew
+    })
+    .then((result) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    })
   });
 
   //update item from list
   router.put("/:category/:item", (req, res) => {
+    let item = req.params.item;
+    let category = req.params.category;
+    let itemNew = req.body.item;
+    let email = req.session.user[0];
 
+    knex('categories').select('id').where('name', category) //first find the id of the category
+      .then((id) => {
+        let categories_id = id[0].id // Selects just the number from the array
+        knex('users')
+        .select('id')
+        .where('email', email)
+          .then((user_id) => { //then find the id of the user
+            let user = user_id[0].id
+            console.log(user)
+            knex('items') //then find the item with that category id and user id
+            .where('name', item)
+            .andWhere('users_id', user)
+            .andWhere('categories_id', categories_id)
+            .update({
+              "name": itemNew
+            })
+            .then((result) => {
+              res.redirect('/');
+            })
+      })
+      .catch(() => {
+        res.status(403).send('Could not update');
+      })
+    });
   });
 
   //delete item from list
+  //should method override to delete when refactoring
   router.delete("/:category/:item", (req, res) => {
+    //currently does not check if user has permissions to delete that item
     let item = req.params.item;
     let category = req.params.category;
-    let email = req.session.user[0];
+   let email = req.session.user[0];
+    let item_id;
+    let user_id;
 
+    knex('categories').select('id').where('name', category) //first find the id of the category
+      .then((id) => {
+        console.log(id)
+        let categories_id = id[0].id // Selects just the number from the array
+        knex('users')
+        .select('id')
+        .where('email', email)
+          .then((user_id) => { //then find the id of the user
+            user_id = user_id[0].id
+            knex('items') //then find the item with that category id and user id
+            .where('name', item)
+            .andWhere('users_id', user_id)
+            .andWhere('categories_id', categories_id)
+            .del() //delete the item
+            .then(() => {
+              res.redirect('/');
+            })
+          })
+      })
+      .catch(() => {
+        res.status(403).send('Could not delete item');
+      })
   });
 
   //log out user cookie session
   router.get("/logout", (req, res) => {
     req.session = null; //destroy cookie
     res.redirect('/');
-  });
-
-  router.post("/profile", (req, res) => {
-
   });
 
   router.post("/login", (req, res) => {
