@@ -31,7 +31,11 @@ $(document).ready(function(){
     console.log(item)
     waitingMsg()
 
+
 })
+
+
+
    function checkApis(){
    }
    //end of checkapis function
@@ -120,11 +124,34 @@ function expandList(parent) {
 
 
 
+    // test = result;
+    // console.log(test);
+    // if (result === 'both'){
+    //   result = "other"
+    //   $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
+    //   selectCategoryBtns();
+    // } else if (result === 'movie' || result === 'book'){
+    //     //$("<li>").text(item).appendTo($("." + result));//need an else if for book
+    //     $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
+    //     $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+    //     $('.alerts').text(item + ": Has been added to your " + result + " List")
+    // } else {
+      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // productCheck(item, cb)
+      // yelpSearch(item, cb)
 
 
 
-
-
+//ajax for yelp
+// $.ajax({
+//     method: "POST",
+//     url: "/todo/create",
+//     data: "item"
+//   }).done((object) => {
+//     console.log("this is the route", object)
+//     $("<li>").text(`${object.category}, ${object.item}`).appendTo($("#buy-list"));
+//     // }
+//   });
 
 
 
@@ -310,10 +337,6 @@ function expandList(parent) {
 
 
 
-
-
-
-
 // $(() => {
 //   $.ajax({
 //     url: "https://api.yelp.com/v3/businesses/search?term=mcdonalds&location=toronto",
@@ -345,6 +368,28 @@ $(() => {
    $(this).closest('li').remove();//remove item on front end
     deleteItem(item, category) //remove item on back end
   });
+
+  //on register click, register user
+  $("#register-submit-btn").on("click", function(event) {
+    event.preventDefault();
+    let formData = $('#register-form').serializeArray();
+    let name = formData[0].value;
+    let email = formData[1].value;
+    let password = formData[2].value;
+    registerUser(name, email, password);
+  });
+
+  $("#login-submit-btn").on("click", function(event) {
+    event.preventDefault()
+    let formData = $('#login-form').serializeArray();
+    let email = formData[0].value;
+    let password = formData[1].value;
+    loginUser(email, password);
+  });
+
+
+
+
 })
 
 
@@ -436,13 +481,14 @@ function updateUser(newName, newEmail, newPassword) {
   $.ajax({
     url: `/todo/profile`,
     method: "PUT",
-    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword},
-    success: function() {
-      //update .val of item element
-    }
+    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword}
+    // success: function() {
+    //   //update .val of item element
+    // }
   })
-}
+};
 
+>>>>>>> master
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
 //   let isMovie = false;
@@ -483,4 +529,7 @@ function updateUser(newName, newEmail, newPassword) {
 //     }
 //   })
 // };
+<<<<<<< HEAD
+=======
 
+>>>>>>> master

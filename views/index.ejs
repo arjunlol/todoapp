@@ -14,11 +14,17 @@
     <script type="text/javascript" src="/scripts/register.js"></script>
   </head>
   <% include partials/_header %>
+
   <body >
     <main
     class=
   <% if (true){ %>
   "not_logged" >
+
+
+  <body>
+    <main>
+  <% if (false){ %>
 
   <section id="register-popup-section" class="reg-log-section">
     <form id="register-form" class="reg-log-form">
@@ -34,9 +40,13 @@
 
   <section id="login-popup-section" class="reg-log-section">
     <form id="login-form" class="reg-log-form">
+
         <label for="name"></label>
         <input id ="name-log-textarea" type="text" name="name">
         <label for="email"></label>
+
+        <label for="email">Email:</label>
+
         <input id ="email-log-textarea" type="text" name="email">
         <label for="password"></label>
         <input id ="password-log-textarea" type="text" name="password">
