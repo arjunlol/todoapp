@@ -31,7 +31,7 @@ $(document).ready(function(){
     console.log(item)
     waitingMsg()
 
-
+})
    function checkApis(){
    }
    //end of checkapis function
@@ -385,7 +385,8 @@ function renderElement(item, category) {
    </div>`
 
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
+  $("<div>").after()
 };
 
 function logoutUser() {

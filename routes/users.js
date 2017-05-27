@@ -69,28 +69,28 @@ module.exports = (knex) => {
 
   //route handler for returning list of specific catergory
   //assumes parameter is number corresponding to category... so that easy request to loop through
-  router.get("/:category", (req, res) => {
-    let email = 'arjun@arjun.com';
-    let category= req.params.category;
-    let user_id;
-    knex('categories').select('id').where('name', category) //first find the id of the category
-      .then((id) => {
-      let categories_id = id[0].id // Selects just the number from the array
-      knex('users') //first find the id of the email
-      .select('id')
-      .where('email', email)
-        .then((user_id) => {
-          user_id = user_id[0].id
-          knex('items') //then find the items with that category id and user id
-          .select('name')
-          .where('users_id', user_id)
-          .andWhere('categories_id', categories_id)
-          .then((items) => {
-            res.json(items);
-          })
-        })
-      })
-  });
+  // router.get("/:category", (req, res) => {
+  //   let email = 'arjun@arjun.com';
+  //   let category= req.params.category;
+  //   let user_id;
+  //   knex('categories').select('id').where('name', category) //first find the id of the category
+  //     .then((id) => {
+  //     let categories_id = id[0].id // Selects just the number from the array
+  //     knex('users') //first find the id of the email
+  //     .select('id')
+  //     .where('email', email)
+  //       .then((user_id) => {
+  //         user_id = user_id[0].id
+  //         knex('items') //then find the items with that category id and user id
+  //         .select('name')
+  //         .where('users_id', user_id)
+  //         .andWhere('categories_id', categories_id)
+  //         .then((items) => {
+  //           res.json(items);
+  //         })
+  //       })
+  //     })
+  // });
 
   //updating the profile
   //will update to put method override when refactoring, post for mvp
