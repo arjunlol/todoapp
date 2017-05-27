@@ -23,36 +23,54 @@ module.exports = (knex) => {
   });
 
   //route handler for user creating an item
-  router.post("/create", (req, res) => {
-  let isProduct = false
-  let isRestaurant = false
-  let isBook = false
-  let isMovie = false
-  // let item = req.body.item
-  let item = req.body.data
-  let category = categorize(item, (result) => {
-    console.log(result)
-  });
-
-  function categorize(item, cb) {
-
+  router.post("/create", (req, res) => { //user id hardcoded currently
+  let isProduct = undefined
+  let isRestaurant = undefined
+  let isBook = undefined
+  let isMovie = undefined
+  let item = req.body.item
+  let created_at = new Date();
+  let email = req.session.user[0]
+  //promise call all API's to determine the category
+  new Promise ((resolve) => {
     yelpSearch(item, function(result){
+      console.log('yelpcity');
       if(result){
-        isRestaurant = true
+        isRestaurant = 'restaurant';
       }
     });
-
     wolframApi(item, (result) => {
+      console.log('wolfcity');
       if(result.movie){
-        isMovie = true;
+        isMovie = 'movie';
       }
       if(result.book){
-        isBook = true;
+        isBook = 'book';
       }
+      resolve()
     });
+  }).then(() => { //after all api calls finsih the resond with category and store item in database
+    let category = isMovie || isBook || isRestaurant || 'product'; //prioritizes wolfram results
+    res.send(category);
+    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+    .then((id) => {
+      let item_id = id[0].id // Selects just the number from the array
+      knex('users') //first find the id of the email
+      .select('id')
+      .where('email', email)
+        .then((user_id) => {
+          let user = user_id[0].id
+          knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: user}) //Inserts a new row in the items table
+          .then(() => {})
+       })
+    }).catch(() =>{
+      res.status(404).send('ERROR');
+    })
+  })
 
-
-
+  // Promise.all(promises)
+  //   ,then(() => {
+  //   })
     // productCheck(item, function(results) {
     //   console.log("Results of productCheck function:", results)
     //   if (results === true) {
@@ -61,49 +79,7 @@ module.exports = (knex) => {
     //   }
     //   console.log("Product check sez isProduct =", isProduct)
     // });
-
-
-
-    // isMovieOrBook(item, function(results) {
-    //   if (result === "both") {
-    //     isBook = true
-    //     isMovie = true
-    //   } else if (result === "book") {
-    //     isBook = true
-    //   } else if (result === "movie") {
-    //     isMovie = true
-    //   }
-    //   console.log("isMovieOrBook sez isBook =", isBook)
-    //   console.log("isMovieOrBook sez isMovie =", isMovie)
-    // });
-    // when finished
-      // callback to handle result => isBook or isMovie or isProduct or isRestaurant
-  }
-
-
-  })
-
-
-  // function resultCheck(isRestaurant, isProduct) {
-  //   let category;
-  //   console.log(isRestaurant, isProduct)
-  //   if (isRestaurant) {
-  //     category = "restaurant"
-  //   } else if (isProduct) {
-  //     category = "product"
-  //   } else {
-  //     category = "other"
-  //   }
-
-  //   console.log(category);
-
-  // }
-
-// let created_at = new Date()
-    // let item_id;
-    // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
-
-
+})
 
   //route handler for register user
   router.post("/register", (req, res) => {
