@@ -2,11 +2,12 @@
 
 module.exports = function productCheck(keyword, cb) {
 
+
   const {OperationHelper} = require('apac');
   const opHelper = new OperationHelper({
-      awsId:     'AKIAIAH3JPUF6SDIALLA',
-      awsSecret: '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',
-      assocId:   'heimvaa0f-20'
+      awsId:     process.env.awsId,
+      awsSecret: process.env.awsSecret,
+      assocId:   process.env.assocId
   });
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'MusicalInstruments',
@@ -18,14 +19,22 @@ module.exports = function productCheck(keyword, cb) {
     'Keywords': keyword,
   })
     .then((response) => {
+    console.log("response.result.ItemSearchResponse:", response)
+
       if (response.result.ItemSearchResponse.Items.Item) {
-        console.log(true)
-      } else console.log(false);
+        cb(true)
+      } else {
+        cb(false)
+      }
   }).catch((err) => {
       console.error("Something went wrong! ", err);
+
   });
 
 }
+
+
+
 
 
 

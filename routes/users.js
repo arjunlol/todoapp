@@ -4,7 +4,9 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
-//const productCheck = require('./product_check.js')
+const productCheck = require('./product_check.js')
+const isMovieOrBook = require('./is_movie_or_book.js')
+const $ = require('jQuery')
 
 module.exports = (knex) => {
 
@@ -19,30 +21,75 @@ module.exports = (knex) => {
     });
   });
 
-    //route handler for user creating an item
+  //route handler for user creating an item
   router.post("/create", (req, res) => {
-    //let item = req.body.item
-    let item = req.body.data;
-    //const item = 'pizza';
+  let isProduct = false
+  let isRestaurant = false
+  let isBook = false
+  let isMovie = false
+  // let item = req.body.item
+  let item = req.body.data
 
-    yelpSearch(item, function(results){
-      if(results){
-        let category = "restaurant";
-        res.send({category, item})
+  function bigFunction(item, cb) {
+
+    yelpSearch(item, function(result){
+      // console.log("Results of yelpSearch function:", results)
+      if(result){
+        // let category = "restaurant";
+        isRestaurant = true
+        // resultCheck(isRestaurant, false);
       }
-      console.log(results.businesses[0].categories);
+      console.log("YelpSearch sez isRestaruant =", isRestaurant)
+    });
 
-      // product_check(item) {
-      //   console.log("ProductCheck is running", item)
-      // }
+    // productCheck(item, function(results) {
+    //   console.log("Results of productCheck function:", results)
+    //   if (results === true) {
+    //     // let category = "product";
+    //     isProduct = true
+    //   }
+    //   console.log("Product check sez isProduct =", isProduct)
+    // });
+
+    isMovieOrBook(item, function(results) {
+      if (result === "both") {
+        isBook = true
+        isMovie = true
+      } else if (result === "book") {
+        isBook = true
+      } else if (result === "movie") {
+        isMovie = true
+      }
+      console.log("isMovieOrBook sez isBook =", isBook)
+      console.log("isMovieOrBook sez isMovie =", isMovie)
+    });
+    // when finished
+      // callback to handle result => isBook or isMovie or isProduct or isRestaurant
+    }
+
+  bigFunction(item)
+
+  })
 
 
-    })
+  // function resultCheck(isRestaurant, isProduct) {
+  //   let category;
+  //   console.log(isRestaurant, isProduct)
+  //   if (isRestaurant) {
+  //     category = "restaurant"
+  //   } else if (isProduct) {
+  //     category = "product"
+  //   } else {
+  //     category = "other"
+  //   }
 
-    // let created_at = new Date()
+  //   console.log(category);
+
+  // }
+
+// let created_at = new Date()
     // let item_id;
     // knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
-  })
 
 
 
