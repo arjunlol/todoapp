@@ -364,44 +364,51 @@ function isMovieOrBook (item, cb) {
 
 //when click on register than do
 
-$() => {
+$(() => {
+  console.log('test');
 // on the click of the delete remove that specific list item
-    $(this).remove();
-    let item = "item"
-    let category = "blah"
-    $.ajax({
-      url: "/todo/${category}/${item}",
-      method: "DELETE",
-    })
+  $('a .flash-delete-btn').on('click', function(event) {
+    preventDefault();
+    let item = $(this).closest('li').text()
+    console.log(item);
+    // $(this).remove();
+    // let item = "item"
+    // let category = "blah"
+    // $.ajax({
+    //   url: "/todo/${category}/${item}",
+    //   method: "DELETE",
+    // })
+
+  })
 
 //on the update click where is the input going to come from?
     //update the item inline
-    let item = "item";
-    let itemNew = "newitem";
-    let category = "blah";
-    $.ajax({
-      url: "/todo/${category}/${item}",
-      method: "PUT",
-      data: {item: itemNew}
-    })
+    // let item = "item";
+    // let itemNew = "newitem";
+    // let category = "blah";
+    // $.ajax({
+    //   url: "/todo/${category}/${item}",
+    //   method: "PUT",
+    //   data: {item: itemNew}
+    // })
 
 //on the register form after they click submit then do
 //username email password from
-    $.ajax({
-      url: "/todo/register",
-      method: "POST",
-      data: {}
-    })
+    // $.ajax({
+    //   url: "/todo/register",
+    //   method: "POST",
+    //   data: {}
+    // })
 
-    let item = "item";
-    let itemNew = "newitem";
-    let category = "blah";
-    $.ajax({
-      url: "/todo/login",
-      method: "POST",
-      data: {item: itemNew}
-    })
+    // let item = "item";
+    // let itemNew = "newitem";
+    // let category = "blah";
+    // $.ajax({
+    //   url: "/todo/login",
+    //   method: "POST",
+    //   data: {item: itemNew}
+    // })
 
-}
+})
 
 
