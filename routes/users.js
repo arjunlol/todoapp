@@ -22,8 +22,8 @@ module.exports = (knex) => {
     //route handler for user creating an item
   router.post("/create", (req, res) => {
     //let item = req.body.item
-    // let category = req.body.category
-    const item = 'pizza';
+    let item = req.body.data;
+    //const item = 'pizza';
 
     yelpSearch(item, function(results){
       if(results){
@@ -31,6 +31,11 @@ module.exports = (knex) => {
         res.send({category, item})
       }
       console.log(results.businesses[0].categories);
+
+      // product_check(item) {
+      //   console.log("ProductCheck is running", item)
+      // }
+
 
     })
 
