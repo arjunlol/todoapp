@@ -376,41 +376,10 @@ $(() => {
    $(this).closest('li').remove();//remove item on front end
     deleteItem(item, category) //remove item on back end
   });
-
-
-
-//on the update click where is the input going to come from?
-    //update the item inline
-    // let item = "item";
-    // let itemNew = "newitem";
-    // let category = "blah";
-    // $.ajax({
-    //   url: "/todo/${category}/${item}",
-    //   method: "PUT",
-    //   data: {item: itemNew}
-    // })
-
-//on the register form after they click submit then do
-//username email password from
-    // $.ajax({
-    //   url: "/todo/register",
-    //   method: "POST",
-    //   data: {}
-    // })
-
-    // let item = "item";
-    // let itemNew = "newitem";
-    // let category = "blah";
-    // $.ajax({
-    //   url: "/todo/login",
-    //   method: "POST",
-    //   data: {item: itemNew}
-    // })
-
 })
 
 
-function deleteItem (item, category) {
+function deleteItem(item, category) {
   $.ajax({
     url: "/todo/${category}/${item}",
     method: "DELETE"
@@ -450,15 +419,49 @@ function renderElement(item, category) {
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
 };
 
-function logout (){
+function logoutUser() {
   $.ajax({
     url: "/todo/logout",
-    method: "POST"
+    method: "POST",
     success: function() {
       //render the ejs where someone has to log in or register
     }
   })
 };
+
+function loginUser(email, password) {
+  $.ajax({
+    url: "/todo/login",
+    method: "POST",
+    data: {'email': email, 'password': password},
+    success: function() {
+      //render the ejs where someone has signed in
+    }
+  })
+};
+
+function registerUser(name, email, password) {
+  $.ajax({
+    url: "/todo/register",
+    method: "POST",
+    data: {'username': name, 'email': email, 'password': password},
+    success: function() {
+      //render the ejs where someone has signed in
+    }
+  })
+};
+
+function updateItem(item, category, newItem) {
+  $.ajax({
+    url: `/todo/${category}/${item}`,
+    method: "PUT",
+    data: {'item': newItem},
+    success: function() {
+      //update .val of item element
+    }
+  })
+};
+
 
 // function isMovieOrBook (item, cb) {
 //   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
