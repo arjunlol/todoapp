@@ -70,7 +70,7 @@ module.exports = (knex) => {
   //route handler for returning list of specific catergory
   //assumes parameter is number corresponding to category... so that easy request to loop through
   router.get("/:category", (req, res) => {
-    let email = 'arjun@arjun.com';
+    let email = 'John.Doe@fake.com';
     let category= req.params.category;
     let user_id;
     knex('categories').select('id').where('name', category) //first find the id of the category

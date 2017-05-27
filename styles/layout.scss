@@ -198,3 +198,21 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.reg-log-nav-btn {
+  padding:0;
+}
+
+.update-and-delete-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.list.movie > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
