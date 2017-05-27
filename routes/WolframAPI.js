@@ -1,20 +1,20 @@
-var request = require('request-promise');
+// var request = require('request-promise');
 
-function isMovieOrBook (item, cb) {
-  let result;
+// function isMovieOrBook (item, cb) {
+//   let result;
 
-  request({
-    uri: 'http://api.wolframalpha.com/v2/query',
-    qs: {
-      input: item,
-      appid: '8A2RH8-QPYYEQGL7K',
-      output: 'json'}
-  }).then((data) => {
-    let wolframResult = JSON.parse(data);
-    cb(wolframResult);
-    // res.json((parser.toJson(data)));
-    // res.send(wolframResult.queryresult.assumptions.values);
-  });
+//   request({
+//     uri: 'http://api.wolframalpha.com/v2/query',
+//     qs: {
+//       input: item,
+//       appid: '8A2RH8-QPYYEQGL7K',
+//       output: 'json'}
+//   }).then((data) => {
+//     let wolframResult = JSON.parse(data);
+//     cb(wolframResult);
+//     // res.json((parser.toJson(data)));
+//     // res.send(wolframResult.queryresult.assumptions.values);
+//   });
 
 }
 
@@ -48,3 +48,5 @@ function isMovieOrBook (item, cb) {
 //     }
 //   })
 // };
+
+

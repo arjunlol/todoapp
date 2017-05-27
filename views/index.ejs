@@ -17,8 +17,8 @@
   <body>
     <main>
   <% if (true){ %>
-  <section id="register-popup-section" class="hide">
-    <form id="register-form">
+  <section id="register-popup-section" class="reg-log-section">
+    <form id="register-form" class="reg-log-form">
         <label for="name">Name:</label>
         <input id ="name-reg-textarea" type="text" name="name">
         <label for="email">Email:</label>
@@ -26,6 +26,18 @@
         <label for="password">Password:</label>
         <input id ="password-reg-textarea" type="text" name="password">
         <a id ="register-submit-btn" href="#">Register</a>
+    </form>
+  </section>
+
+  <section id="login-popup-section" class="reg-log-section">
+    <form id="login-form" class="reg-log-form">
+        <label for="name">Name:</label>
+        <input id ="name-log-textarea" type="text" name="name">
+        <label for="email">Email:</label>
+        <input id ="email-log-textarea" type="text" name="email">
+        <label for="password">Password:</label>
+        <input id ="password-log-textarea" type="text" name="password">
+        <a id ="login-submit-btn" href="#">Login</a>
     </form>
   </section>
 
