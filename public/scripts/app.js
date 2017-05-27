@@ -32,6 +32,39 @@ $(document).ready(function(){
     waitingMsg()
 
 
+   function checkApis(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
+   //end of checkapis function
+
+
+
+
+
+
+
+
+
+
+
+
+
     //searches wolfram and appends result to a list
     isMovieOrBook(item, (result) => {
     const buttons =
@@ -44,23 +77,25 @@ $(document).ready(function(){
     console.log(test);
     if (result === 'both'){
       result = "other"
-      //$("<li>").text(item).appendTo($("." + result));//need to append based on click result
       $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
       selectCategoryBtns();
     } else if (result === 'movie' || result === 'book'){
-      //$("<li>").text(item).appendTo($("." + result));
+        //$("<li>").text(item).appendTo($("." + result));//need an else if for book
         $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
         $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
-
-      $('.alerts').text(item + ": Has been added to your " + result + " List")
-      // $('.flash-update-btn').show();
-      // $('.flash-delete-btn').show();
-
+        $('.alerts').text(item + ": Has been added to your " + result + " List")
     } else {
-      $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+      // productCheck(item, cb)
+      yelpSearch(item, cb)
+
     }
   })
   })
+
+
+
+
 //ajax for yelp
 $.ajax({
     method: "POST",
