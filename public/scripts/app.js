@@ -33,64 +33,36 @@ $(document).ready(function(){
 
 
    function checkApis(){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    }
    //end of checkapis function
 
 
-
-
-
-
-
-
-
-
-
-
-
   //   //searches wolfram and appends result to a list
-    isMovieOrBook(item, (result) => {
-    const buttons =
-    `<div class="update-and-delete-btns" style= "">
-        <a class="flash-update-btn" href="#">Update</a>
-        <a class="flash-delete-btn" href="#">Delete</a>
-     </div>`
+    // isMovieOrBook(item, (result) => {
+    // const buttons =
+    // `<div class="update-and-delete-btns" style= "">
+    //     <a class="flash-update-btn" href="#">Update</a>
+    //     <a class="flash-delete-btn" href="#">Delete</a>
+    //  </div>`
 
-    test = result;
-    console.log(test);
-    if (result === 'both'){
-      result = "other"
-      $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
-      selectCategoryBtns();
-    } else if (result === 'movie' || result === 'book'){
-        //$("<li>").text(item).appendTo($("." + result));//need an else if for book
-        $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
-        $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
-        $('.alerts').text(item + ": Has been added to your " + result + " List")
-    } else {
-      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
-      // productCheck(item, cb)
-      yelpSearch(item, cb)
+    // test = result;
+    // console.log(test);
+    // if (result === 'both'){
+    //   result = "other"
+    //   $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
+    //   selectCategoryBtns();
+    // } else if (result === 'movie' || result === 'book'){
+    //     //$("<li>").text(item).appendTo($("." + result));//need an else if for book
+    //     $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
+    //     $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+    //     $('.alerts').text(item + ": Has been added to your " + result + " List")
+    // } else {
+    //   // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
+    //   // productCheck(item, cb)
+    //   yelpSearch(item, cb)
 
-    }
-    })
+    // }
+    // })
 
   $.ajax({
       method: "POST",
@@ -137,9 +109,6 @@ function collapseList(parent) {
 function expandList(parent) {
   $(parent).slideDown().removeClass('collapsed');
 }
-
-
-
 
 
 

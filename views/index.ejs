@@ -11,23 +11,25 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-
+    <script type="text/javascript" src="/scripts/register.js"></script>
   </head>
   <% include partials/_header %>
   <body>
     <main>
+  <% if (true){ %>
+  <section id="register-popup-section" class="hide">
+    <form id="register-form">
+        <label for="name">Name:</label>
+        <input id ="name-reg-textarea" type="text" name="name">
+        <label for="email">Email:</label>
+        <input id ="email-reg-textarea" type="text" name="email">
+        <label for="password">Password:</label>
+        <input id ="password-reg-textarea" type="text" name="password">
+        <a id ="register-submit-btn" href="#">Register</a>
+    </form>
+  </section>
 
-<!-- <nav> -->
-<!--   <h1>ToDo App!</h1>
-  <a href="#"><div>LISTS</div></a>
-  <a href="#"><div>ARCHIVE</div></a>
-  <a href="#"><div>REGISTER</div></a>
-  <a href="#"><div>LOGIN</div></a>
-  <a href="#"><div>LOGOUT</div></a>
-  <img src= "#">
-</nav> -->
-
-
+    <% } else { %>
     <section class="search-form-area">
       <form id="search-form">
         <label for="list-item">To Do:</label>
@@ -76,6 +78,7 @@
         </li>
       </ul>
     </section>
+    <% } %>
 
     </main>
   </body>

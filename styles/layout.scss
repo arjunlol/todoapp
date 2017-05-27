@@ -179,3 +179,15 @@ main {
   display:none;
 }
 
+#register-popup-section {
+  margin-top: 25vw;
+  display:none;
+
+}
+
+#register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
