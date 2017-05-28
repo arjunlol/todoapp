@@ -17,9 +17,9 @@ body {
 
 
   section.search-form-area {
-    margin-top:180px;
     width:60%;
     display: flex;
+    margin:0 auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -124,7 +124,6 @@ nav {
 }
 
 main {
-    display: flex;
     justify-content: center;
 
 }
@@ -145,7 +144,14 @@ main {
 
 }
 
+#alerts-and-update-user {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  width: 100%;
 
+}
 
 .update-user-info {
  /* display:none;*/
@@ -165,10 +171,11 @@ main {
 }
 
 .alerts {
-  height:100px;
-  display:flex;
-  align-items:center;
-  text-align:center;
+    width: 350px;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
