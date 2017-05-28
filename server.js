@@ -48,7 +48,11 @@ app.use("/todo", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  if(!req.session.user) {
+    res.render("index", {user:false});
+  } else {
+    res.render("index", {user:true, name: req.session.user[0]});
+  }
 });
 
 app.listen(PORT, () => {

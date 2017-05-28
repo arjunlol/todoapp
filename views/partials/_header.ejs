@@ -1,7 +1,9 @@
 <!-- nav bar while NOT logged in -->
 <nav>
 <h1>listy</h1>
-<% if (false){ %>
+
+<% if (!user){ %>
+
 
   <a id="register-btn" class="reg-log-nav-btn" href="#"><div>REGISTER</div></a>
   <a id="login-btn" class="reg-log-nav-btn" href="#"><div>LOGIN</div></a>
@@ -9,7 +11,8 @@
 
 <% } else { %>
 
-  <a href="#"><div>LOGOUT</div></a>
+
+  <a href="#" id='logout'><div>LOGOUT</div></a>
   <img src= "#">
 
 <% } %>

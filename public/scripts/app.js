@@ -355,7 +355,7 @@ function expandList(parent) {
 
 $(() => {
 
-  loadLists();
+ loadLists();
 
 
 // on the click of the delete remove that specific list item
@@ -386,9 +386,9 @@ $(() => {
     loginUser(email, password);
   });
 
-
-
-
+  $("#logout").on("click", function(event) {
+    logoutUser();
+  });
 })
 
 
@@ -438,6 +438,7 @@ function logoutUser() {
     url: "/todo/logout",
     method: "POST",
     success: function() {
+      location.reload();
       //render the ejs where someone has to log in or register
     }
   })
@@ -448,7 +449,9 @@ function loginUser(email, password) {
     url: "/todo/login",
     method: "POST",
     data: {'email': email, 'password': password},
-    success: function() {
+    success: function(result) {
+      location.reload();
+      return result;
       //render the ejs where someone has signed in
     }
   })
@@ -460,6 +463,7 @@ function registerUser(name, email, password) {
     method: "POST",
     data: {'username': name, 'email': email, 'password': password},
     success: function() {
+      location.reload();
       //render the ejs where someone has signed in
     }
   })
