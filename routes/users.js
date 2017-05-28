@@ -13,17 +13,27 @@ module.exports = (knex) => {
 
   //user home page see their lists - logged in
   router.get("/", (req, res) => {
-
-    knex
-      .select("*")
-      .from("users")
-      .then((results) => {
-        res.json(results);
-    });
+    console.log('testtest')
+    res.redirect("../");
+    // if(!req.session.user) {
+    //   res.render("../", {user:false});
+    // } else {
+    //   res.render("../", {user:true, name: req.session.user[0]});
+    // }
+    // knex
+    //   .select("*")
+    //   .from("users")
+    //   .then((results) => {
+    //     res.json(results);
+    // });
   });
 
   //route handler for user creating an item
   router.post("/create", (req, res) => { //user id hardcoded currently
+  if(!req.session.user) {
+    res.redirect("/")
+    return;
+  }
   let isProduct = undefined
   let isRestaurant = undefined
   let isBook = undefined
@@ -136,6 +146,10 @@ module.exports = (knex) => {
 // =======
 
   router.get("/:category", (req, res) => {
+    if(!req.session.user) {
+      res.redirect("/")
+      return;
+    }
     let email = 'John.Doe@fake.com';
     let category= req.params.category;
     let user_id;
@@ -187,6 +201,10 @@ module.exports = (knex) => {
 
   //update item from list
   router.put("/:category/:item", (req, res) => {
+    if(!req.session.user) {
+      res.redirect("/")
+      return;
+    }
     let item = req.params.item;
     let category = req.params.category;
     let itemNew = req.body.item;

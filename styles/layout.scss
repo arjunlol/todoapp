@@ -64,7 +64,7 @@ body {
     width:100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 
       label {
         margin-right:10px;
@@ -90,7 +90,7 @@ body {
 #submit-btn {
   color: $darkPurple;
   border: none;
-  font-size: 36px;
+  font-size: 50px;
   padding: 0;
 }
 
@@ -376,5 +376,27 @@ input::-webkit-input-placeholder {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+
+#form-textarea{
+  width: 350px;
+  height: 75px;
+  border-radius: 33px;
+  border: none;
+  background-color: $creamyOrange;
+}
+
+
+#icon-category-btns-section {
+  display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.icon {
+  font-size: 70px;
+    background-color: #fff;
+    margin: 20px;
 }
 
