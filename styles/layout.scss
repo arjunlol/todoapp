@@ -209,24 +209,137 @@ main {
 }
 
 .reg-log-section {
-  margin-top: 25vw;
+  margin-top: 250px;
   display:none;
 }
 
-#register-form {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.reg-log-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 500;
+  color:#312550;
+
 }
 
-#form-textarea {
-  width: 100%
+
+
+
+
+
+
+.reg-log-form input {
+  padding: 30px 30px;
+  width: 350px;
+  height: 40px;
+  background: transparent;
+  margin-top: 15px;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-bottom: 8px solid #FF4A15;
+
 }
 
-#login-form {
+
+main.not_logged {
+ background-image: url("../images/notebook-img-home-page.jpg");
+ background-position: center top;
+ height: 100vh;
+ width: 100vw;
+}
+
+input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+
+.reg-log-submit-btn {
+  text-decoration: none;
+  font-size: 38px;
+  padding: 10px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
+  margin-top:10px;
+
+}
+
+.reg-log-nav-btn {
+  padding:0;
+}
+
+.update-and-delete-btns {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
 }
+
+// #form-textarea {
+//   width: 100%
+// }
+
+// #login-form {
+
+.list.movie > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+

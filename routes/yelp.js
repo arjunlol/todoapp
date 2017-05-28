@@ -14,7 +14,7 @@ module.exports = function (keyword, cb) {
     var id = results.businesses[0].id;
     var keywordArr = keyword.toLowerCase().split(' ');
     var resultsArr = id.split('-');
-    console.log(keywordArr, resultsArr)
+    // console.log(keywordArr, resultsArr)
     var found = false;
     for (var i = 0; i < keywordArr.length; i++) {
       if (resultsArr.indexOf(keywordArr[i]) > -1) {
@@ -23,7 +23,7 @@ module.exports = function (keyword, cb) {
       }
     }
     // console.log('yelp.js results: ', results.businesses[0].categories[0].alias)
-    console.log('yelp.js results: ', results.businesses[0].id)
+    // console.log('yelp.js results: ', results.businesses[0].id)
 
     cb(found)
 

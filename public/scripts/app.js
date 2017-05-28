@@ -30,7 +30,11 @@ $(document).ready(function(){
     var item = $('#form-textarea').val()
     console.log(item)
     waitingMsg()
-  })
+
+
+})
+
+
 
    function checkApis(){
    }
@@ -426,7 +430,8 @@ function renderElement(item, category) {
    </div>`
 
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
+  $("<div>").after()
 };
 
 function logoutUser() {

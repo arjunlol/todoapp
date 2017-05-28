@@ -9,41 +9,44 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,400,500,700,800|Roboto:100,400,500,700" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/register.js"></script>
   </head>
   <% include partials/_header %>
-  <body>
-    <main>
-  <% if (false){ %>
+
+  <body >
+    <main
+    class=
+  <% if (true){ %>
+  "not_logged" >
+
   <section id="register-popup-section" class="reg-log-section">
     <form id="register-form" class="reg-log-form">
-        <label for="name">Name:</label>
+        <label for="name" placeholder="Full Name"></label>
         <input id ="name-reg-textarea" type="text" name="name">
-        <label for="email">Email:</label>
+        <label for="email" placeholder="Email"></label>
         <input id ="email-reg-textarea" type="text" name="email">
-        <label for="password">Password:</label>
+        <label for="password" placeholder="Enter password"></label>
         <input id ="password-reg-textarea" type="text" name="password">
-        <a id ="register-submit-btn" href="#">Register</a>
+        <a id ="register-submit-btn" class="reg-log-submit-btn" href="#">Register</a>
     </form>
   </section>
 
   <section id="login-popup-section" class="reg-log-section">
     <form id="login-form" class="reg-log-form">
-        <label for="name">Name:</label>
-        <input id ="name-log-textarea" type="text" name="name">
-        <label for="email">Email:</label>
+        <label for="email"></label>
         <input id ="email-log-textarea" type="text" name="email">
-        <label for="password">Password:</label>
+        <label for="password"></label>
         <input id ="password-log-textarea" type="text" name="password">
-        <a id ="login-submit-btn" href="#">Login</a>
+        <a id ="login-submit-btn" class="reg-log-submit-btn" href="#">Login</a>
     </form>
   </section>
 
     <% } else { %>
+  "logged" >
     <section class="search-form-area">
       <form id="search-form">
         <!-- <label for="list-item">To Do:</label> -->
