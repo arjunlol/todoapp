@@ -429,7 +429,9 @@ function renderElement(item, category) {
       <a class="flash-delete-btn" href="#">Delete</a>
    </div>`
 
+  // Renders items in list
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
+  // appends buttons
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
   $("<div>").after()
 };
