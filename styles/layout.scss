@@ -12,16 +12,51 @@ $creamyOrange: #F46036;
 
 body {
   background-color: #fff;
+  font-family: $body-font-family;
+  color: $darkPurple;
+
 
   section.search-form-area {
     margin-top:180px;
-    width:65%;
+    width:60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     color: $darkPurple;
+
+    #list-area {
+      border: 5px solid $creamyOrange;
+      // height: 200px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 18px;
+
+        .list-row {
+          border-bottom: 2px solid $creamyOrange;
+          padding: 6px 0;
+          display: flex;
+          justify-content: space-between;
+
+            .list-item-name {
+              font-size: 1.2em;
+              margin: 0;
+              width: 80%;
+            }
+
+            .list-icons-container {
+              display: inline-block;
+              width: 20%;
+            }
+        }
+
+        .list-title {
+            font-size: 1.2em;
+            padding: 0;
+            margin: 0;
+          }
+    }
 
   form {
     font-size:20px;
