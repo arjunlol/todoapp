@@ -355,13 +355,29 @@ input::-webkit-input-placeholder {
 
 #icon-category-btns-section {
   display: flex;
-    width: 100%;
-    justify-content: space-around;
+  width: 100%;
+  justify-content: space-between;
+  margin-top:50px;
+
+  .icon {
+  font-size: 70px;
+  background-color: #fff;
+  margin: 20px;
+ }
+
+}
+h4 {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
+  color:$creamyOrange;
+  text-align:center;
 }
 
-.icon {
-  font-size: 70px;
-    background-color: #fff;
-    margin: 20px;
+.category-icon div:hover{
+  border:8px solid $creamyOrange;
+  border-radius: 10px;
+ h4 {
+  color: #511984;
+ }
 }
 
