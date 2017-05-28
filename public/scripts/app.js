@@ -396,6 +396,7 @@ $(() => {
     registerUser(name, email, password);
   });
 
+  //on login click
   $("#login-submit-btn").on("click", function(event) {
     event.preventDefault()
     let formData = $('#login-form').serializeArray();
@@ -404,6 +405,16 @@ $(() => {
     loginUser(email, password);
   });
 
+  $("#update-submit-btn").on("click", function(event) {
+    event.preventDefault()
+    let formData = $('#update-user-form').serializeArray();
+    let name = formData[0].value;
+    let email = formData[1].value;
+    let password = formData[2].value;
+    updateUser(name, email, password);
+  });
+
+  //logging out
   $("#logout").on("click", function(event) {
     logoutUser();
   });
@@ -511,7 +522,10 @@ function updateUser(newName, newEmail, newPassword) {
   $.ajax({
     url: `/todo/profile`,
     method: "PUT",
-    data: {'name': newName, 'newEmail': newEmail, 'password': newPassword}
+    //values not needed to be updated are set to undefined
+    data: {'name': newName == "" ? undefined: newName,
+     'newEmail': newEmail == "" ? undefined: newEmail,
+     'password': newPassword == ""? undefined: newPassword}
     // success: function() {
     //   //update .val of item element
     // }
