@@ -56,96 +56,131 @@
   "logged" >
   <section id="alerts-and-update-user">
 
-    <section class="alerts"></section>
-      <div class="flash-buttons-section">
-        <!-- <a class="flash-category-btn" href="#">Book</a>
-        <a class="flash-category-btn" href="#">Movie</a> -->
-      </div>
+    <div class="alerts"></div>
 
+    <aside id="update-user-info-section" class="hidden">
+
+      <form id="update-user-form" class="update-form">
+         <label for="name" placeholder="Full Name"></label>
+         <input id ="update-name-textarea" type="text" name="name">
+         <label for="email" placeholder="Email"></label>
+         <input id ="update-email-textarea" type="text" name="email">
+         <label for="password" placeholder="Enter password"></label>
+         <input id ="update-password-textarea" type="password" name="password">
+         <a id ="update-submit-btn" class="update-user-submit-btn" href="#">Update</a>
+      </form>
+    </aside>
   </section>
 
 
 
     <section class="search-form-area">
       <form id="search-form">
-        <!-- <label for="list-item">To Do:</label> -->
         <input id="form-textarea" type="text" name="item" placeholder="add something to a list">
-        <a id="submit-btn" href="#"><div><i class="fa fa-plus" aria-hidden="true"></i></div></a>
+        <a id="submit-btn" href="#">
+          <div><i class="fa fa-plus" aria-hidden="true"></i></div>
+        </a>
       </form>
 
       <section id="icon-category-btns-section">
-        <div class="category-icon">
-          <a class="icon" href=""><i class="fa fa-tv" aria-hidden="true"></i></a>
+        <div id="to-watch-list-btn">
+          <a class="icon listHeader" href="#"><i class="fa fa-tv" aria-hidden="true"></i></a>
           <h4>Things to Watch</h4>
         </div>
-        <div class="category-icon">
-          <a class="icon" href=""><i class="fa fa-book" aria-hidden="true"></i></a>
+        <div id="to-read-list-btn">
+          <a class="icon listHeader" href="#"><i class="fa fa-book" aria-hidden="true"></i></a>
           <h4>Books to Read</h4>
         </div>
-        <div class="category-icon">
-          <a class="icon" href=""><i class="fa fa-cutlery" aria-hidden="true"></i></a>
+        <div id="to-eat-list-btn">
+          <a class="icon listHeader" href="#"><i class="fa fa-cutlery" aria-hidden="true"></i></a>
           <h4>Places to Eat</h4>
         </div>
-        <div class="category-icon">
-          <a class="icon" href=""><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+        <div id="to-buy-list-btn">
+          <a class="icon listHeader" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
           <h4>Things to Buy</h4>
         </div>
       </section>
 
-      <div id="list-area">
-
-        <div class="list-row">
-          <p class="list-item-name">Godzilla</p>
-          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
-        </div>
-
-        <div class="list-row">
-          <p class="list-item-name">Pulp Fiction</p>
-          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
-        </div>
-
-        <div class="list-row">
-          <p class="list-item-name">Me You and Everyone We Know</p>
-          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
-        </div>
-
-        <div class="list-row">
-          <p class="list-item-name">Four Weddings and a Funeral</p>
-          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
-        </div>
-
+      <div class="list-area list-to-watch">
+        <ul class="list collapsed movie">
+          <!-- <li> -->
+            <!-- <div class="list-row">
+              <p class="list-item-name movie">this is where app.js adds text for each item in db</p>
+            </div> -->
+          <!-- </li> -->
+         </ul>
       </div>
 
-      <a id= "view-lists" class="listHeader" href="#">
+      <div class="list-area list-to-read">
+        <ul class="list collapsed book">
+          <!-- <li> -->
+            <!-- <div class="list-row">
+              <p class="list-item-name book">this is where app.js adds text for each item in db</p>
+            </div> -->
+          <!-- </li> -->
+         </ul>
+      </div>
+
+      <div class="list-area list-to-eat">
+        <ul class="list collapsed restaurant">
+          <!-- <li> -->
+          <!-- <div class="list-row">
+            <p class="list-item-name restaurant">this is where app.js adds text for each item in db</p>
+          </div> -->
+          <!-- </li> -->
+        </ul>
+      </div>
+
+       <div class="list-area list-to-buy">
+        <ul class="list collapsed product">
+          <!-- <li> -->
+            <!-- <div class="list-row">
+            <p class="list-item-name product">this is where app.js adds text for each item in db</p>
+            </div> -->
+          <!-- </li> -->
+        </ul>
+      </div>
+
+<!--    <a id= "view-lists" class="listHeader" href="#">
         <div>view lists</div>
-      </a>
-      <ul class="category-list collapsed">
+        </a>
+        <ul class="category-list collapsed">
+
         <li>
           <a href="#" id="to-watch-list-btn" class="listHeader ">things to watch</a>
-           <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="watch-list" class= "list collapsed movie"></ul>
+
+           this ul is where app.js adds an <li> for each item in db -->
+          <!-- <ul id="watch-list" class= "list collapsed movie"></ul>
+
         </li>
+
         <li>
-          <a href="#" id="to-eat-list-btn" class="listHeader">places to eat</a>
-           <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="eat-list" class= "list collapsed restaurant"></ul>
+        <a href="#" id="to-eat-list-btn" class="listHeader">places to eat</a>
+          <ul id="eat-list" class= "list collapsed restaurant"> -->
+          <!-- this ul is where app.js adds an <li> for each item in db -->
+<!--       </ul>
         </li>
+
         <li>
           <a href="#" id="to-read-list-btn" class="listHeader">books to read</a>
-           <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="read-list" class= "list collapsed book"></ul>
+          <ul id="read-list" class= "list collapsed book"> -->
+            <!-- this ul is where app.js adds an <li> for each item in db -->
+          <!-- </ul>
         </li>
+
         <li>
           <a href="#" id="to-buy-list-btn" class="listHeader">products to buy</a>
-           <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="buy-list" class= "list collapsed product"></ul>
+          <ul id="buy-list" class= "list collapsed product"> -->
+            <!-- this ul is where app.js adds an <li> for each item in db -->
+        <!--   </ul>
         </li>
         <li>
           <a href="#" id="other-list-btn" class="listHeader">other stuff</a>
-           <!-- this ul is where app.js adds an <li> for each item in db -->
-          <ul id="other-list" class= "list collapsed other both neither"></ul>
+          <ul id="other-list" class= "list collapsed other both neither"> -->
+          <!-- this ul is where app.js adds an <li> for each item in db -->
+      <!--     </ul>
         </li>
-      </ul>
+      </ul> -->
 
 
     </section>
