@@ -1,19 +1,35 @@
 <!-- nav bar while NOT logged in -->
 <nav>
+<div>
 <h1>listy</h1>
+</div>
 
 <% if (!user){ %>
-
+  <div class="navbar-right">
   <a id="register-btn" class="reg-log-nav-btn" href="#"><div>REGISTER</div></a>
   <a id="login-btn" class="reg-log-nav-btn" href="#"><div>LOGIN</div></a>
-
+  </div>
 
 <% } else { %>
 
+  <div class="navbar-right">
+  <div class="user-greeting">HELLO, <%= name %></div>
+
 
   <a href="#" id='logout'><div>LOGOUT</div></a>
-  <img src= "#">
+  </div>
 
 <% } %>
 </nav>
+<section class="update-user-info">
+    <form id="update-user-form" class="update-form">
+        <label for="name" placeholder="Full Name"></label>
+        <input id ="update-name-textarea" type="text" name="name">
+        <label for="email" placeholder="Email"></label>
+        <input id ="update-email-textarea" type="text" name="email">
+        <label for="password" placeholder="Enter password"></label>
+        <input id ="update-password-textarea" type="password" name="password">
+        <a id ="register-submit-btn" class="reg-log-submit-btn" href="#">Update</a>
+    </form>
+  </section>
 

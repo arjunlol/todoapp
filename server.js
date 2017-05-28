@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
   if(!req.session.user) {
     res.render("index", {user:false});
   } else {
-    res.render("index", {user:true, name: req.session.user[0]});
+    res.render("index", {user:true, name: req.session.user[1]});
   }
 });
 

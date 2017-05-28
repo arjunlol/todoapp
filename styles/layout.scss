@@ -105,7 +105,7 @@ nav {
   opacity: 0.9;
   display:flex;
   align-items: center;
-  justify-content:space-around;
+  justify-content:space-between;
 
  a {
   text-decoration: none;
@@ -118,7 +118,7 @@ nav {
       font-size: 3em;
       font-weight: normal;
       float: left;
-      padding: none;
+      padding-left: 50px;
       margin: none;
     }
 }
@@ -129,6 +129,40 @@ main {
 
 }
 
+.navbar-right {
+  display: flex;
+  align-items: center;
+  padding-right: 50px;
+
+}
+.user-greeting {
+  color:$creamyOrange;
+  margin-right:20px;
+  font-family: $body-font-family;
+
+}
+.user-greeting:hover {
+
+}
+
+
+
+.update-user-info {
+ /* display:none;*/
+     margin-top: 100px;
+    display: flex;
+    justify-content: column;
+    justify-content: flex-end;
+
+}
+
+#update-user-form {
+      display: flex;
+    padding: 30px 80px;
+    border: 1px solid;
+    flex-direction: column;
+    margin-right: 30px;
+}
 
 .alerts {
   height:100px;
@@ -439,3 +473,5 @@ h4 {
     width:360px;
   }
 }
+
+
