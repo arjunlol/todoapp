@@ -100,8 +100,12 @@ function selectCategoryBtns(){
 
 
 //msg user recives while waiting for the apis response
-function waitingMsg(){
-  $('.alerts').text("Categorizing now..")
+function waitingMsgToggle(msg){
+  $('.alerts').text(msg).fadeIn("slow").delay(3000).fadeOut("slow");
+}
+
+function waitingMsg(msg){
+  $('.alerts').text(msg);
 }
 
 //this function as per name collapses the uls and lis
@@ -362,12 +366,13 @@ $(() => {
  $('#submit-btn').click(function(e) {
     event.preventDefault();
     var item = $('#form-textarea').val()
-    waitingMsg()
+    waitingMsg("Categorizing...")
     $.ajax({
       method: "POST",
       url: "/todo/create",
       data: {'item': item}
     }).done((category) => {
+      waitingMsgToggle(`${item} added to ${category} list`);
       renderElement(item, category);
     }).fail((error) => {
       console.log(error);
@@ -382,7 +387,6 @@ $(() => {
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
    $(this).closest('li').remove();//remove item on front end
-    console.log(item,category);
     deleteItem(item, category) //remove item on back end
   });
 
@@ -525,7 +529,15 @@ function updateUser(newName, newEmail, newPassword) {
     //values not needed to be updated are set to undefined
     data: {'name': newName == "" ? undefined: newName,
      'newEmail': newEmail == "" ? undefined: newEmail,
-     'password': newPassword == ""? undefined: newPassword}
+     'password': newPassword == ""? undefined: newPassword},
+    success: function () {
+      let message = "";
+      if(!(newName == "")) message += "Name ";
+      if(!(newEmail == "")) message += "Email ";
+      if(!(newPassword == "")) message += "Password ";
+
+      waitingMsgToggle(`Updated ${message.split(" ")}`);
+    }
     // success: function() {
     //   //update .val of item element
     // }
