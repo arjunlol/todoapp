@@ -26,24 +26,27 @@ body {
     background-color: #fff;
     color: $darkPurple;
 
-    #list-area {
+    .list-area {
       border: 5px solid $creamyOrange;
-      // height: 200px;
       width: 100%;
       border-radius: 20px;
       padding: 18px;
+      display: none;
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
 
         .list-row {
           border-bottom: 2px solid $creamyOrange;
           padding: 6px 0;
           display: flex;
           justify-content: space-between;
+          font-size: 1.2em;
+          margin: 0;
+          width: 80%;
 
-            .list-item-name {
-              font-size: 1.2em;
-              margin: 0;
-              width: 80%;
-            }
 
             .list-icons-container {
               display: inline-block;
@@ -73,7 +76,7 @@ body {
 
       a {
         text-decoration: none;
-        color:#fff;
+        color:$creamyOrange;
         padding: 10px;
         border: 2px solid;
         margin-left:10px;
@@ -205,32 +208,34 @@ main {
   border-radius: 5px;
   border:2px solid #666;
   margin:20px;
-  display:none;
+  // display:none;
   text-decoration: none;
 
 
 }
 .flash-update-btn {
-  height:35px;
-  width:75px;
-  background-color:#eee;
-  border-radius: 5px;
-  border:2px solid #666;
-  margin:20px;
-  display:none;
-  text-decoration: none;
+  // height:35px;
+  // width:75px;
+  // background-color:#eee;
+  // border-radius: 5px;
+  // border:2px solid #666;
+  // margin:20px;
+  // // display:none;
+  // text-decoration: none;
+  color: $darkPurple;
 
 }
 
 .flash-delete-btn {
-  height:35px;
-  width:75px;
-  background-color:#eee;
-  border-radius: 5px;
-  border:2px solid #666;
-  margin:20px;
-  display:none;
-  text-decoration: none;
+  // height:35px;
+  // width:75px;
+  // background-color:#eee;
+  // border-radius: 5px;
+  // border:2px solid #666;
+  // margin:20px;
+  // // display:none;
+  // text-decoration: none;
+  color: $darkPurple;
 
 }
 
@@ -246,43 +251,23 @@ main {
 
 #view-lists:hover {
 
-
 }
 
 .category-list {
-  display:none;
+  // display:none;
   width: 99%;
   text-align:center;
   padding-left:0;
   list-style: none;
   margin:0;
   a {
-    color:#fff;
+    color: $creamyOrange;
     display:block;
     text-decoration:none;
     padding: 25px;
   }
 }
 
-
-#to-watch-list-btn {
-    background-color: #A040A0;
-
-  }
-#to-eat-list-btn {
-    background-color: #B060B0;
-  }
-#to-read-list-btn {
-    background-color: #C080C0;
-  }
-#to-buy-list-btn {
-    background-color: #CF9FCF;
-  }
-
-#other-list-btn {
-  background-color: #CF9FCF;
-
-}
 
 .list {
     height:auto;
@@ -295,12 +280,13 @@ main {
 }
 
 .collapsed {
-  display:none;
+  // display:none;
 }
 
 .reg-log-section {
   margin-top: 0;
   display:none;
+
 }
 
 
@@ -383,7 +369,7 @@ main {
   background: transparent;
   margin-top: 15px;
   outline: none;
-  color: #fff;
+  color: $creamyOrange;
   border: none;
   border-bottom: 8px solid #FF4A15;
 
@@ -423,7 +409,7 @@ input::-webkit-input-placeholder {
 }
 
 
-.list.movie > li {
+.list li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -452,7 +438,27 @@ input::-webkit-input-placeholder {
 /*  color:#390B63;*/
  }
 
+  #to-watch-list-btn {
+      // background-color: $creamyOrange;
+    }
+  #to-eat-list-btn {
+      // background-color: $creamyOrange;
+    }
+  #to-read-list-btn {
+      // background-color: $creamyOrange;
+    }
+  #to-buy-list-btn {
+      // background-color: $creamyOrange;
+    }
+
+  // #other-list-btn {
+  //     background-color: $creamyOrange;
+  // }
+
 }
+
+
+
 h4 {
   font-family: 'Dosis', sans-serif;
   font-weight: 700;

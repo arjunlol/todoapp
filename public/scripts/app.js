@@ -1,17 +1,35 @@
 
 //after doc is ready
+//Shows each list when its corresponding button is clicked
 $(document).ready(function(){
-  $('.listHeader').click(function(){
-    if ($($(this)[0].nextElementSibling).is('.collapsed')) {
-      expandList($(this)[0].nextElementSibling);
-    } else {
-      collapseList($(this)[0].nextElementSibling);
-    }
-  })
+  let listsAdded = false;
+  $("#to-watch-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-watch").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
+    })
 
-  $('#view-lists').click(function() {
-   loadLists();
-  });
+  $("#to-read-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-read").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
+    })
+
+  $("#to-eat-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-eat").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
+    })
+
+  $("#to-buy-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-buy").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
+    })
 
  $('#submit-btn').click(function() {
     event.preventDefault();
@@ -108,8 +126,8 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
-      <a class="flash-update-btn" href="#">Update</a>
-      <a class="flash-delete-btn" href="#">Delete</a>
+      <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
+      <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
 
   // Renders items in list
@@ -187,6 +205,7 @@ function updateUser(newName, newEmail, newPassword) {
       if(!(newEmail == "")) message += "Email ";
       if(!(newPassword == "")) message += "Password ";
       waitingMsgToggle(`Updated ${message}`);
+      location.reload();
     }
   }).fail(function() {
     waitingMsgToggle('Error incorrect input')
