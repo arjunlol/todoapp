@@ -20,7 +20,7 @@
   <body >
     <main
     class=
-  <% if (true){ %>
+  <% if (false){ %>
   "not_logged" >
 
   <section id="register-popup-section" class="reg-log-section">
@@ -47,6 +47,13 @@
 
     <% } else { %>
   "logged" >
+
+      <section class="alerts"></section>
+      <div class="flash-buttons-section">
+      <!-- <a class="flash-category-btn" href="#">Book</a>
+      <a class="flash-category-btn" href="#">Movie</a> -->
+      </div>
+
     <section class="search-form-area">
       <form id="search-form">
         <!-- <label for="list-item">To Do:</label> -->
@@ -54,13 +61,13 @@
         <a id="submit-btn" href="#"><div><i class="fa fa-plus" aria-hidden="true"></i></div></a>
       </form>
 
-      <div class="alerts"></div>
-      <div class="flash-buttons-section">
-      <a class="flash-category-btn" href="#">Book</a>
-      <a class="flash-category-btn" href="#">Movie</a>
-      <!-- <a class="flash-update-btn" href="#">Update</a>
-      <a class="flash-delete-btn" href="#">Delete</a> -->
-      </div>
+      <section id="icon-category-btns-section">
+
+      <a class="icon" href=""><i class="fa fa-tv" aria-hidden="true"></i></a>
+      <a class="icon" href=""><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a class="icon" href=""><i class="fa fa-cutlery" aria-hidden="true"></i></a>
+      <a class="icon" href=""><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+      </section>
 
       <a id = "view-lists" class="listHeader" href="#">
         <div>view lists</div>

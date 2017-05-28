@@ -35,7 +35,6 @@ $(document).ready(function(){
 })
 
 
-
    function checkApis(){
    }
    //end of checkapis function
@@ -428,7 +427,7 @@ function renderElement(item, category) {
       <a class="flash-update-btn" href="#">Update</a>
       <a class="flash-delete-btn" href="#">Delete</a>
    </div>`
-
+  //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
   $("<div>").after()
