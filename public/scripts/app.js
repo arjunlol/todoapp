@@ -355,7 +355,9 @@ function expandList(parent) {
 
 $(() => {
 
- loadLists();
+  $('#view-lists').click(function() {
+   loadLists();
+  });
 
  $('#submit-btn').click(function(e) {
     event.preventDefault();
@@ -367,6 +369,8 @@ $(() => {
       data: {'item': item}
     }).done((category) => {
       renderElement(item, category);
+    }).fail((error) => {
+      console.log(error);
     })
   });
 
@@ -428,10 +432,11 @@ function loadItems(category) { //4 categories
     method: "GET",
     success: function(result) {
       result.forEach(function (item) { //loops through all items and renders
-        console.log(item)
         renderElement(item.name, category)//renders items for specified category
       })
     }
+  }).fail(function() {
+    console.log('ERROR NOT LOGGED IN')
   })
 };
 
@@ -471,6 +476,8 @@ function loginUser(email, password) {
       return result;
       //render the ejs where someone has signed in
     }
+  }).fail(function (err){
+      //here append the error
   })
 };
 
@@ -494,6 +501,8 @@ function updateItem(item, category, newItem) {
     success: function() {
       //update .val of item element
     }
+  }).fail(function() {
+      console.log('ERROR NOT LOGGED IN')
   })
 };
 
@@ -505,5 +514,7 @@ function updateUser(newName, newEmail, newPassword) {
     // success: function() {
     //   //update .val of item element
     // }
+  }).fail(function() {
+    console.log('INVALID')
   })
 };
