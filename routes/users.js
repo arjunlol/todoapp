@@ -147,10 +147,10 @@ module.exports = (knex) => {
 
   router.get("/:category", (req, res) => {
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send('ERROR')
       return;
     }
-    let email = 'John.Doe@fake.com';
+    let email = req.session.user[0];
     let category= req.params.category;
     let user_id;
     knex('categories').select('id').where('name', category) //first find the id of the category
@@ -242,7 +242,7 @@ module.exports = (knex) => {
     //currently does not check if user has permissions to delete that item
     let item = req.params.item;
     let category = req.params.category;
-   let email = req.session.user[0];
+    let email = req.session.user[0];
     let item_id;
     let user_id;
 
@@ -255,6 +255,7 @@ module.exports = (knex) => {
         .where('email', email)
           .then((user_id) => { //then find the id of the user
             user_id = user_id[0].id
+            console.log(categories_id, user_id)
             knex('items') //then find the item with that category id and user id
             .where('name', item)
             .andWhere('users_id', user_id)
