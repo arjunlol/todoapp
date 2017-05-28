@@ -47,7 +47,7 @@ module.exports = (knex) => {
 
   //promise call all API's to determine the category
   new Promise ((resolve, reject) => {
-    yelpSearch(item, function(result){
+    yelpSearch(item, (result) => {
       console.log('yelpcity');
       if(result){
         isRestaurant = 'restaurant';
