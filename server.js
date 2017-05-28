@@ -17,6 +17,7 @@ const yelpSearch  = require('./routes/yelp.js');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+const APIinfo = require("./routes/APIinfo");
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
   name: 'session',
@@ -44,7 +45,7 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/todo", usersRoutes(knex));
-//app.use("/yelp", yelpSearch(knex));
+app.use("/API", APIinfo(knex))
 
 // Home page
 app.get("/", (req, res) => {

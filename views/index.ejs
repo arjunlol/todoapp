@@ -56,21 +56,30 @@
   "logged" >
   <section id="alerts-and-update-user">
 
-    <section class="alerts"></section>
-      <div class="flash-buttons-section">
-        <!-- <a class="flash-category-btn" href="#">Book</a>
-        <a class="flash-category-btn" href="#">Movie</a> -->
-      </div>
+    <div class="alerts"></div>
 
+    <aside id="update-user-info-section" class="hidden">
+
+      <form id="update-user-form" class="update-form">
+         <label for="name" placeholder="Full Name"></label>
+         <input id ="update-name-textarea" type="text" name="name">
+         <label for="email" placeholder="Email"></label>
+         <input id ="update-email-textarea" type="text" name="email">
+         <label for="password" placeholder="Enter password"></label>
+         <input id ="update-password-textarea" type="password" name="password">
+         <a id ="update-submit-btn" class="update-user-submit-btn" href="#">Update</a>
+      </form>
+    </aside>
   </section>
 
 
 
     <section class="search-form-area">
       <form id="search-form">
-        <!-- <label for="list-item">To Do:</label> -->
         <input id="form-textarea" type="text" name="item" placeholder="add something to a list">
-        <a id="submit-btn" href="#"><div><i class="fa fa-plus" aria-hidden="true"></i></div></a>
+        <a id="submit-btn" href="#">
+          <div><i class="fa fa-plus" aria-hidden="true"></i></div>
+        </a>
       </form>
 
       <section id="icon-category-btns-section">
