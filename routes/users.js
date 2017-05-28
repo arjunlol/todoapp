@@ -123,12 +123,25 @@ module.exports = (knex) => {
       password: bcrypt.hashSync(req.body.password, 10), //encrypt password
       createdAt: new Date()
     }
-    //insert user into the users table
-    knex('users').insert(user)
-      .then((resp) => {
-        req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
-        res.redirect('/');
-      })
+
+    knex('users')
+    .select('email')
+    .where('email', user['email'])
+    .then((emails) => {
+      //if email already exists
+      if(emails[0]){
+        console.log('error');
+        res.status(403).send('Email already exists');
+      } else {
+      //else insert user into the users table
+      knex('users').insert(user)
+        .then((resp) => {
+          req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
+          res.redirect('/');
+        })
+      }
+    })
+
   });
 
   //route to get all items of a specified category
@@ -161,8 +174,6 @@ module.exports = (knex) => {
         res.status(404).send(err);
       })
   });
-// >>>>>>> master
-
 
   //updating the profile
   //will update to put method override when refactoring, post for mvp
