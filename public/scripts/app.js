@@ -1,19 +1,5 @@
 
-//this ajax call takes each user in the db and adds that value to a new li inside the ul watch list
-//this needs to be adapted to sort which actegory value given into whichever list
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/todo"
-  }).done((users) => {
-    for(id of users) {
-      $("<li>").text(id.user_name).appendTo($("#watch-list"));
-    }
-  });
-});
-
 //after doc is ready
-//line 20-26 ish are collapsing the 4 category lists when the parent list button is collapsed
 $(document).ready(function(){
   $('.listHeader').click(function(){
     if ($($(this)[0].nextElementSibling).is('.collapsed')) {
@@ -23,349 +9,11 @@ $(document).ready(function(){
     }
   })
 
-
-
-//this is todays work to submited value in the form (front end in browser)
-//and trying to pass
-//   $('#submit-btn').click(function(e) {
-//     event.preventDefault(e);
-//     var item = $('#form-textarea').val()
-//     console.log(item)
-//     waitingMsg()
-
-
-// })
-
-
-   function checkApis(){
-   }
-   //end of checkapis function
-
-
-  //   //searches wolfram and appends result to a list
-    // isMovieOrBook(item, (result) => {
-    // const buttons =
-    // `<div class="update-and-delete-btns" style= "">
-    //     <a class="flash-update-btn" href="#">Update</a>
-    //     <a class="flash-delete-btn" href="#">Delete</a>
-    //  </div>`
-
-    // test = result;
-    // console.log(test);
-    // if (result === 'both'){
-    //   result = "other"
-    //   $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
-    //   selectCategoryBtns();
-    // } else if (result === 'movie' || result === 'book'){
-    //     //$("<li>").text(item).appendTo($("." + result));//need an else if for book
-    //     $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
-    //     $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
-    //     $('.alerts').text(item + ": Has been added to your " + result + " List")
-    // } else {
-    //   // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
-    //   // productCheck(item, cb)
-    //   yelpSearch(item, cb)
-
-    // }
-    // })
-
-//   $.ajax({
-//       method: "POST",
-//       url: "/todo/create",
-//       data: {'item': item}
-//     }).done((object) => {
-//       console.log("this is the route", object)
-//       $("<li>").text(`${object.category}, ${object.item}`).appendTo($("." + result));
-//       })
-//     });
-})
-
-
-
-
-//ajax for yelp
-
-
-
-
-
-
-
-
-//doc ready close
-
-
-function selectCategoryBtns(){
-  $('.flash-category-btn').show();
-
-}
-
-
-//msg user recives while waiting for the apis response
-function waitingMsgToggle(msg){
-  $('.alerts').text(msg).fadeIn("slow").delay(3000).fadeOut("slow");
-}
-
-function waitingMsg(msg){
-  $('.alerts').text(msg);
-}
-
-//this function as per name collapses the uls and lis
-function collapseList(parent) {
-  $(parent).slideUp().addClass('collapsed').find('ul').slideUp().addClass('collapsed');
-}
-//expands the lists
-function expandList(parent) {
-  $(parent).slideDown().removeClass('collapsed');
-}
-
-
-
-
-
-
-
-
-
-
-
-    // test = result;
-    // console.log(test);
-    // if (result === 'both'){
-    //   result = "other"
-    //   $('.alerts').text(item + ": could be a Book or a Movie. Please specify by selecting an option below.")
-    //   selectCategoryBtns();
-    // } else if (result === 'movie' || result === 'book'){
-    //     //$("<li>").text(item).appendTo($("." + result));//need an else if for book
-    //     $("<li>").text(item).attr('data-title', item).appendTo($("." + result));
-    //     $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns').append($('<a>')));
-    //     $('.alerts').text(item + ": Has been added to your " + result + " List")
-    // } else {
-      // $('.alerts').text(item + ": does not match your current categories. Would you like to add this to your Other List?")
-      // productCheck(item, cb)
-      // yelpSearch(item, cb)
-
-
-
-//ajax for yelp
-// $.ajax({
-//     method: "POST",
-//     url: "/todo/create",
-//     data: "item"
-//   }).done((object) => {
-//     console.log("this is the route", object)
-//     $("<li>").text(`${object.category}, ${object.item}`).appendTo($("#buy-list"));
-//     // }
-//   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function takes an item and returns the category of the item to the supplied callback function
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(() => {
-//   $.ajax({
-//     url: "https://api.yelp.com/v3/businesses/search?term=mcdonalds&location=toronto",
-//     method: "GET",
-//     headers: {'Access-Control-Allow-Origin': 'http://localhost',
-//       'authorization': '-fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx',
-//       'User-Agent': 'curl/7.51.0'}
-//   //   // dataType: 'jsonp',
-//   //   beforeSend: function(xhr){xhr.setRequestHeader('authorization', 'Bearer -fg8Z9CSNu2n4kNXeEOi3_L9kgUc93RXikn1l1th0Y2zp3QBDGbBUiWtvFC0ojfhRSk0K8hKrAVxC-qLgd9pO73scF0VLt_mGlmaoBHWH8UGw1UjSNyDieehz08oWXYx');}
-//   // Access-Control-Allow-Origin
-//   }).done((data) => {
-//     console.log(data);
-//   });
-// });
-
-//when click on register than do
-
-$(() => {
-
   $('#view-lists').click(function() {
    loadLists();
   });
 
- $('#submit-btn').click(function(e) {
+ $('#submit-btn').click(function() {
     event.preventDefault();
     var item = $('#form-textarea').val()
     waitingMsg("Categorizing...")
@@ -377,7 +25,7 @@ $(() => {
       waitingMsgToggle(`${item} added to ${category} list`);
       renderElement(item, category);
     }).fail((error) => {
-      console.log(error);
+      waitingMsgToggle(error.responseText)
     })
   });
 
@@ -494,7 +142,7 @@ function loginUser(email, password) {
       //render the ejs where someone has signed in
     }
   }).fail(function (error){
-    waitingMsgToggle(error);
+    waitingMsgToggle(error.responseText);
   })
 };
 
@@ -508,7 +156,7 @@ function registerUser(name, email, password) {
       //render the ejs where someone has signed in
     }
   }).fail(function(error) {
-    waitingMsgToggle(error);
+    waitingMsgToggle(error.responseText);
   })
 };
 
@@ -543,4 +191,27 @@ function updateUser(newName, newEmail, newPassword) {
   }).fail(function() {
     waitingMsgToggle('Error incorrect input')
   })
+};
+
+function selectCategoryBtns(){
+  $('.flash-category-btn').show();
+};
+
+
+//msg user recives while waiting for the apis response
+function waitingMsgToggle(msg){
+  $('.alerts').text(msg).fadeIn("slow").delay(3000).fadeOut("slow");
+};
+
+function waitingMsg(msg){
+  $('.alerts').text(msg);
+};
+
+//this function as per name collapses the uls and lis
+function collapseList(parent) {
+  $(parent).slideUp().addClass('collapsed').find('ul').slideUp().addClass('collapsed');
+};
+//expands the lists
+function expandList(parent) {
+  $(parent).slideDown().removeClass('collapsed');
 };

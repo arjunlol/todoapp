@@ -1,4 +1,4 @@
-module.exports = function (item, cb) {
+module.exports = (item, cb) => {
 
   var request = require('request-promise');
   let result = {'movie':false, 'book':false};

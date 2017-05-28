@@ -5,33 +5,14 @@ const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
 const productCheck = require('./product_check.js')
-const isMovieOrBook = require('./is_movie_or_book.js')
-// const $ = require('jQuery')
 const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
 
-  //user home page see their lists - logged in
-  router.get("/", (req, res) => {
-    console.log('testtest')
-    res.redirect("../"); //not sure if this does anything..
-    // if(!req.session.user) {
-    //   res.render("../", {user:false});
-    // } else {
-    //   res.render("../", {user:true, name: req.session.user[0]});
-    // }
-    // knex
-    //   .select("*")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    // });
-  });
-
   //route handler for user creating an item
   router.post("/create", (req, res) => { //user id hardcoded currently
   if(!req.session.user) {
-    res.redirect("/")
+    res.status(404).send("Not logged in")
     return;
   }
   let isProduct = undefined
@@ -47,7 +28,7 @@ module.exports = (knex) => {
 
   //promise call all API's to determine the category
   new Promise ((resolve, reject) => {
-    yelpSearch(item, function(result){
+    yelpSearch(item, (result) => {
       console.log('yelpcity');
       if(result){
         isRestaurant = 'restaurant';
@@ -137,7 +118,7 @@ module.exports = (knex) => {
       knex('users').insert(user)
         .then((resp) => {
           req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
-          res.redirect('/');
+          res.send("");
         })
       }
     })
@@ -176,7 +157,6 @@ module.exports = (knex) => {
   });
 
   //updating the profile
-  //will update to put method override when refactoring, post for mvp
   router.put("/profile", (req, res) => {
     let email = req.session.user[0];
     let nameNew = req.body.name || req.session.user[1]; //if no name provided use the old name
@@ -195,6 +175,7 @@ module.exports = (knex) => {
         "password": passwordNew == 0 ? passwordOld: bcrypt.hashSync(req.body.password, 10)
       })
       .then((result) => {
+        req.session.user[1] = nameNew;
         res.send('Information provided has been updated');
       })
       .catch((err) => {
@@ -206,7 +187,7 @@ module.exports = (knex) => {
   //update item from list
   router.put("/:category/:item", (req, res) => {
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send("Not logged in")
       return;
     }
     let item = req.params.item;
@@ -231,7 +212,7 @@ module.exports = (knex) => {
               "name": itemNew
             })
             .then((result) => {
-              res.redirect('/');
+              res.send("");
             })
       })
       .catch(() => {
@@ -245,7 +226,7 @@ module.exports = (knex) => {
   router.delete("/:category/:item", (req, res) => {
     //currently does not check if user has permissions to delete that item
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send("Not logged in")
       return;
     }
 
@@ -271,7 +252,7 @@ module.exports = (knex) => {
             .andWhere('categories_id', categories_id)
             .del() //delete the item
             .then(() => {
-              res.redirect('/');
+              res.send('Deleted');
             })
           })
       })
@@ -283,7 +264,7 @@ module.exports = (knex) => {
   //log out user cookie session
   router.post("/logout", (req, res) => {
     req.session = null; //destroy cookie
-    res.redirect('/');
+    res.send("Logged out");
   });
 
   router.post("/login", (req, res) => {
@@ -302,15 +283,15 @@ module.exports = (knex) => {
       .then((result) => {
           if(!result[0]){ //If email address does not exist in database
             console.log('1')
-            res.status(403).send("Please input valid email/password");
+            res.status(403).send("Invalid email/password");
             return;
           } else if(!(bcrypt.compareSync(user.password, result[0].password))) { //if incorrect password
             console.log('2')
-            res.status(403).send("Please input valid email/password");
+            res.status(403).send("Invalid email/password");
             return;
           } else { //correct email & password
             req.session.user = [user.email, result[0].user_name]; //set cookie if the correct email/pass
-            res.redirect('/');
+            res.send("");
           }
         })
       .catch((err) =>{

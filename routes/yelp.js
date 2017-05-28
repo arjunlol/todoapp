@@ -1,4 +1,4 @@
-module.exports = function (keyword, cb) {
+module.exports = (keyword, cb) => {
 
   const Yelp = require('node-yelp-api-v3');
 
