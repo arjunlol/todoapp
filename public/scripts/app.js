@@ -477,6 +477,7 @@ function loginUser(email, password) {
       //render the ejs where someone has signed in
     }
   }).fail(function (err){
+    console.log(err);
       //here append the error
   })
 };
