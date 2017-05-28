@@ -25,7 +25,7 @@ $(document).ready(function(){
       waitingMsgToggle(`${item} added to ${category} list`);
       renderElement(item, category);
     }).fail((error) => {
-      console.log(error);
+      waitingMsgToggle(error.responseText)
     })
   });
 
