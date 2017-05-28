@@ -20,7 +20,9 @@
   <body >
     <main
     class=
+
   <% if (!user){ %>
+
   "not_logged" >
 
   <section id="register-popup-section" class="reg-log-section">
@@ -69,7 +71,31 @@
       <a class="icon" href=""><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
       </section>
 
-      <a id = "view-lists" class="listHeader" href="#">
+      <div id="list-area">
+
+        <div class="list-row">
+          <p class="list-item-name">Godzilla</p>
+          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
+        </div>
+
+        <div class="list-row">
+          <p class="list-item-name">Pulp Fiction</p>
+          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
+        </div>
+
+        <div class="list-row">
+          <p class="list-item-name">Me You and Everyone We Know</p>
+          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
+        </div>
+
+        <div class="list-row">
+          <p class="list-item-name">Four Weddings and a Funeral</p>
+          <div class="list-icons"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></div>
+        </div>
+
+      </div>
+
+      <a id= "view-lists" class="listHeader" href="#">
         <div>view lists</div>
       </a>
       <ul class="category-list collapsed">
@@ -101,7 +127,12 @@
           <ul id="other-list" class= "list collapsed other both neither"></ul>
         </li>
       </ul>
+
+
     </section>
+
+
+
     <% } %>
 
     </main>
