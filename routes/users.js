@@ -9,27 +9,10 @@ const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
 
-  //user home page see their lists - logged in
-  router.get("/", (req, res) => {
-    console.log('testtest')
-    res.redirect("../"); //not sure if this does anything..
-    // if(!req.session.user) {
-    //   res.render("../", {user:false});
-    // } else {
-    //   res.render("../", {user:true, name: req.session.user[0]});
-    // }
-    // knex
-    //   .select("*")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    // });
-  });
-
   //route handler for user creating an item
   router.post("/create", (req, res) => { //user id hardcoded currently
   if(!req.session.user) {
-    res.redirect("/")
+    res.status(404).send("Not logged in")
     return;
   }
   let isProduct = undefined
@@ -135,7 +118,7 @@ module.exports = (knex) => {
       knex('users').insert(user)
         .then((resp) => {
           req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
-          res.redirect('/');
+          res.send("");
         })
       }
     })
@@ -204,7 +187,7 @@ module.exports = (knex) => {
   //update item from list
   router.put("/:category/:item", (req, res) => {
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send("Not logged in")
       return;
     }
     let item = req.params.item;
@@ -229,7 +212,7 @@ module.exports = (knex) => {
               "name": itemNew
             })
             .then((result) => {
-              res.redirect('/');
+              res.send("");
             })
       })
       .catch(() => {
@@ -243,7 +226,7 @@ module.exports = (knex) => {
   router.delete("/:category/:item", (req, res) => {
     //currently does not check if user has permissions to delete that item
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send("Not logged in")
       return;
     }
 
@@ -269,7 +252,7 @@ module.exports = (knex) => {
             .andWhere('categories_id', categories_id)
             .del() //delete the item
             .then(() => {
-              res.redirect('/');
+              res.send('Deleted');
             })
           })
       })
@@ -281,7 +264,7 @@ module.exports = (knex) => {
   //log out user cookie session
   router.post("/logout", (req, res) => {
     req.session = null; //destroy cookie
-    res.redirect('/');
+    res.send("Logged out");
   });
 
   router.post("/login", (req, res) => {
@@ -308,7 +291,7 @@ module.exports = (knex) => {
             return;
           } else { //correct email & password
             req.session.user = [user.email, result[0].user_name]; //set cookie if the correct email/pass
-            res.redirect('/');
+            res.send("");
           }
         })
       .catch((err) =>{
