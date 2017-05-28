@@ -13,7 +13,7 @@ $(document).ready(function(){
    loadLists();
   });
 
- $('#submit-btn').click(function(e) {
+ $('#submit-btn').click(function() {
     event.preventDefault();
     var item = $('#form-textarea').val()
     waitingMsg("Categorizing...")
@@ -142,7 +142,7 @@ function loginUser(email, password) {
       //render the ejs where someone has signed in
     }
   }).fail(function (error){
-    waitingMsgToggle(error);
+    waitingMsgToggle(error.responseText);
   })
 };
 
@@ -156,7 +156,7 @@ function registerUser(name, email, password) {
       //render the ejs where someone has signed in
     }
   }).fail(function(error) {
-    waitingMsgToggle(error);
+    waitingMsgToggle(error.responseText);
   })
 };
 

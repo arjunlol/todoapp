@@ -300,11 +300,11 @@ module.exports = (knex) => {
       .then((result) => {
           if(!result[0]){ //If email address does not exist in database
             console.log('1')
-            res.status(403).send("Please input valid email/password");
+            res.status(403).send("Invalid email/password");
             return;
           } else if(!(bcrypt.compareSync(user.password, result[0].password))) { //if incorrect password
             console.log('2')
-            res.status(403).send("Please input valid email/password");
+            res.status(403).send("Invalid email/password");
             return;
           } else { //correct email & password
             req.session.user = [user.email, result[0].user_name]; //set cookie if the correct email/pass
