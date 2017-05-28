@@ -14,7 +14,7 @@ module.exports = (knex) => {
   //user home page see their lists - logged in
   router.get("/", (req, res) => {
     console.log('testtest')
-    res.redirect("../");
+    res.redirect("../"); //not sure if this does anything..
     // if(!req.session.user) {
     //   res.render("../", {user:false});
     // } else {
@@ -41,8 +41,12 @@ module.exports = (knex) => {
   let item = req.body.item
   let created_at = new Date();
   let email = req.session.user[0]
+  let alreadyAdded = false; //if the item is already added to db already
+
+
+
   //promise call all API's to determine the category
-  new Promise ((resolve) => {
+  new Promise ((resolve, reject) => {
     yelpSearch(item, function(result){
       console.log('yelpcity');
       if(result){
@@ -61,22 +65,40 @@ module.exports = (knex) => {
     });
   }).then(() => { //after all api calls finsih the resond with category and store item in database
     let category = isMovie || isBook || isRestaurant || 'product'; //prioritizes wolfram results
-    res.send(category);
+
     knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
     .then((id) => {
-      let item_id = id[0].id // Selects just the number from the array
+      let categories_id = id[0].id // Selects just the number from the array
+
+
+
+
       knex('users') //first find the id of the email
       .select('id')
       .where('email', email)
         .then((user_id) => {
           let user = user_id[0].id
-          knex('items').insert({createdAt: created_at, name: item, categories_id: item_id, users_id: user}) //Inserts a new row in the items table
-          .then(() => {})
+          knex('items') //tfirst check if item is already in the database
+          .select('id')
+          .where('name', item)
+          .andWhere('categories_id', categories_id)
+          .andWhere('users_id', user)
+          .then((items) => {
+            console.log(items);
+            if(items[0]){ //if the item was already added by the user
+              res.status(403).send("Item was already added")
+            } else {
+              res.send(category);
+              knex('items').insert({createdAt: created_at, name: item, categories_id: categories_id, users_id: user}) //Inserts a new row in the items table
+              .then(() => {})
+            }
+          })
        })
-    }).catch(() =>{
-      res.status(404).send('ERROR');
     })
-  })
+  }).catch((error) =>{
+      console.log(error)
+      return;
+    })
 
   // Promise.all(promises)
   //   ,then(() => {
@@ -147,10 +169,10 @@ module.exports = (knex) => {
 
   router.get("/:category", (req, res) => {
     if(!req.session.user) {
-      res.redirect("/")
+      res.status(404).send("Please login")
       return;
     }
-    let email = 'John.Doe@fake.com';
+    let email = req.session.user[0];
     let category= req.params.category;
     let user_id;
     knex('categories').select('id').where('name', category) //first find the id of the category
@@ -169,6 +191,9 @@ module.exports = (knex) => {
             res.json(items);
           })
         })
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       })
   });
 // >>>>>>> master
@@ -240,9 +265,14 @@ module.exports = (knex) => {
   //should method override to delete when refactoring
   router.delete("/:category/:item", (req, res) => {
     //currently does not check if user has permissions to delete that item
+    if(!req.session.user) {
+      res.redirect("/")
+      return;
+    }
+
     let item = req.params.item;
     let category = req.params.category;
-   let email = req.session.user[0];
+    let email = req.session.user[0];
     let item_id;
     let user_id;
 
@@ -255,6 +285,7 @@ module.exports = (knex) => {
         .where('email', email)
           .then((user_id) => { //then find the id of the user
             user_id = user_id[0].id
+            console.log(categories_id, user_id)
             knex('items') //then find the item with that category id and user id
             .where('name', item)
             .andWhere('users_id', user_id)
@@ -278,7 +309,7 @@ module.exports = (knex) => {
 
   router.post("/login", (req, res) => {
     if(req.body.email === "" ||  req.body.password === "" ){ //if user or pass left empty return error
-      res.status(400).send("Please fill in both email and password");
+      res.send("Invalid email address/password");
       return;
     }
     let user = {

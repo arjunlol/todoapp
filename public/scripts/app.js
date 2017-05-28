@@ -25,14 +25,14 @@ $(document).ready(function(){
 
 //this is todays work to submited value in the form (front end in browser)
 //and trying to pass
-  $('#submit-btn').click(function(e) {
-    event.preventDefault(e);
-    var item = $('#form-textarea').val()
-    console.log(item)
-    waitingMsg()
+//   $('#submit-btn').click(function(e) {
+//     event.preventDefault(e);
+//     var item = $('#form-textarea').val()
+//     console.log(item)
+//     waitingMsg()
 
 
-})
+// })
 
 
    function checkApis(){
@@ -355,7 +355,24 @@ function expandList(parent) {
 
 $(() => {
 
- loadLists();
+  $('#view-lists').click(function() {
+   loadLists();
+  });
+
+ $('#submit-btn').click(function(e) {
+    event.preventDefault();
+    var item = $('#form-textarea').val()
+    waitingMsg()
+    $.ajax({
+      method: "POST",
+      url: "/todo/create",
+      data: {'item': item}
+    }).done((category) => {
+      renderElement(item, category);
+    }).fail((error) => {
+      console.log(error);
+    })
+  });
 
 
 // on the click of the delete remove that specific list item
@@ -365,6 +382,7 @@ $(() => {
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
    $(this).closest('li').remove();//remove item on front end
+    console.log(item,category);
     deleteItem(item, category) //remove item on back end
   });
 
@@ -394,8 +412,8 @@ $(() => {
 
 function deleteItem(item, category) {
   $.ajax({
-    url: "/todo/${category}/${item}",
-    method: "DELETE"
+    url: `/todo/${category}/${item}`,
+    type: "DELETE"
   })
 };
 
@@ -414,10 +432,11 @@ function loadItems(category) { //4 categories
     method: "GET",
     success: function(result) {
       result.forEach(function (item) { //loops through all items and renders
-        console.log(item)
         renderElement(item.name, category)//renders items for specified category
       })
     }
+  }).fail(function() {
+    console.log('ERROR NOT LOGGED IN')
   })
 };
 
@@ -457,6 +476,8 @@ function loginUser(email, password) {
       return result;
       //render the ejs where someone has signed in
     }
+  }).fail(function (err){
+      //here append the error
   })
 };
 
@@ -480,6 +501,8 @@ function updateItem(item, category, newItem) {
     success: function() {
       //update .val of item element
     }
+  }).fail(function() {
+      console.log('ERROR NOT LOGGED IN')
   })
 };
 
@@ -491,47 +514,7 @@ function updateUser(newName, newEmail, newPassword) {
     // success: function() {
     //   //update .val of item element
     // }
+  }).fail(function() {
+    console.log('INVALID')
   })
 };
-
-// function isMovieOrBook (item, cb) {
-//   let appid = '8A2RH8-QPYYEQGL7K'; //authorization token
-//   let isMovie = false;
-//   let isBook = false;
-//   let result;
-//  $.ajax({
-//     method: "GET",
-//     //wolfram API URL
-//     url: `http://api.wolframalpha.com/v2/query?input=${item}&appid=${appid}&output=json`,
-//     dataType: 'jsonp',
-//     success: function (data){ //data is result from wolfram api
-//       //if wolfram deems no ambiguity in the search, then it doesnt return any assumptions but only 'datatype'
-//       let categories = data.queryresult.assumptions || data.queryresult.datatypes;
-//       console.log(categories)
-//       console.log(data)
-//       categories = categories.values || categories[0].values|| categories.split(',') //if using the 'assumptions' then use the .values of the assumptions, if not split datetypes
-//       categories.forEach(category => {
-//         //if returned assumptions are either a book or movie set accordingly
-//         //if using assumptions then the name of the assumptions exists otherwise only use the datatype
-//         if((category.name || category) === 'Book'){
-//           isBook = true;
-//         }
-//         if((category.name || category) === 'Movie'){
-//           isMovie = true;
-//         }
-//       });
-//     //after all assumption values are iterated over, set result to be both, movie, book. or neither
-//      if (isMovie && isBook) {
-//       result = 'both';
-//      } else if (isMovie) {
-//       result = 'movie';
-//      } else if (isBook) {
-//       result = 'book';
-//      } else {
-//       result = 'neither';
-//      }
-//      cb(result);
-//     }
-//   })
-// };
-
