@@ -13,15 +13,39 @@ $(() => {
 });
 
 //after doc is ready
-//line 20-26 ish are collapsing the 4 category lists when the parent list button is collapsed
+//Shows each list when its corresponding button is clicked
+
 $(document).ready(function(){
-  $('.listHeader').click(function(){
-    if ($($(this)[0].nextElementSibling).is('.collapsed')) {
-      expandList($(this)[0].nextElementSibling);
-    } else {
-      collapseList($(this)[0].nextElementSibling);
-    }
+  $("#to-watch-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-watch").show();
+    })
+
+  $("#to-read-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-read").show();
+    })
+
+  $("#to-eat-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-eat").show();
+    })
+
+  $("#to-buy-list-btn").click(function(){
+    event.preventDefault();
+    $(".list-to-buy").show();
+    })
+
   })
+
+//backup version
+  //   $('.listHeader').click(function(){
+  //   if ($($(this)[0].nextElementSibling).is('.collapsed')) {
+  //     expandList($(this)[0].nextElementSibling);
+  //   } else {
+  //     collapseList($(this)[0].nextElementSibling);
+  //   }
+  // })
 
 //this is todays work to submited value in the form (front end in browser)
 //and trying to pass
@@ -34,9 +58,6 @@ $(document).ready(function(){
 
 // })
 
-
-   function checkApis(){
-   }
    //end of checkapis function
 
 
@@ -76,7 +97,7 @@ $(document).ready(function(){
 //       $("<li>").text(`${object.category}, ${object.item}`).appendTo($("." + result));
 //       })
 //     });
-})
+// })
 
 
 
@@ -451,7 +472,7 @@ function renderElement(item, category) {
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
+  $("div[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
   $("<div>").after()
 };
 
