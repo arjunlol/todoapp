@@ -24,6 +24,11 @@
   <% if (!user){ %>
 
   "not_logged" >
+  <section id="alerts-and-update-user">
+
+    <section class="alerts"></section>
+
+  </section>
 
   <section id="register-popup-section" class="reg-log-section">
     <form id="register-form" class="reg-log-form">
@@ -49,12 +54,17 @@
 
     <% } else { %>
   "logged" >
+  <section id="alerts-and-update-user">
 
-      <section class="alerts"></section>
+    <section class="alerts"></section>
       <div class="flash-buttons-section">
-      <!-- <a class="flash-category-btn" href="#">Book</a>
-      <a class="flash-category-btn" href="#">Movie</a> -->
+        <!-- <a class="flash-category-btn" href="#">Book</a>
+        <a class="flash-category-btn" href="#">Movie</a> -->
       </div>
+
+  </section>
+
+
 
     <section class="search-form-area">
       <form id="search-form">
@@ -125,9 +135,10 @@
 
         <li>
           <a href="#" id="to-watch-list-btn" class="listHeader ">things to watch</a>
-          <ul id="watch-list" class="list collapsed movie"> -->
-          <!-- this ul is where app.js adds an <li> for each item in db -->
-<!--      </ul>
+
+           <!-- this ul is where app.js adds an <li> for each item in db -->
+          <ul id="watch-list" class= "list collapsed movie"></ul>
+
         </li>
 
         <li>

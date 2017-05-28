@@ -1,6 +1,6 @@
 // make this file export a function, import the function in the app, the function takes an argument (keyword as argument), function returns true or false
 
-module.exports = function productCheck(keyword, cb) {
+module.exports = (keyword, cb) => {
 
 
   const {OperationHelper} = require('apac');
