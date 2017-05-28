@@ -195,7 +195,7 @@ module.exports = (knex) => {
         "password": passwordNew == 0 ? passwordOld: bcrypt.hashSync(req.body.password, 10)
       })
       .then((result) => {
-        res.send('Information has been updated');
+        res.send('Information provided has been updated');
       })
       .catch((err) => {
         res.status(404).send(err);
