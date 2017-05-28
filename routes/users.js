@@ -131,42 +131,7 @@ module.exports = (knex) => {
       })
   });
 
-
-  //route handler for returning list of specific catergory
-  //assumes parameter is number corresponding to category... so that easy request to loop through
-// <<<<<<< HEAD
-// =======
-
-// >>>>>>> master
-  // router.get("/:category", (req, res) => {
-  //   let email = 'arjun@arjun.com';
-  //   let category= req.params.category;
-  //   let user_id;
-  //   knex('categories').select('id').where('name', category) //first find the id of the category
-  //     .then((id) => {
-  //     let categories_id = id[0].id // Selects just the number from the array
-  //     knex('users') //first find the id of the email
-  //     .select('id')
-  //     .where('email', email)
-  //       .then((user_id) => {
-// <<<<<<< HEAD
-  //         // user_id = user_id[0].id
-// =======
-  //         user_id = user_id[0].id
-// >>>>>>> master
-  //         knex('items') //then find the items with that category id and user id
-  //         .select('name')
-  //         .where('users_id', user_id)
-  //         .andWhere('categories_id', categories_id)
-  //         .then((items) => {
-  //           res.json(items);
-  //         })
-  //       })
-  //     })
-  // });
-// <<<<<<< HEAD
-// =======
-
+  //route to get all items of a specified category
   router.get("/:category", (req, res) => {
     if(!req.session.user) {
       res.status(404).send("Please login")
@@ -202,25 +167,28 @@ module.exports = (knex) => {
   //updating the profile
   //will update to put method override when refactoring, post for mvp
   router.put("/profile", (req, res) => {
-    //currently assuming that user wants to update all fields..
-    //will refactor to only update what user wants later.
-    let email = req.session.user[0];
-    let nameNew = req.body.name;
-    let emailNew = req.body.email;
-    let passwordNew = bcrypt.hashSync(req.body.password, 10);
-
+    let email = 'test';
+    let nameNew = req.body.name || req.session.user[1]; //if no name provided use the old name
+    let emailNew = req.body.email || req.session.user[0]; //is no email provided, use the old email address
     knex('users')
+    .select('password')
     .where('email', email)
-    .update({
-      "user_name": nameNew,
-      "email": emailNew,
-      "password": passwordNew
-    })
     .then((result) => {
-      res.redirect('/');
-    })
-    .catch((err) => {
-      res.status(404).send(err);
+      let passwordOld = (result[0].password);
+      let passwordNew = bcrypt.hashSync(req.body.password || passwordOld, 10); //if no password provided use old password
+      knex('users')
+      .where('email', email)
+      .update({
+        "user_name": nameNew,
+        "email": emailNew,
+        "password": passwordNew
+      })
+      .then((result) => {
+        res.send('Information has been updated');
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      })
     })
   });
 
