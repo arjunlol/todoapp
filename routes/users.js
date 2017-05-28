@@ -157,7 +157,7 @@ module.exports = (knex) => {
         })
       })
   });
->>>>>>> master
+// >>>>>>> master
 
 
   //updating the profile
