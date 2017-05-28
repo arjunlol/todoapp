@@ -5,8 +5,6 @@ const router  = express.Router();
 const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
 const productCheck = require('./product_check.js')
-const isMovieOrBook = require('./is_movie_or_book.js')
-// const $ = require('jQuery')
 const wolframApi   = require('./WolframAPI.js');
 
 module.exports = (knex) => {
