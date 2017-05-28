@@ -43,12 +43,10 @@ body {
           padding: 6px 0;
           display: flex;
           justify-content: space-between;
+          font-size: 1.2em;
+          margin: 0;
+          width: 80%;
 
-            .list-item-name {
-              font-size: 1.2em;
-              margin: 0;
-              width: 80%;
-            }
 
             .list-icons-container {
               display: inline-block;

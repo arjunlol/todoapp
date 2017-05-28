@@ -22,12 +22,10 @@ $(document).ready(function(){
     $(".list-to-buy").show();
     })
 
-  })
-
 
   $('#view-lists').click(function() {
    loadLists();
-  });
+})
 
  $('#submit-btn').click(function() {
     event.preventDefault();
@@ -124,15 +122,15 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
-      <a class="flash-update-btn" href="#">Update</a>
-      <a class="flash-delete-btn" href="#">Delete</a>
+      <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
+      <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
 
   // Renders items in list
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
-  $("div[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
   $("<div>").after()
 };
 
