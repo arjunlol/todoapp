@@ -24,6 +24,10 @@ module.exports = (knex) => {
 
   //route handler for user creating an item
   router.post("/create", (req, res) => { //user id hardcoded currently
+  if(!req.session.user) {
+    res.redirect("/", {user:false})
+    return;
+  }
   let isProduct = undefined
   let isRestaurant = undefined
   let isBook = undefined
