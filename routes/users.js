@@ -178,21 +178,21 @@ module.exports = (knex) => {
   //updating the profile
   //will update to put method override when refactoring, post for mvp
   router.put("/profile", (req, res) => {
-    let email = 'test';
+    let email = req.session.user[0];
     let nameNew = req.body.name || req.session.user[1]; //if no name provided use the old name
     let emailNew = req.body.email || req.session.user[0]; //is no email provided, use the old email address
+    let passwordNew = req.body.password || 0;
     knex('users')
     .select('password')
     .where('email', email)
     .then((result) => {
       let passwordOld = (result[0].password);
-      let passwordNew = bcrypt.hashSync(req.body.password || passwordOld, 10); //if no password provided use old password
       knex('users')
       .where('email', email)
       .update({
         "user_name": nameNew,
         "email": emailNew,
-        "password": passwordNew
+        "password": passwordNew == 0 ? passwordOld: bcrypt.hashSync(req.body.password, 10)
       })
       .then((result) => {
         res.send('Information has been updated');
