@@ -1,5 +1,7 @@
 
-var request = require('request-promise');
+const express = require('express');
+const router  = express.Router();
+const request = require('request-promise');
 
 module.exports = (knex) => {
 
@@ -11,8 +13,8 @@ module.exports = (knex) => {
       qs: {
         query: item,
         api_key: 'e191e18d0a5c6e9519a156c004f02527'}
-    }).then((data) => {
-  });
-
+      }).then((data) => {
+    });
+  })
   return router;
 }
