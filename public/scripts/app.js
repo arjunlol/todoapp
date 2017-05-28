@@ -491,9 +491,8 @@ function loginUser(email, password) {
       return result;
       //render the ejs where someone has signed in
     }
-  }).fail(function (err){
-    console.log(err);
-      //here append the error
+  }).fail(function (error){
+    waitingMsgToggle(error);
   })
 };
 
@@ -506,6 +505,8 @@ function registerUser(name, email, password) {
       location.reload();
       //render the ejs where someone has signed in
     }
+  }).fail(function(error) {
+    waitingMsgToggle(error);
   })
 };
 
@@ -535,13 +536,9 @@ function updateUser(newName, newEmail, newPassword) {
       if(!(newName == "")) message += "Name ";
       if(!(newEmail == "")) message += "Email ";
       if(!(newPassword == "")) message += "Password ";
-
-      waitingMsgToggle(`Updated ${message.split(" ")}`);
+      waitingMsgToggle(`Updated ${message}`);
     }
-    // success: function() {
-    //   //update .val of item element
-    // }
   }).fail(function() {
-    console.log('INVALID')
+    waitingMsgToggle('Error incorrect input')
   })
 };
