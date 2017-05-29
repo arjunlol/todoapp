@@ -348,7 +348,7 @@ function updateUser(newName, newEmail, newPassword) {
     method: "PUT",
     //values not needed to be updated are set to undefined
     data: {'name': newName == "" ? undefined: newName,
-     'newEmail': newEmail == "" ? undefined: newEmail,
+     'email': newEmail == "" ? undefined: newEmail,
      'password': newPassword == ""? undefined: newPassword},
     success: function () {
       let message = "";

@@ -162,6 +162,7 @@ module.exports = (knex) => {
     let email = req.session.user[0];
     let nameNew = req.body.name || req.session.user[1]; //if no name provided use the old name
     let emailNew = req.body.email || req.session.user[0]; //is no email provided, use the old email address
+    console.log(emailNew)
     let passwordNew = req.body.password || 0;
     knex('users')
     .select('password')
