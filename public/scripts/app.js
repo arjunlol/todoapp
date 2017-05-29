@@ -195,12 +195,20 @@ function renderElement(item, category) {
       <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
 
+   const updateField =
+   `<div class="dialog-edit">
+      <form class="update-item-form">
+        <input class="update-input">
+          <a class="list-update-sumbit-btn" href="#">Update</a>
+     </form>
+    </div>`
+
   // Renders items in list
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
-  .append('<div class="dialog-edit"><form><input><a href="#">Update</a>');
+  .append($(updateField));
 };
 
 function logoutUser() {
