@@ -8,7 +8,7 @@ $(document).ready(function(){
     $(".list-to-read").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-buy").removeClass('active');
-    $(this).addClass('active');
+    $(this).toggleClass('active');
 
     $(".list-to-watch").toggle();
     $(".list-to-read").hide();
@@ -23,7 +23,7 @@ $(document).ready(function(){
     $(".list-to-watch").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-buy").removeClass('active');
-    $(this).addClass('active');
+    $(this).toggleClass('active');
 
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
@@ -36,10 +36,10 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-watch").removeClass('active');
     $(".list-to-read").removeClass('active');
+    $(".list-to-watch").removeClass('active');
     $(".list-to-buy").removeClass('active');
-    $(this).addClass('active');
+    $(this).toggleClass('active');
 
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
@@ -55,7 +55,7 @@ $(document).ready(function(){
     $(".list-to-watch").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-read").removeClass('active');
-    $(this).addClass('active');
+    $(this).toggleClass('active');
 
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
@@ -68,7 +68,7 @@ $(document).ready(function(){
 
  $('#submit-btn').click(function() {
     event.preventDefault();
-    var item = $('#form-textarea').val()
+    let item = $('#form-textarea').val()
     waitingMsg("Categorizing...")
     $.ajax({
       method: "POST",
@@ -85,7 +85,6 @@ $(document).ready(function(){
       } else if (category === "product") {
         category = "things to buy"
       }
-
       waitingMsgToggle(`${item} was added to the ${category} list`);
     }).fail((error) => {
       waitingMsgToggle(error.responseText)
@@ -322,11 +321,11 @@ function selectCategoryBtns(){
 
 //msg user recives while waiting for the apis response
 function waitingMsgToggle(msg){
-  $('.alerts').text(msg).fadeIn("slow").delay(3000).fadeOut("slow");
+  $('.alerts').text(msg).fadeIn("slow").delay(5000).fadeOut("slow");
 };
 
 function waitingMsg(msg){
-  $('.alerts').text(msg);
+  $('.alerts').text(msg).fadeIn();
 };
 
 //this function as per name collapses the uls and lis
