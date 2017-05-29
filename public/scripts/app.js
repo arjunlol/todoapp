@@ -53,6 +53,7 @@ $(document).ready(function(){
  $('#submit-btn').click(function() {
     event.preventDefault();
     var item = $('#form-textarea').val()
+    $('#form-textarea').val('')
     waitingMsg("Categorizing...")
     $.ajax({
       method: "POST",
