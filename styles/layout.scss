@@ -159,29 +159,41 @@ main {
 
 }
 
-#update-user-info-section{
-    right: 0;
-    margin-top: 60px;
-    z-index: 2;
-    position: absolute;
-
-}
-
 .hidden {
  visibility:hidden;
 }
 
+#update-user-info-section{
+    right: 0;
+    margin-top: 45px;
+    z-index: 2;
+    position: absolute;
+}
 
-#update-user-form {
+.update-form {
     display: flex;
     padding: 30px 35px;
-    // border: 4px solid $darkPurple;
     border-radius: 20px;
     flex-direction: column;
-    margin-right: 30px;
+    margin-right: 20px;
     background-color: $darkPurple;
     opacity: 0.9;
 
+  .update-user-textarea {
+    border: none;
+    border-bottom: 2px solid $creamyOrange;
+    margin: 4px 0;
+    padding: 1px;
+    background-color: none;
+  }
+
+
+
+}
+
+.update-user-submit-btn {
+  color: $creamyOrange;
+  text-decoration: none;
 }
 
 .alerts {
@@ -194,8 +206,7 @@ main {
     font-weight:00;
     margin-top:10px;
     font-size:20px;
-
-
+    align: center;
 }
 
 .flash-buttons-section{
@@ -215,30 +226,20 @@ main {
 
 
 }
-.flash-update-btn {
-  // height:35px;
-  // width:75px;
-  // background-color:#eee;
-  // border-radius: 5px;
-  // border:2px solid #666;
-  // margin:20px;
-  // // display:none;
-  // text-decoration: none;
-  color: $darkPurple;
 
+.flash-info-btn {
+  color: $darkPurple;
+  margin: 0 4px;
+}
+
+.flash-update-btn {
+  color: $darkPurple;
+  margin: 0 4px;
 }
 
 .flash-delete-btn {
-  // height:35px;
-  // width:75px;
-  // background-color:#eee;
-  // border-radius: 5px;
-  // border:2px solid #666;
-  // margin:20px;
-  // // display:none;
-  // text-decoration: none;
   color: $darkPurple;
-
+  margin: 0 4px;
 }
 
 #view-lists {
@@ -437,12 +438,14 @@ input::-webkit-input-placeholder {
   .icon {
   font-size: 70px;
   background-color: #fff;
+  color: $darkPurple;
+  opacity: 0.9;
 /*  color:#390B63;*/
  }
 
   #to-watch-list-btn {
-      color: $darkPurple;
-      opacity: 0.9;
+      // color: $darkPurple;
+      // opacity: 0.9;
     }
   #to-eat-list-btn {
       // background-color: $creamyOrange;
@@ -479,8 +482,6 @@ h4 {
     justify-content: center;
     align-items: center;
     margin: 5px;
-
-
 }
 
 .category-icon:hover{
