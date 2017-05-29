@@ -101,9 +101,9 @@ $(document).ready(function(){
    event.preventDefault();
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
-    let itemNew = $(this).closest('form').serializeArray()[0].value
+    let categoryNew = $(this).closest('form').serializeArray()[0].value
     category = category[category.length-1]; //the last item of the array is the category
-    updateItem(item, category, itemNew);
+    updateItem(item, category, categoryNew);
     $(this).closest('li').text(itemNew);
     // $(this).closest('li').data("title", itemNew);
   })
@@ -252,13 +252,14 @@ function registerUser(name, email, password) {
   })
 };
 
-function updateItem(item, category, newItem) {
+function updateItem(item, category, newCategory, newItem) {
   $.ajax({
     url: `/todo/${category}/${item}`,
     method: "PUT",
-    data: {'item': newItem},
+    data: {'category': newCategory,
+      'item', newItem},
     success: function() {
-      waitingMsgToggle(`${item} updated to ${newItem}`)
+      waitingMsgToggle(`Item updated`)
     }
   }).fail(function() {
       console.log('Item not updated')

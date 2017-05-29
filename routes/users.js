@@ -184,7 +184,7 @@ module.exports = (knex) => {
     })
   });
 
-  //update item from list
+  //update item from list to change the category
   router.put("/:category/:item", (req, res) => {
     if(!req.session.user) {
       res.status(404).send("Not logged in")
@@ -192,10 +192,9 @@ module.exports = (knex) => {
     }
     let item = req.params.item;
     let category = req.params.category;
-    let itemNew = req.body.item;
+    let categoryNew = req.body.category;
+    let itemNew = req.body.item !== "" ? itemNew: item; //if new item field empty only update the category
     let email = req.session.user[0];
-    console.log(item, category, itemNew, email)
-
     knex('categories').select('id').where('name', category) //first find the id of the category
       .then((id) => {
         let categories_id = id[0].id // Selects just the number from the array
@@ -210,7 +209,8 @@ module.exports = (knex) => {
             .andWhere('users_id', user)
             .andWhere('categories_id', categories_id)
             .update({
-              "name": itemNew
+              "name": itemNew,
+              "categories_id": categoryNew
             })
             .then((result) => {
               res.send("Updated");
