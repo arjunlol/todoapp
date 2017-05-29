@@ -161,10 +161,10 @@ function renderElement(item, category) {
    </div>`
 
    const updateField =
-   `<div class="dialog-edit">
-      <form class="update-item-form">
-        <input class="update-input">
-          <a class="list-update-sumbit-btn" href="#">Update</a>
+   `<div id="dialog-edit">
+      <form id="update-item-form">
+        <input id="update-input">
+          <a id="list-update-submit-btn" href="#">Update</a>
      </form>
     </div>`
 
