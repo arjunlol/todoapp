@@ -12,7 +12,6 @@ $(document).ready(function(){
     $(".list-to-buy").hide();
     if (!listsAdded) loadLists();
     listsAdded = true;
-
     })
 
   $("#to-read-list-btn").click(function(){
@@ -161,12 +160,20 @@ function renderElement(item, category) {
       <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
 
+   const updateField =
+   `<div id="dialog-edit">
+      <form id="update-item-form">
+        <input id="update-input">
+          <a id="list-update-submit-btn" href="#">Update</a>
+     </form>
+    </div>`
+
   // Renders items in list
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
-  $("<div>").after()
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
+  .append($(updateField));
 };
 
 function logoutUser() {
