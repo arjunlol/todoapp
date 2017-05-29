@@ -101,7 +101,8 @@ $(document).ready(function(){
 
     })
 
- $("#search-form").on("submit", function() {
+ // $("#search-form").on("#submit-btn", function() {
+   $("#submit-btn").click(function() {
     if (!listsAdded) loadLists(); //if the user hasnt already loaded the list, then do before rendering to prevent re-rendering
       listsAdded = true;
     event.preventDefault();
