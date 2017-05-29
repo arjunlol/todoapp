@@ -1,7 +1,7 @@
 
 module.exports = (item, cb) => {
 
-  const request = require('request-promise');
+  const request = require("request-promise");
   //route handler for getting information about a movie
 
     let information = {};
@@ -10,9 +10,9 @@ module.exports = (item, cb) => {
       }).then((data) => {
         let result = JSON.parse(data);
         //image link is base + size + path
-        information['imageLink'] = `https://image.tmdb.org/t/p/w500${result.results[0].poster_path}`
-        information['overview'] = result.results[0].overview;
-        information['rating'] = result.results[0].vote_average;
+        information["imageLink"] = `https://image.tmdb.org/t/p/w500${result.results[0].poster_path}`
+        information["overview"] = result.results[0].overview;
+        information["rating"] = result.results[0].vote_average;
         cb(information)
     });
 

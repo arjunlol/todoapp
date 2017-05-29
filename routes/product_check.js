@@ -3,20 +3,20 @@
 module.exports = (keyword, cb) => {
 
 
-  const {OperationHelper} = require('apac');
+  const {OperationHelper} = require("apac");
   const opHelper = new OperationHelper({
       awsId:     process.env.awsId,
       awsSecret: process.env.awsSecret,
       assocId:   process.env.assocId
   });
-  opHelper.execute('ItemSearch', {
-    'SearchIndex': 'MusicalInstruments',
-    'SearchIndex': 'Electronics',
-    'SearchIndex': 'LawnAndGarden',
-    'SearchIndex': 'PetSupplies',
-    'SearchIndex': 'Kitchen',
+  opHelper.execute("ItemSearch", {
+    "SearchIndex": "MusicalInstruments",
+    "SearchIndex": "Electronics",
+    "SearchIndex": "LawnAndGarden",
+    "SearchIndex": "PetSupplies",
+    "SearchIndex": "Kitchen",
 
-    'Keywords': keyword,
+    "Keywords": keyword,
   })
     .then((response) => {
     console.log("response.result.ItemSearchResponse:", response)
