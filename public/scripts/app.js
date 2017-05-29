@@ -5,10 +5,17 @@ $(document).ready(function(){
   let listsAdded = false;
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
+<<<<<<< HEAD
     $(".list-to-read").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-buy").removeClass('active');
     $(this).toggleClass('active');
+=======
+    $(".list-to-read").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-buy").removeClass("active");
+    $(this).addClass('active');
+>>>>>>> master
 
     $(".list-to-watch").toggle();
     $(".list-to-read").hide();
@@ -20,10 +27,17 @@ $(document).ready(function(){
 
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
+<<<<<<< HEAD
     $(".list-to-watch").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-buy").removeClass('active');
     $(this).toggleClass('active');
+=======
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-buy").removeClass("active");
+    $(this).addClass("active");
+>>>>>>> master
 
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
@@ -36,10 +50,17 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
+<<<<<<< HEAD
     $(".list-to-read").removeClass('active');
     $(".list-to-watch").removeClass('active');
     $(".list-to-buy").removeClass('active');
     $(this).toggleClass('active');
+=======
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-read").removeClass("active");
+    $(".list-to-buy").removeClass("active");
+    $(this).addClass("active");
+>>>>>>> master
 
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
@@ -52,10 +73,17 @@ $(document).ready(function(){
 
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
+<<<<<<< HEAD
     $(".list-to-watch").removeClass('active');
     $(".list-to-eat").removeClass('active');
     $(".list-to-read").removeClass('active');
     $(this).toggleClass('active');
+=======
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-read").removeClass("active");
+    $(this).addClass("active");
+>>>>>>> master
 
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
@@ -66,10 +94,16 @@ $(document).ready(function(){
 
     })
 
- $('#submit-btn').click(function() {
+ $("#submit-btn").click(function() {
     event.preventDefault();
+<<<<<<< HEAD
     let item = $('#form-textarea').val()
+=======
+    var item = $('#form-textarea').val()
+    $('#form-textarea').val('') // Clears the form
+>>>>>>> master
     waitingMsg("Categorizing...")
+
     $.ajax({
       method: "POST",
       url: "/todo/create",
