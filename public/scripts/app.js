@@ -2,42 +2,62 @@
 //after doc is ready
 //Shows each list when its corresponding button is clicked
 $(document).ready(function(){
+  let listsAdded = false;
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
+
     $(".list-to-watch").toggle();
     $(".list-to-read").hide();
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
+
+    // $(".list-to-watch").show();
+    // if (!listsAdded) loadLists();
+    // listsAdded = true;
+
     })
 
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
+
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
+
+    // $(".list-to-read").show();
+    // if (!listsAdded) loadLists();
+    // listsAdded = true;
+
     })
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
+
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
     $(".list-to-watch").hide();
     $(".list-to-buy").hide();
+
+    // $(".list-to-eat").show();
+    // if (!listsAdded) loadLists();
+    // listsAdded = true;
+
     })
 
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
+
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
     $(".list-to-eat").hide();
     $(".list-to-watch").hide();
+
+    // $(".list-to-buy").show();
+    // if (!listsAdded) loadLists();
+    // listsAdded = true;
+
     })
-
-
-  $('#view-lists').click(function() {
-   loadLists();
-})
 
  $('#submit-btn').click(function() {
     event.preventDefault();
@@ -224,6 +244,7 @@ function updateUser(newName, newEmail, newPassword) {
       if(!(newEmail == "")) message += "Email ";
       if(!(newPassword == "")) message += "Password ";
       waitingMsgToggle(`Updated ${message}`);
+      location.reload();
     }
   }).fail(function() {
     waitingMsgToggle('Error incorrect input')

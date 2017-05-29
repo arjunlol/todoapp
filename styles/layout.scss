@@ -174,7 +174,8 @@ main {
 #update-user-form {
     display: flex;
     padding: 16px 80px;
-    border: 1px solid;
+    border: 4px solid $darkPurple;
+    border-radius: 20px;
     flex-direction: column;
     margin-right: 30px;
     background-color: #eee;
@@ -495,10 +496,16 @@ h4 {
     display:flex;
   }
 }
-@media (min-width: 360px) {
+/*@media (min-width: 360px) {
   #icon-category-btns-section {
     width:360px;
   }
+}*/
+
+input::placeholder {
+  color: #370A60;
+  font:$body-font-family;
+
 }
 
 
