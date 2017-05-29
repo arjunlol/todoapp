@@ -1,11 +1,11 @@
 "use strict";
 
-const express = require('express');
+const express = require("express");
 const router  = express.Router();
-const bcrypt = require('bcrypt');
-const yelpSearch  = require('./yelp.js');
-const productCheck = require('./product_check.js')
-const wolframApi   = require('./WolframAPI.js');
+const bcrypt = require("bcrypt");
+const yelpSearch  = require("./yelp.js");
+const productCheck = require("./product_check.js")
+const wolframApi   = require("./WolframAPI.js");
 const movieInfo = require("./movieAPI");
 
 module.exports = (knex) => {
@@ -27,51 +27,51 @@ module.exports = (knex) => {
 
 
 
-  //promise call all API's to determine the category
+  //promise call all API"s to determine the category
   new Promise ((resolve, reject) => {
     yelpSearch(item, (result) => {
-      console.log('yelpcity');
+      console.log("yelpcity");
       if(result){
-        isRestaurant = 'restaurant';
+        isRestaurant = "restaurant";
       }
     });
     wolframApi(item, (result) => {
-      console.log('wolfcity');
+      console.log("wolfcity");
       if(result.movie){
-        isMovie = 'movie';
+        isMovie = "movie";
       }
       if(result.book){
-        isBook = 'book';
+        isBook = "book";
       }
       resolve()
     });
   }).then(() => { //after all api calls finsih the resond with category and store item in database
-    let category = isMovie || isBook || isRestaurant || 'product'; //prioritizes wolfram results
+    let category = isMovie || isBook || isRestaurant || "product"; //prioritizes wolfram results
 
-    knex('categories').select('id').where('name', category) // Selects the id from the category that matches the name of the category
+    knex("categories").select("id").where("name", category) // Selects the id from the category that matches the name of the category
     .then((id) => {
       let categories_id = id[0].id // Selects just the number from the array
 
 
 
 
-      knex('users') //first find the id of the email
-      .select('id')
-      .where('email', email)
+      knex("users") //first find the id of the email
+      .select("id")
+      .where("email", email)
         .then((user_id) => {
           let user = user_id[0].id
-          knex('items') //tfirst check if item is already in the database
-          .select('id')
-          .where('name', item)
-          .andWhere('categories_id', categories_id)
-          .andWhere('users_id', user)
+          knex("items") //tfirst check if item is already in the database
+          .select("id")
+          .where("name", item)
+          .andWhere("categories_id", categories_id)
+          .andWhere("users_id", user)
           .then((items) => {
             console.log(items);
             if(items[0]){ //if the item was already added by the user
               res.status(403).send("Item was already added")
             } else {
               res.send(category);
-              knex('items').insert({createdAt: created_at, name: item, categories_id: categories_id, users_id: user}) //Inserts a new row in the items table
+              knex("items").insert({createdAt: created_at, name: item, categories_id: categories_id, users_id: user}) //Inserts a new row in the items table
               .then(() => {})
             }
           })
@@ -106,19 +106,19 @@ module.exports = (knex) => {
       createdAt: new Date()
     }
 
-    knex('users')
-    .select('email')
-    .where('email', user['email'])
+    knex("users")
+    .select("email")
+    .where("email", user["email"])
     .then((emails) => {
       //if email already exists
       if(emails[0]){
-        console.log('error');
-        res.status(403).send('Email already exists');
+        console.log("error");
+        res.status(403).send("Email already exists");
       } else {
       //else insert user into the users table
-      knex('users').insert(user)
+      knex("users").insert(user)
         .then((resp) => {
-          req.session.user = [user['email'], user['user_name']]; //set cookie upon succesful registering
+          req.session.user = [user["email"], user["user_name"]]; //set cookie upon succesful registering
           res.send("");
         })
       }
@@ -135,18 +135,18 @@ module.exports = (knex) => {
     let email = req.session.user[0];
     let category= req.params.category;
     let user_id;
-    knex('categories').select('id').where('name', category) //first find the id of the category
+    knex("categories").select("id").where("name", category) //first find the id of the category
       .then((id) => {
       let categories_id = id[0].id // Selects just the number from the array
-      knex('users') //first find the id of the email
-      .select('id')
-      .where('email', email)
+      knex("users") //first find the id of the email
+      .select("id")
+      .where("email", email)
         .then((user_id) => {
           user_id = user_id[0].id
-          knex('items') //then find the items with that category id and user id
-          .select('name')
-          .where('users_id', user_id)
-          .andWhere('categories_id', categories_id)
+          knex("items") //then find the items with that category id and user id
+          .select("name")
+          .where("users_id", user_id)
+          .andWhere("categories_id", categories_id)
           .then((items) => {
             res.json(items);
           })
@@ -164,13 +164,13 @@ module.exports = (knex) => {
     let emailNew = req.body.email || req.session.user[0]; //is no email provided, use the old email address
     console.log(emailNew)
     let passwordNew = req.body.password || 0;
-    knex('users')
-    .select('password')
-    .where('email', email)
+    knex("users")
+    .select("password")
+    .where("email", email)
     .then((result) => {
       let passwordOld = (result[0].password);
-      knex('users')
-      .where('email', email)
+      knex("users")
+      .where("email", email)
       .update({
         "user_name": nameNew,
         "email": emailNew,
@@ -178,7 +178,7 @@ module.exports = (knex) => {
       })
       .then((result) => {
         req.session.user = [emailNew, nameNew];
-        res.send('Information provided has been updated');
+        res.send("Information provided has been updated");
       })
       .catch((err) => {
         res.status(404).send(err);
@@ -197,20 +197,20 @@ module.exports = (knex) => {
     let categoryNew = req.body.category;
     let itemNew = req.body.item !== "" ? req.body.item: item; //if new item field empty only update the category
     let email = req.session.user[0];
-    console.log('category', category, 'newcat', categoryNew, 'new item', itemNew)
-    knex('categories').select('id').where('name', categoryNew) //first find the id of the category
+    console.log("category", category, "newcat", categoryNew, "new item", itemNew)
+    knex("categories").select("id").where("name", categoryNew) //first find the id of the category
       .then((id) => {
         let categories_id = id[0].id // Selects just the number from the array
-        knex('users')
-        .select('id')
-        .where('email', email)
+        knex("users")
+        .select("id")
+        .where("email", email)
           .then((user_id) => { //then find the id of the user
             let user = user_id[0].id
             console.log(user)
-            knex('items') //then find the item with that category id and user id
-            .where('name', item)
-            .andWhere('users_id', user)
-            // .andWhere('categories_id', categories_id)
+            knex("items") //then find the item with that category id and user id
+            .where("name", item)
+            .andWhere("users_id", user)
+            // .andWhere("categories_id", categories_id)
             .update({
               "name": itemNew,
               "categories_id": categories_id
@@ -220,7 +220,7 @@ module.exports = (knex) => {
             })
       })
       .catch(() => {
-        res.status(403).send('Could not update');
+        res.status(403).send("Could not update");
       })
     });
   });
@@ -240,28 +240,28 @@ module.exports = (knex) => {
     let item_id;
     let user_id;
 
-    knex('categories').select('id').where('name', category) //first find the id of the category
+    knex("categories").select("id").where("name", category) //first find the id of the category
       .then((id) => {
         console.log(id)
         let categories_id = id[0].id // Selects just the number from the array
-        knex('users')
-        .select('id')
-        .where('email', email)
+        knex("users")
+        .select("id")
+        .where("email", email)
           .then((user_id) => { //then find the id of the user
             user_id = user_id[0].id
             console.log(categories_id, user_id)
-            knex('items') //then find the item with that category id and user id
-            .where('name', item)
-            .andWhere('users_id', user_id)
-            .andWhere('categories_id', categories_id)
+            knex("items") //then find the item with that category id and user id
+            .where("name", item)
+            .andWhere("users_id", user_id)
+            .andWhere("categories_id", categories_id)
             .del() //delete the item
             .then(() => {
-              res.send('Deleted');
+              res.send("Deleted");
             })
           })
       })
       .catch(() => {
-        res.status(403).send('Could not delete item');
+        res.status(403).send("Could not delete item");
       })
   });
 
@@ -281,16 +281,14 @@ module.exports = (knex) => {
       "password": req.body.password
     };
     //select all from the users table that match email address
-    knex('users')
+    knex("users")
       .select()
-      .where('email', user.email)
+      .where("email", user.email)
       .then((result) => {
           if(!result[0]){ //If email address does not exist in database
-            console.log('1')
             res.status(403).send("Invalid email/password");
             return;
           } else if(!(bcrypt.compareSync(user.password, result[0].password))) { //if incorrect password
-            console.log('2')
             res.status(403).send("Invalid email/password");
             return;
           } else { //correct email & password
