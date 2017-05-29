@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const yelpSearch  = require('./yelp.js');
 const productCheck = require('./product_check.js')
 const wolframApi   = require('./WolframAPI.js');
+const movieInfo = require("./movieAPI");
 
 module.exports = (knex) => {
 
@@ -300,6 +301,20 @@ module.exports = (knex) => {
         console.log(err);
       })
   });
+
+
+
+  router.get("/movieInfo/:item", (req, res) => {
+    if(!req.session.user) {
+      res.status(404).send("Not logged in")
+      return;
+    }
+
+    movieInfo(req.params.item, (info) => {
+      res.json(info);
+    })
+
+  })
 
   return router;
 }
