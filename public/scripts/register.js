@@ -25,7 +25,10 @@ $(document).ready(function(){
   $(this).closest('li').find('#dialog-edit').toggle();
   });
 
- $('')
+  $('.list').on('click', 'a.flash-info-btn', function(e){
+  event.preventDefault(e);
+  $(this).closest('li').find('.info-section').toggle();
+  });
 })
 
 

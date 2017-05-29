@@ -4,6 +4,7 @@
 $(document).ready(function(){
   let listsAdded = false;
   let hovered = [false, false, false, false];
+  let infoed = {};
   // $("#icon-category-btns-section > div").click(function(){
   //   event.preventDefault();
   //   $(this).addClass('active').siblings().removeClass('active');
@@ -145,7 +146,10 @@ $(document).ready(function(){
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
-    getInfo(item, category, this);
+    if (infoed[item] == undefined){
+    getInfo(item, category, $(this).closest('li'));
+  }
+    infoed[item] = false;
   })
 
 //update the info of the item on click
@@ -207,7 +211,7 @@ function getInfo(item, category, This) {
     url: `/todo/${category}Info/${item}`,
     method: 'GET',
     success: function(info){
-      $(This).append(`<div>
+      $(This).append(`<div class="info-section">
         <h4>Rating: ${info.rating}</h4>
         <p><b>Overview: </b>${info.overview}</p>
         <img src="${info.imageLink}"">
