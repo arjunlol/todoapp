@@ -5,10 +5,10 @@ $body-font-family: 'Dosis', sans-serif;
 $darkPurple: #2E294E;
 $creamyOrange: #F46036;
 
-
-
-
-
+html,
+body {
+  min-width: 360px;
+}
 
 body {
   background-color: #fff;
@@ -17,7 +17,6 @@ body {
 
 
   section.search-form-area {
-    width:60%;
     max-width: 600px;
     display: flex;
     margin:0 auto;
@@ -380,7 +379,7 @@ main {
   background: transparent;
   margin-top: 15px;
   outline: none;
-  color: $creamyOrange;
+  color: #fff;
   border: none;
   border-bottom: 8px solid #FF4A15;
 
@@ -464,10 +463,14 @@ input::-webkit-input-placeholder {
 
 #icon-category-btns-section {
   display: flex;
-  width: 70%;
+  width: 100%;
   justify-content: space-between;
-  /*flex-wrap:wrap;*/
-  margin:50px 0;
+  flex-wrap: wrap;
+  margin: 50px 0;
+
+  @media (max-width: 599px) {
+    width:360px;
+  }
 
   .icon {
   font-size: 70px;
@@ -538,21 +541,6 @@ h4 {
  }
 
 }
-
-
-
-@media (min-width: 575px) {
-  #icon-category-btns-section {
-    width:80%;
-    display:flex;
-    flex-wrap: wrap;
-  }
-}
-/*@media (min-width: 360px) {
-  #icon-category-btns-section {
-    width:360px;
-  }
-}*/
 
 input::placeholder {
   color: #370A60;
