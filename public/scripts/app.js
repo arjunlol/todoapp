@@ -246,7 +246,7 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
-      <a class="flash-info-btn" href="#">info</a>
+      <a class="flash-info-btn" href="#"><i class="fa fa-info flash-update-btn" aria-hidden="true"></i></a>
       <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
       <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
