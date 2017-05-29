@@ -129,7 +129,23 @@ $(document).ready(function(){
   $("#logout").on("click", function(event) {
     logoutUser();
   });
+
+  $().on("click", function(event) {
+
+  })
+
+
 })
+
+function getInfo(item, category) {
+  $.ajax({
+    url: `/${category}/${category}Info`,
+    method: 'GET'
+    success: function(info){
+      console.log(info);
+    }
+  })
+}
 
 
 function deleteItem(item, category) {
