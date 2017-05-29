@@ -2,9 +2,9 @@
 //after doc is ready
 //Shows each list when its corresponding button is clicked
 $(document).ready(function(){
-  let listsAdded = false;
-  let hovered = [false, false, false, false];
-  let infoed = {};
+  var listsAdded = false;
+  var hovered = [false, false, false, false];
+  var infoed = {};
   // $("#icon-category-btns-section > div").click(function(){
   //   event.preventDefault();
   //   $(this).addClass('active').siblings().removeClass('active');
@@ -14,14 +14,14 @@ $(document).ready(function(){
 
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
-    $("#to-read-list-btn").removeClass('active');
-    $("#to-eat-list-btn").removeClass('active');
-    $("#to-buy-list-btn").removeClass('active');
+    $("#to-read-list-btn").removeClass("active");
+    $("#to-eat-list-btn").removeClass("active");
+    $("#to-buy-list-btn").removeClass("active");
     if (!hovered[0]) {
-    $(this).addClass('active');
+    $(this).addClass("active");
     hovered[0] = true;
   } else {
-        $(this).removeClass('active');
+        $(this).removeClass("active");
         hovered[0] = false;
   }
     $(".list-to-watch").toggle();
@@ -35,15 +35,15 @@ $(document).ready(function(){
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
 
-    $("#to-watch-list-btn").removeClass('active');
-    $("#to-eat-list-btn").removeClass('active');
-    $("#to-buy-list-btn").removeClass('active');
+    $("#to-watch-list-btn").removeClass("active");
+    $("#to-eat-list-btn").removeClass("active");
+    $("#to-buy-list-btn").removeClass("active");
 
         if (!hovered[1]) {
-    $(this).addClass('active');
+    $(this).addClass("active");
     hovered[1] = true;
   } else {
-        $(this).removeClass('active');
+        $(this).removeClass("active");
         hovered[1] = false;
   }
 
@@ -58,14 +58,14 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
-    $("#to-read-list-btn").removeClass('active');
-    $("#to-watch-list-btn").removeClass('active');
-    $("#to-buy-list-btn").removeClass('active');
+    $("#to-read-list-btn").removeClass("active");
+    $("#to-watch-list-btn").removeClass("active");
+    $("#to-buy-list-btn").removeClass("active");
     if (!hovered[2]) {
-    $(this).addClass('active');
+    $(this).addClass("active");
     hovered[2] = true;
   } else {
-        $(this).removeClass('active');
+        $(this).removeClass("active");
         hovered[2] = false;
   }
 
@@ -81,14 +81,14 @@ $(document).ready(function(){
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
 
-    $("#to-watch-list-btn").removeClass('active');
-    $("#to-eat-list-btn").removeClass('active');
-    $("#to-read-list-btn").removeClass('active');
+    $("#to-watch-list-btn").removeClass("active");
+    $("#to-eat-list-btn").removeClass("active");
+    $("#to-read-list-btn").removeClass("active");
     if (!hovered[3]) {
-    $(this).addClass('active');
+    $(this).addClass("active");
     hovered[3] = true;
   } else {
-        $(this).removeClass('active');
+        $(this).removeClass("active");
         hovered[3] = false;
   }
 
@@ -106,14 +106,14 @@ $(document).ready(function(){
       listsAdded = true;
     event.preventDefault();
 
-    var item = $('#form-textarea').val()
-    $('#form-textarea').val('') // Clears the form
+    var item = $("#form-textarea").val()
+    $("#form-textarea").val("") // Clears the form
     waitingMsg("Categorizing...")
 
     $.ajax({
       method: "POST",
       url: "/todo/create",
-      data: {'item': item}
+      data: {"item": item}
     }).done((category) => {
       renderElement(item, category);
       if (category === "movie") {
@@ -135,21 +135,21 @@ $(document).ready(function(){
 // on the click of the delete remove that specific list item
   $(".list-area").on("click", ".flash-delete-btn", function(event) {
     event.preventDefault();
-    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
-    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    var item = $(this).closest("li").data("title");//lie data attribute contains the items name
+    var category = $(this).closest("ul").attr("class").split(" "); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
-   $(this).closest('li').remove();//remove item on front end
+   $(this).closest("li").remove();//remove item on front end
     deleteItem(item, category) //remove item on back end
   });
 
 //get the info of the item on click
   $(".list-area").on("click", ".flash-info-btn", function(event) {
    event.preventDefault();
-    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
-    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    var item = $(this).closest("li").data("title");//lie data attribute contains the items name
+    var category = $(this).closest("ul").attr("class").split(" "); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
     if (infoed[item] == undefined){
-    getInfo(item, category, $(this).closest('li'));
+    getInfo(item, category, $(this).closest("li"));
   }
     infoed[item] = false;
   })
@@ -157,44 +157,44 @@ $(document).ready(function(){
 //update the info of the item on click
   $(".list-area").on("click", "#list-update-submit-btn", function(event) {
    event.preventDefault();
-    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
-    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
-    let categoryNew = $(this).closest('form').serializeArray()[0].value
-    let itemNew = $(this).closest('form').serializeArray()[1].value
+    var item = $(this).closest("li").data("title");//lie data attribute contains the items name
+    var category = $(this).closest("ul").attr("class").split(" "); //this is an array of classes
+    var categoryNew = $(this).closest("form").serializeArray()[0].value
+    var itemNew = $(this).closest("form").serializeArray()[1].value
     console.log(categoryNew, itemNew);
     category = category[category.length-1]; //the last item of the array is the category
     updateItem(item, category, categoryNew, itemNew);
 
 
-    // $(this).closest('li').data("title", itemNew);
+    // $(this).closest("li").data("title", itemNew);
   })
 
 
   //on register click, register user
   $("#register-submit-btn").on("click", function(event) {
     event.preventDefault();
-    let formData = $('#register-form').serializeArray();
-    let name = formData[0].value;
-    let email = formData[1].value;
-    let password = formData[2].value;
+    var formData = $("#register-form").serializeArray();
+    var name = formData[0].value;
+    var email = formData[1].value;
+    var password = formData[2].value;
     registerUser(name, email, password);
   });
 
   //on login click
   $("#login-submit-btn").on("click", function(event) {
     event.preventDefault()
-    let formData = $('#login-form').serializeArray();
-    let email = formData[0].value;
-    let password = formData[1].value;
+    var formData = $("#login-form").serializeArray();
+    var email = formData[0].value;
+    var password = formData[1].value;
     loginUser(email, password);
   });
 
   $("#update-submit-btn").on("click", function(event) {
     event.preventDefault()
-    let formData = $('#update-user-form').serializeArray();
-    let name = formData[0].value;
-    let email = formData[1].value;
-    let password = formData[2].value;
+    var formData = $("#update-user-form").serializeArray();
+    var name = formData[0].value;
+    var email = formData[1].value;
+    var password = formData[2].value;
     updateUser(name, email, password);
   });
 
@@ -211,7 +211,7 @@ function getInfo(item, category, This) {
   console.log(item,category)
   $.ajax({
     url: `/todo/${category}Info/${item}`,
-    method: 'GET',
+    method: "GET",
     success: function(info){
       $(This).append(`<div class="info-section">
         <h4>Rating: ${info.rating}</h4>
@@ -220,7 +220,7 @@ function getInfo(item, category, This) {
         <div>`)
     }
   }).fail (function() {
-    waitingMsgToggle('Data not found');
+    waitingMsgToggle("Data not found");
   })
 }
 
@@ -233,7 +233,7 @@ function deleteItem(item, category) {
 };
 
 function loadLists() {
-  let categories = ['movie', 'restaurant', 'book', 'product'];
+  var categories = ["movie", "restaurant", "book", "product"];
   categories.forEach(function (category) {
     loadItems(category);
   })
@@ -251,7 +251,7 @@ function loadItems(category) { //4 categories
       })
     }
   }).fail(function() {
-    console.log('ERROR NOT LOGGED IN')
+    console.log("ERROR NOT LOGGED IN")
   })
 };
 
@@ -283,9 +283,9 @@ function renderElement(item, category) {
 
   // Renders items in list
   //target parent ul line 431 and data title on parent line 432
-  $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
+  $("<li>").text(item).attr("data-title", item).appendTo($("." + category));
   // appends buttons
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass("update-and-delete-btns"))
   .append($(updateField))
 };
 
@@ -304,7 +304,7 @@ function loginUser(email, password) {
   $.ajax({
     url: "/todo/login",
     method: "POST",
-    data: {'email': email, 'password': password},
+    data: {"email": email, "password": password},
     success: function(result) {
       location.reload();
       return result;
@@ -319,7 +319,7 @@ function registerUser(name, email, password) {
   $.ajax({
     url: "/todo/register",
     method: "POST",
-    data: {'username': name, 'email': email, 'password': password},
+    data: {"username": name, "email": email, "password": password},
     success: function() {
       location.reload();
       //render the ejs where someone has signed in
@@ -333,14 +333,14 @@ function updateItem(item, category, newCategory, newItem) {
   $.ajax({
     url: `/todo/${category}/${item}`,
     method: "PUT",
-    data: {'category': newCategory,
-      'item': newItem},
+    data: {"category": newCategory,
+      "item": newItem},
     success: function() {
       location.reload();
       waitingMsg(`${item} was added to the ${category} list`);
     }
   }).fail(function() {
-      console.log('Item not updated')
+      console.log("Item not updated")
   })
 };
 
@@ -349,11 +349,11 @@ function updateUser(newName, newEmail, newPassword) {
     url: `/todo/profile`,
     method: "PUT",
     //values not needed to be updated are set to undefined
-    data: {'name': newName == "" ? undefined: newName,
-     'email': newEmail == "" ? undefined: newEmail,
-     'password': newPassword == ""? undefined: newPassword},
+    data: {"name": newName == "" ? undefined: newName,
+     "email": newEmail == "" ? undefined: newEmail,
+     "password": newPassword == ""? undefined: newPassword},
     success: function () {
-      let message = "";
+      var message = "";
       if(!(newName == "")) message += "Name ";
       if(!(newEmail == "")) message += "Email ";
       if(!(newPassword == "")) message += "Password ";
@@ -361,29 +361,29 @@ function updateUser(newName, newEmail, newPassword) {
       location.reload();
     }
   }).fail(function() {
-    waitingMsgToggle('Error incorrect input')
+    waitingMsgToggle("Error incorrect input")
   })
 };
 
 function selectCategoryBtns(){
-  $('.flash-category-btn').show();
+  $(".flash-category-btn").show();
 };
 
 
 //msg user recives while waiting for the apis response
 function waitingMsgToggle(msg){
-  $('.alerts').text(msg).fadeIn("slow").delay(5000).fadeOut("slow");
+  $(".alerts").text(msg).fadeIn("slow").delay(5000).fadeOut("slow");
 };
 
 function waitingMsg(msg){
-  $('.alerts').text(msg).fadeIn();
+  $(".alerts").text(msg).fadeIn();
 };
 
 //this function as per name collapses the uls and lis
 function collapseList(parent) {
-  $(parent).slideUp().addClass('collapsed').find('ul').slideUp().addClass('collapsed');
+  $(parent).slideUp().addClass("collapsed").find("ul").slideUp().addClass("collapsed");
 };
 //expands the lists
 function expandList(parent) {
-  $(parent).slideDown().removeClass('collapsed');
+  $(parent).slideDown().removeClass("collapsed");
 };
