@@ -584,11 +584,11 @@ select:-webkit-autofill:focus {
 }
 
 
-.lightbox {
-  /** Default lightbox to hidden */
+/*.lightbox {
+
   display: none;
 
-  /** Position and style */
+
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -600,16 +600,17 @@ select:-webkit-autofill:focus {
 }
 
 .lightbox div {
-  /** Pad the lightbox image */
+
   max-width: 90%;
   max-height: 80%;
   margin-top: 2%;
 }
 
 .lightbox:target {
-  /** Remove default browser outline */
+
   outline: none;
 
-  /** Unhide lightbox **/
+
   display: block;
 }
+*/

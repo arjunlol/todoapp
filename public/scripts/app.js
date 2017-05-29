@@ -112,7 +112,7 @@ $(document).ready(function(){
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
     category = category[category.length-1]; //the last item of the array is the category
-    getInfo(item, category);
+    getInfo(item, category, this);
   })
 
 //update the info of the item on click
@@ -167,13 +167,17 @@ $(document).ready(function(){
 
 })
 
-function getInfo(item, category) {
+function getInfo(item, category, This) {
   console.log(item,category)
   $.ajax({
     url: `/todo/${category}Info/${item}`,
     method: 'GET',
     success: function(info){
-
+      $(This).append(`<div>
+        <h4>Rating: ${info.rating}</h4>
+        <p><b>Overview: </b>${info.overview}</p>
+        <img src="${info.imageLink}"">
+        <div>`)
     }
   }).fail (function() {
     waitingMsgToggle('Data not found');
@@ -214,9 +218,8 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
-      <a class="flash-info-btn" href="#" class="lightbox id="img1">info
-      <div>TESTETST</div>
-      </a>
+      <a class="flash-info-btn">info</a>
+
       <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
       <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
@@ -244,7 +247,7 @@ function renderElement(item, category) {
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
-  .append($(updateField));
+  .append($(updateField))
 };
 
 function logoutUser() {
