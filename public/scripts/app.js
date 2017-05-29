@@ -3,12 +3,26 @@
 //Shows each list when its corresponding button is clicked
 $(document).ready(function(){
   let listsAdded = false;
+  let hovered = [false, false, false, false];
+  // $("#icon-category-btns-section > div").click(function(){
+  //   event.preventDefault();
+  //   $(this).addClass('active').siblings().removeClass('active');
+  // //   $(this)'s ul show, the others' uls hide
+  //  }
+
+
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-read").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-buy").removeClass('active');
-    $(this).toggleClass('active');
+    $("#to-read-list-btn").removeClass('active');
+    $("#to-eat-list-btn").removeClass('active');
+    $("#to-buy-list-btn").removeClass('active');
+    if (!hovered[0]) {
+    $(this).addClass('active');
+    hovered[0] = true;
+  } else {
+        $(this).removeClass('active');
+        hovered[0] = false;
+  }
     $(".list-to-watch").toggle();
     $(".list-to-read").hide();
     $(".list-to-eat").hide();
@@ -20,10 +34,17 @@ $(document).ready(function(){
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
 
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-buy").removeClass('active');
-    $(this).toggleClass('active');
+    $("#to-watch-list-btn").removeClass('active');
+    $("#to-eat-list-btn").removeClass('active');
+    $("#to-buy-list-btn").removeClass('active');
+
+        if (!hovered[1]) {
+    $(this).addClass('active');
+    hovered[1] = true;
+  } else {
+        $(this).removeClass('active');
+        hovered[1] = false;
+  }
 
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
@@ -36,10 +57,16 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-read").removeClass('active');
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-buy").removeClass('active');
-    $(this).toggleClass('active');
+    $("#to-read-list-btn").removeClass('active');
+    $("#to-watch-list-btn").removeClass('active');
+    $("#to-buy-list-btn").removeClass('active');
+    if (!hovered[2]) {
+    $(this).addClass('active');
+    hovered[2] = true;
+  } else {
+        $(this).removeClass('active');
+        hovered[2] = false;
+  }
 
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
@@ -53,10 +80,16 @@ $(document).ready(function(){
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
 
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-read").removeClass('active');
-    $(this).toggleClass('active');
+    $("#to-watch-list-btn").removeClass('active');
+    $("#to-eat-list-btn").removeClass('active');
+    $("#to-read-list-btn").removeClass('active');
+    if (!hovered[3]) {
+    $(this).addClass('active');
+    hovered[3] = true;
+  } else {
+        $(this).removeClass('active');
+        hovered[3] = false;
+  }
 
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
@@ -125,7 +158,8 @@ $(document).ready(function(){
     console.log(categoryNew, itemNew);
     category = category[category.length-1]; //the last item of the array is the category
     updateItem(item, category, categoryNew, itemNew);
-    // $(this).closest('li').text(itemNew);
+
+
     // $(this).closest('li').data("title", itemNew);
   })
 
@@ -291,6 +325,7 @@ function updateItem(item, category, newCategory, newItem) {
       'item': newItem},
     success: function() {
       location.reload();
+      waitingMsg(`${item} was added to the ${category} list`);
     }
   }).fail(function() {
       console.log('Item not updated')
