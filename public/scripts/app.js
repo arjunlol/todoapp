@@ -11,9 +11,9 @@ $(document).ready(function(){
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
 
-    // $(".list-to-watch").show();
-    // if (!listsAdded) loadLists();
-    // listsAdded = true;
+    $(".list-to-watch").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
 
     })
 
@@ -25,9 +25,9 @@ $(document).ready(function(){
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
 
-    // $(".list-to-read").show();
-    // if (!listsAdded) loadLists();
-    // listsAdded = true;
+    $(".list-to-read").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
 
     })
 
@@ -39,9 +39,9 @@ $(document).ready(function(){
     $(".list-to-watch").hide();
     $(".list-to-buy").hide();
 
-    // $(".list-to-eat").show();
-    // if (!listsAdded) loadLists();
-    // listsAdded = true;
+    $(".list-to-eat").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
 
     })
 
@@ -53,9 +53,9 @@ $(document).ready(function(){
     $(".list-to-eat").hide();
     $(".list-to-watch").hide();
 
-    // $(".list-to-buy").show();
-    // if (!listsAdded) loadLists();
-    // listsAdded = true;
+    $(".list-to-buy").show();
+    if (!listsAdded) loadLists();
+    listsAdded = true;
 
     })
 
