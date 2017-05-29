@@ -10,8 +10,6 @@ $(document).ready(function(){
     $(".list-to-read").hide();
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
-
-    $(".list-to-watch").show();
     if (!listsAdded) loadLists();
     listsAdded = true;
 
@@ -24,8 +22,6 @@ $(document).ready(function(){
     $(".list-to-watch").hide();
     $(".list-to-eat").hide();
     $(".list-to-buy").hide();
-
-    $(".list-to-read").show();
     if (!listsAdded) loadLists();
     listsAdded = true;
 
@@ -38,8 +34,6 @@ $(document).ready(function(){
     $(".list-to-read").hide();
     $(".list-to-watch").hide();
     $(".list-to-buy").hide();
-
-    $(".list-to-eat").show();
     if (!listsAdded) loadLists();
     listsAdded = true;
 
@@ -52,8 +46,6 @@ $(document).ready(function(){
     $(".list-to-read").hide();
     $(".list-to-eat").hide();
     $(".list-to-watch").hide();
-
-    $(".list-to-buy").show();
     if (!listsAdded) loadLists();
     listsAdded = true;
 
@@ -69,7 +61,6 @@ $(document).ready(function(){
       data: {'item': item}
     }).done((category) => {
       renderElement(item, category);
-
       if (category === "movie") {
         category = "things to watch"
       } else if (category === "book") {
@@ -181,6 +172,7 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
+      <a class="flash-info-btn" href="#">info</a>
       <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
       <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
    </div>`
