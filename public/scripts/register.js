@@ -19,7 +19,7 @@ $(document).ready(function(){
  })
  $('.list').on('click', 'a.flash-update-btn', function(e){
   event.preventDefault(e);
-  $(this).closest('li').find('.dialog-edit').show();
+  $(this).closest('li').find('#dialog-edit').show();
   });
 })
 
