@@ -165,16 +165,16 @@ function loadItems(category) { //4 categories
 function renderElement(item, category) {
   const buttons =
   `<div class="update-and-delete-btns" style= "">
-      <a class="flash-update-btn" href="#"><i class="fa fa-pencil flash-update-btn" aria-hidden="true"></i></a>
-      <a class="flash-delete-btn" href="#"><i class="fa fa-trash flash-delete-btn" aria-hidden="true"></i></a>
+      <a class="flash-update-btn" href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a class="flash-delete-btn" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
    </div>`
 
   // Renders items in list
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
-  $("<div>").after()
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
+  .append('<div class="dialog-edit"><form><input><a href="#">Update</a>');
 };
 
 function logoutUser() {
