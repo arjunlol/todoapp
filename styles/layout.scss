@@ -256,7 +256,7 @@ main {
 }
 
 .category-list {
-  // display:none;
+  /*// display:none;*/
   width: 99%;
   text-align:center;
   padding-left:0;
@@ -425,7 +425,7 @@ input::-webkit-input-placeholder {
 
 #dialog-edit {
   width:100%;
-  margin-top:10px;
+  margin:10px 0 60px 0;
   height:30px;
   display:none;
 }
@@ -435,6 +435,7 @@ input::-webkit-input-placeholder {
   }
   #update-input {
     padding:0;
+    width:100%;
   }
   #list-update-submit-btn {
     padding:0;
@@ -517,10 +518,24 @@ h4 {
  }
 }
 
+.active {
+  border: 8px solid $creamyOrange;
+    border-radius: 20px;
+
+ h4 {
+  color: $darkPurple;
+
+ }
+
+}
+
+
+
 @media (min-width: 575px) {
   #icon-category-btns-section {
-    width:100%;
+    width:80%;
     display:flex;
+    flex-wrap: wrap;
   }
 }
 /*@media (min-width: 360px) {

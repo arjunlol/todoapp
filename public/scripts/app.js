@@ -5,6 +5,10 @@ $(document).ready(function(){
   let listsAdded = false;
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
+    $(".list-to-read").removeClass('active');
+    $(".list-to-eat").removeClass('active');
+    $(".list-to-buy").removeClass('active');
+    $(this).addClass('active');
 
     $(".list-to-watch").toggle();
     $(".list-to-read").hide();
@@ -16,6 +20,10 @@ $(document).ready(function(){
 
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
+    $(".list-to-watch").removeClass('active');
+    $(".list-to-eat").removeClass('active');
+    $(".list-to-buy").removeClass('active');
+    $(this).addClass('active');
 
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
@@ -28,6 +36,10 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
+    $(".list-to-watch").removeClass('active');
+    $(".list-to-read").removeClass('active');
+    $(".list-to-buy").removeClass('active');
+    $(this).addClass('active');
 
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
@@ -40,6 +52,10 @@ $(document).ready(function(){
 
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
+    $(".list-to-watch").removeClass('active');
+    $(".list-to-eat").removeClass('active');
+    $(".list-to-read").removeClass('active');
+    $(this).addClass('active');
 
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
@@ -161,11 +177,21 @@ function renderElement(item, category) {
    </div>`
 
    const updateField =
-   `<div id="dialog-edit">
+   `<div id="dialog-edit" >
+
       <form id="update-item-form">
+        <input type="radio" name="gender" value="male" checked> Watch &nbsp; &nbsp;
+        <input type="radio" name="gender" value="female"> Read &nbsp; &nbsp;
+        <input type="radio" name="gender" value="other"> Eat &nbsp; &nbsp;
+        <input type="radio" name="gender" value="other"> Buy &nbsp; &nbsp;
+
+      </form>
+      <form>
         <input id="update-input">
-          <a id="list-update-submit-btn" href="#">Update</a>
+        <a id="list-update-submit-btn" href="#">Update</a>
+
      </form>
+
     </div>`
 
   // Renders items in list
