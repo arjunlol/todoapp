@@ -12,7 +12,6 @@ $(document).ready(function(){
     $(".list-to-buy").hide();
     if (!listsAdded) loadLists();
     listsAdded = true;
-
     })
 
   $("#to-read-list-btn").click(function(){
@@ -188,8 +187,8 @@ function renderElement(item, category) {
   //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr('data-title', item).appendTo($("." + category));
   // appends buttons
-  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'));
-  $("<div>").after()
+  $("li[data-title=\""+item+"\"]").append($(buttons).addClass('update-and-delete-btns'))
+  .append('<div class="dialog-edit"><form><input><a href="#">Update</a>');
 };
 
 function logoutUser() {
