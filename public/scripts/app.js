@@ -4,22 +4,34 @@
 $(document).ready(function(){
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-watch").show();
+    $(".list-to-watch").toggle();
+    $(".list-to-read").hide();
+    $(".list-to-eat").hide();
+    $(".list-to-buy").hide();
     })
 
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-read").show();
+    $(".list-to-read").toggle();
+    $(".list-to-watch").hide();
+    $(".list-to-eat").hide();
+    $(".list-to-buy").hide();
     })
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-eat").show();
+    $(".list-to-eat").toggle();
+    $(".list-to-read").hide();
+    $(".list-to-watch").hide();
+    $(".list-to-buy").hide();
     })
 
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-buy").show();
+    $(".list-to-buy").toggle();
+    $(".list-to-read").hide();
+    $(".list-to-eat").hide();
+    $(".list-to-watch").hide();
     })
 
 
@@ -36,8 +48,19 @@ $(document).ready(function(){
       url: "/todo/create",
       data: {'item': item}
     }).done((category) => {
-      waitingMsgToggle(`${item} added to ${category} list`);
       renderElement(item, category);
+
+      if (category === "movie") {
+        category = "things to watch"
+      } else if (category === "book") {
+        category = "books to read"
+      } else if (category === "restaurant") {
+        category = "places to eat"
+      } else if (category === "product") {
+        category = "things to buy"
+      }
+
+      waitingMsgToggle(`${item} was added to the ${category} list`);
     }).fail((error) => {
       waitingMsgToggle(error.responseText)
     })
