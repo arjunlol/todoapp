@@ -97,14 +97,15 @@ $(document).ready(function(){
   })
 
 //update the info of the item on click
-  $(".list-area").on("click", ".list-update-submit-btn", function(event) {
+  $(".list-area").on("click", "#list-update-submit-btn", function(event) {
    event.preventDefault();
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
-    let itemNew = $('#update-item-form').serializeArray()[0];
+    let itemNew = $(this).closest('form').serializeArray()[0].value
     category = category[category.length-1]; //the last item of the array is the category
     updateItem(item, category, itemNew);
     $(this).closest('li').text(itemNew);
+    // $(this).closest('li').data("title", itemNew);
   })
 
 
@@ -198,7 +199,7 @@ function renderElement(item, category) {
    const updateField =
    `<div id="dialog-edit">
       <form id="update-item-form">
-        <input id="update-input">
+        <input id="update-input" name="item" type="text">
           <a id="list-update-submit-btn" href="#">Update</a>
      </form>
     </div>`
@@ -257,7 +258,7 @@ function updateItem(item, category, newItem) {
     method: "PUT",
     data: {'item': newItem},
     success: function() {
-      location.reload();
+      waitingMsgToggle(`${item} updated to ${newItem}`)
     }
   }).fail(function() {
       console.log('Item not updated')

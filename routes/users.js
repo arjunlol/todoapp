@@ -194,6 +194,7 @@ module.exports = (knex) => {
     let category = req.params.category;
     let itemNew = req.body.item;
     let email = req.session.user[0];
+    console.log(item, category, itemNew, email)
 
     knex('categories').select('id').where('name', category) //first find the id of the category
       .then((id) => {
