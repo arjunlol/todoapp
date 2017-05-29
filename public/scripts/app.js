@@ -5,9 +5,9 @@ $(document).ready(function(){
   let listsAdded = false;
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-read").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-buy").removeClass('active');
+    $(".list-to-read").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-buy").removeClass("active");
     $(this).addClass('active');
 
     $(".list-to-watch").toggle();
@@ -20,10 +20,10 @@ $(document).ready(function(){
 
   $("#to-read-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-buy").removeClass('active');
-    $(this).addClass('active');
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-buy").removeClass("active");
+    $(this).addClass("active");
 
     $(".list-to-read").toggle();
     $(".list-to-watch").hide();
@@ -36,10 +36,10 @@ $(document).ready(function(){
 
   $("#to-eat-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-read").removeClass('active');
-    $(".list-to-buy").removeClass('active');
-    $(this).addClass('active');
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-read").removeClass("active");
+    $(".list-to-buy").removeClass("active");
+    $(this).addClass("active");
 
     $(".list-to-eat").toggle();
     $(".list-to-read").hide();
@@ -52,10 +52,10 @@ $(document).ready(function(){
 
   $("#to-buy-list-btn").click(function(){
     event.preventDefault();
-    $(".list-to-watch").removeClass('active');
-    $(".list-to-eat").removeClass('active');
-    $(".list-to-read").removeClass('active');
-    $(this).addClass('active');
+    $(".list-to-watch").removeClass("active");
+    $(".list-to-eat").removeClass("active");
+    $(".list-to-read").removeClass("active");
+    $(this).addClass("active");
 
     $(".list-to-buy").toggle();
     $(".list-to-read").hide();
@@ -66,10 +66,10 @@ $(document).ready(function(){
 
     })
 
- $('#submit-btn').click(function() {
+ $("#submit-btn").click(function() {
     event.preventDefault();
-    var item = $('#form-textarea').val()
-    waitingMsg("Categorizing...")
+    var item = $("#form-textarea").val();
+    waitingMsg("Categorizing...");
     $.ajax({
       method: "POST",
       url: "/todo/create",
