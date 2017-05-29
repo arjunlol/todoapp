@@ -88,7 +88,7 @@ $(document).ready(function(){
 
 
 // on the click of the delete remove that specific list item
-  $("li").on("click", ".flash-delete-btn", function(event) {
+  $(".list-area").on("click", ".flash-delete-btn", function(event) {
     event.preventDefault();
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
