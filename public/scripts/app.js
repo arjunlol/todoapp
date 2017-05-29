@@ -96,6 +96,18 @@ $(document).ready(function(){
     getInfo(item, category);
   })
 
+//update the info of the item on click
+  $(".list-area").on("click", ".list-update-submit-btn", function(event) {
+   event.preventDefault();
+    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
+    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    let itemNew = $('#update-item-form').serializeArray()[0];
+    category = category[category.length-1]; //the last item of the array is the category
+    updateItem(item, category, itemNew);
+    $(this).closest('li').text(itemNew);
+  })
+
+
   //on register click, register user
   $("#register-submit-btn").on("click", function(event) {
     event.preventDefault();
@@ -237,10 +249,10 @@ function updateItem(item, category, newItem) {
     method: "PUT",
     data: {'item': newItem},
     success: function() {
-      //update .val of item element
+      location.reload();
     }
   }).fail(function() {
-      console.log('ERROR NOT LOGGED IN')
+      console.log('Item not updated')
   })
 };
 

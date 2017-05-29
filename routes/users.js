@@ -212,7 +212,7 @@ module.exports = (knex) => {
               "name": itemNew
             })
             .then((result) => {
-              res.send("");
+              res.send("Updated");
             })
       })
       .catch(() => {

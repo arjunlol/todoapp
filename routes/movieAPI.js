@@ -10,7 +10,7 @@ module.exports = (knex) => {
     let item = req.body.item;
     let information = {};
     request({
-      uri: 'https://api.themoviedb.org/3/search/movie/550',
+      uri: 'https://api.themoviedb.org/3/search/movie',
       qs: {
         query: item,
         api_key: 'e191e18d0a5c6e9519a156c004f02527'}
