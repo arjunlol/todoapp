@@ -101,7 +101,7 @@ $(document).ready(function(){
 
     })
 
- $("#submit-btn").click(function() {
+ $("#search-form").on("submit", function() {
     event.preventDefault();
 
     var item = $('#form-textarea').val()
