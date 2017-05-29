@@ -32,6 +32,8 @@ body {
       border-radius: 20px;
       padding: 18px;
       display: none;
+      overflow:scroll;
+      height:260px;
 
       ul {
         list-style: none;
@@ -101,6 +103,7 @@ body {
 
 nav {
   top:0;
+  z-index:3;
   height:100px;
   padding: 10px;
   width:100%;
@@ -194,6 +197,7 @@ main {
     font-weight:00;
     margin-top:10px;
     font-size:20px;
+    text-align: center;
 
 
 }
