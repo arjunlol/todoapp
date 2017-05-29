@@ -12,7 +12,7 @@ $(document).ready(function(){
  })
  $('#user-img-update-btn').click(function(e){
   event.preventDefault(e);
-  $('#update-user-info-section').removeClass('hidden');
+  $('#update-user-info-section').toggleClass('hidden');
  })
  $('#update-submit-btn').click(function(e){
   $('#update-user-info-section').addClass('hidden');
