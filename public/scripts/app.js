@@ -118,9 +118,11 @@ $(document).ready(function(){
     let item = $(this).closest('li').data("title");//lie data attribute contains the items name
     let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
     let categoryNew = $(this).closest('form').serializeArray()[0].value
+    let itemNew = $(this).closest('form').serializeArray()[1].value
+    console.log(categoryNew, itemNew);
     category = category[category.length-1]; //the last item of the array is the category
-    updateItem(item, category, categoryNew);
-    $(this).closest('li').text(itemNew);
+    updateItem(item, category, categoryNew, itemNew);
+    // $(this).closest('li').text(itemNew);
     // $(this).closest('li').data("title", itemNew);
   })
 
@@ -217,13 +219,13 @@ function renderElement(item, category) {
 
       <form id="update-item-form">
         <div>
-          <input type="radio" name="gender" value="male" checked> Watch &nbsp; &nbsp;
-          <input type="radio" name="gender" value="female"> Read &nbsp; &nbsp;
-          <input type="radio" name="gender" value="other"> Eat &nbsp; &nbsp;
-          <input type="radio" name="gender" value="other"> Buy &nbsp; &nbsp;
+          <input type="radio" name="male" value="movie" checked> Watch &nbsp; &nbsp;
+          <input type="radio" name="male" value="book"> Read &nbsp; &nbsp;
+          <input type="radio" name="male" value="restaurant"> Eat &nbsp; &nbsp;
+          <input type="radio" name="male" value="product"> Buy &nbsp; &nbsp;
         </div>
 
-        <input id="update-input">
+        <input id="update-input" name="itemName">
         <a id="list-update-submit-btn" href="#">Update</a>
 
      </form>
@@ -283,9 +285,9 @@ function updateItem(item, category, newCategory, newItem) {
     url: `/todo/${category}/${item}`,
     method: "PUT",
     data: {'category': newCategory,
-      'item', newItem},
+      'item': newItem},
     success: function() {
-      waitingMsgToggle(`Item updated`)
+      location.reload();
     }
   }).fail(function() {
       console.log('Item not updated')

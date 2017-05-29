@@ -193,9 +193,10 @@ module.exports = (knex) => {
     let item = req.params.item;
     let category = req.params.category;
     let categoryNew = req.body.category;
-    let itemNew = req.body.item !== "" ? itemNew: item; //if new item field empty only update the category
+    let itemNew = req.body.item !== "" ? req.body.item: item; //if new item field empty only update the category
     let email = req.session.user[0];
-    knex('categories').select('id').where('name', category) //first find the id of the category
+    console.log('category', category, 'newcat', categoryNew, 'new item', itemNew)
+    knex('categories').select('id').where('name', categoryNew) //first find the id of the category
       .then((id) => {
         let categories_id = id[0].id // Selects just the number from the array
         knex('users')
@@ -207,10 +208,10 @@ module.exports = (knex) => {
             knex('items') //then find the item with that category id and user id
             .where('name', item)
             .andWhere('users_id', user)
-            .andWhere('categories_id', categories_id)
+            // .andWhere('categories_id', categories_id)
             .update({
               "name": itemNew,
-              "categories_id": categoryNew
+              "categories_id": categories_id
             })
             .then((result) => {
               res.send("Updated");
