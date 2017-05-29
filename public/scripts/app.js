@@ -88,6 +88,15 @@ $(document).ready(function(){
     deleteItem(item, category) //remove item on back end
   });
 
+//get the info of the item on click
+  $(".list-area").on("click", ".flash-info-btn", function(event) {
+   event.preventDefault();
+    let item = $(this).closest('li').data("title");//lie data attribute contains the items name
+    let category = $(this).closest('ul').attr("class").split(' '); //this is an array of classes
+    category = category[category.length-1]; //the last item of the array is the category
+    getInfo(item, category);
+  })
+
   //on register click, register user
   $("#register-submit-btn").on("click", function(event) {
     event.preventDefault();
@@ -121,17 +130,15 @@ $(document).ready(function(){
     logoutUser();
   });
 
-  $().on("click", function(event) {
-
-  })
 
 
 })
 
 function getInfo(item, category) {
+  console.log(item,category)
   $.ajax({
     url: `/${category}/${category}Info`,
-    method: 'GET'
+    method: 'GET',
     success: function(info){
       console.log(info);
     }

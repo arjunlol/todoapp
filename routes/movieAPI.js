@@ -9,10 +9,8 @@ module.exports = (knex) => {
   router.get("/movieInfo", (req, res) => {
     let item = req.body.item;
     let information = {};
-
-
     request({
-      uri: 'https://api.themoviedb.org/3/search/movie',
+      uri: 'https://api.themoviedb.org/3/search/movie/550',
       qs: {
         query: item,
         api_key: 'e191e18d0a5c6e9519a156c004f02527'}
