@@ -81,10 +81,10 @@ module.exports = (knex) => {
       console.log(error)
       return;
     })
-
-  // Promise.all(promises)
-  //   ,then(() => {
-  //   })
+    //this section is for the amazon api to be hooked up once we gain access to the new api key again
+    // Promise.all(promises)
+    //   ,then(() => {
+    //   })
     // productCheck(item, function(results) {
     //   console.log("Results of productCheck function:", results)
     //   if (results === true) {

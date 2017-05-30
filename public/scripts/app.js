@@ -5,13 +5,9 @@ $(document).ready(function(){
   var listsAdded = false;
   var hovered = [false, false, false, false];
   var infoed = {};
-  // $("#icon-category-btns-section > div").click(function(){
-  //   event.preventDefault();
-  //   $(this).addClass('active').siblings().removeClass('active');
-  // //   $(this)'s ul show, the others' uls hide
-  //  }
 
 
+//need to refactor this section below so it is DRY
   $("#to-watch-list-btn").click(function(){
     event.preventDefault();
     $("#to-read-list-btn").removeClass("active");
@@ -101,7 +97,7 @@ $(document).ready(function(){
 
     })
 
- // $("#search-form").on("#submit-btn", function() {
+ // references old $("#search-form").on("#submit-btn", function() {
    $("#submit-btn").click(function() {
     if (!listsAdded) loadLists(); //if the user hasnt already loaded the list, then do before rendering to prevent re-rendering
       listsAdded = true;
@@ -165,9 +161,6 @@ $(document).ready(function(){
     console.log(categoryNew, itemNew);
     category = category[category.length-1]; //the last item of the array is the category
     updateItem(item, category, categoryNew, itemNew);
-
-
-    // $(this).closest("li").data("title", itemNew);
   })
 
 
@@ -283,7 +276,6 @@ function renderElement(item, category) {
     </div>`
 
   // Renders items in list
-  //target parent ul line 431 and data title on parent line 432
   $("<li>").text(item).attr("data-title", item).appendTo($("." + category));
   // appends buttons
   $("li[data-title=\""+item+"\"]").append($(buttons).addClass("update-and-delete-btns"))

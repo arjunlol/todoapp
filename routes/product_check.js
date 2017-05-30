@@ -28,9 +28,7 @@ module.exports = (keyword, cb) => {
       }
   }).catch((err) => {
       console.error("Something went wrong! ", err);
-
   });
-
 }
 
 
